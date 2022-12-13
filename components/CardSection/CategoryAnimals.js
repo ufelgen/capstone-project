@@ -24,7 +24,7 @@ export default function CardSection() {
   );
 }
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.article`
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: white;
@@ -46,9 +46,10 @@ const StyledCard = styled.div`
   }
 `;
 
-const StyledHeader = styled.h1`
+const StyledHeader = styled.h2`
   margin: 10px;
   background-color: White;
   color: darkmagenta;
   text-align: center;
+  padding: 7px;
 `;
