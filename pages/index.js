@@ -1,6 +1,5 @@
 import CategoryOverview from "../components/CategoryOverview/CategoryOverview";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import Link from "next/link";
 import { words } from "../dummydata/words";
 import { nanoid } from "nanoid";
@@ -27,10 +26,10 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <StyledMain>
         {wordsInCategories.map((item) => (
           <Fragment key={item.key}>
-            <Link href={`/${item.slug}`}>
+            <Link href={`/${item.slug}`} style={{ textDecoration: "none" }}>
               <CategoryOverview
                 name={item.categoryName}
                 number={item.categoryWords.length}
@@ -38,7 +37,7 @@ export default function Home() {
             </Link>
           </Fragment>
         ))}
-      </main>
+      </StyledMain>
     </>
   );
 }

@@ -1,26 +1,17 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 export default function CategoryOverview({ name, number }) {
   return (
     <>
-      <Category>
+      <StyledCategory>
         <h3>{name}</h3>
         <p>{number} words</p>
-      </Category>
+      </StyledCategory>
     </>
   );
 }
 
-const StyledHeader = styled.h2`
-  margin: 10px;
-  background-color: White;
-  color: darkmagenta;
-  text-align: center;
-  padding: 7px;
-`;
-
-const Category = styled.section`
+const StyledCategory = styled.section`
   padding: 10px;
   margin: 10px 12px;
   background-color: white;
