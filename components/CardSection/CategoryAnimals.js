@@ -4,12 +4,8 @@ import styled from "styled-components";
 
 export default function CardSection() {
   const allCategories = words.map((word) => word.category);
-
   const singleCategories = Array.from(new Set(allCategories));
-
   const animals = words.filter((word) => word.category === "animals");
-
-  console.log("single categories: ", singleCategories);
 
   return (
     <Fragment>
@@ -45,6 +41,9 @@ const StyledCard = styled.div`
   height: auto;
   border: 1px solid darkmagenta;
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
+  p {
+    padding: 7px 0px;
+  }
 `;
 
 // dunkellila:
