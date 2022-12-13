@@ -46,11 +46,6 @@ const StyledCard = styled.div`
   }
 `;
 
-// dunkellila:
-// -webkit-box-shadow: 10px 10px 5px 0px rgba(191, 10, 191, 0.43);
-//   -moz-box-shadow: 10px 10px 5px 0px rgba(191, 10, 191, 0.43);
-//   box-shadow: 10px 10px 5px 0px rgba(191, 10, 191, 0.43);
-
 const StyledHeader = styled.h1`
   margin: 10px;
   background-color: White;
