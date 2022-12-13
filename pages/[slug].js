@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { wordsInCategories } from ".";
 import { Fragment } from "react";
+import Footer from "../components/Footer/Footer";
 
 export default function Category() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function Category() {
 
   return (
     <Fragment>
-      <StyledHeader>{categoryName}</StyledHeader>
+      <StyledHeading>{categoryName}</StyledHeading>
       <CardWrapper>
         {categoryWords.map((word) => (
           <Fragment key={word.id}>
@@ -37,6 +38,7 @@ export default function Category() {
           </Fragment>
         ))}
       </CardWrapper>
+      <Footer />
     </Fragment>
   );
 }
@@ -54,6 +56,7 @@ const CardWrapper = styled.article`
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: white;
+  margin-bottom: 11vh;
 `;
 
 const StyledCard = styled.div`
@@ -72,7 +75,7 @@ const StyledCard = styled.div`
   }
 `;
 
-const StyledHeader = styled.h2`
+const StyledHeading = styled.h2`
   margin: 10px;
   background-color: White;
   color: darkmagenta;

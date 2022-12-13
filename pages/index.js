@@ -1,9 +1,11 @@
 import CategoryOverview from "../components/CategoryOverview/CategoryOverview";
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Link from "next/link";
 import { words } from "../dummydata/words";
 import { nanoid } from "nanoid";
-import Link from "next/link";
 import { Fragment } from "react";
+import styled from "styled-components";
 
 const allCategories = words.map((word) => word.category);
 const uniqueCategories = Array.from(new Set(allCategories));
@@ -25,16 +27,22 @@ export default function Home() {
   return (
     <>
       <Header />
-      {wordsInCategories.map((item) => (
-        <Fragment key={item.key}>
-          <Link href={`/${item.slug}`}>
-            <CategoryOverview
-              name={item.categoryName}
-              number={item.categoryWords.length}
-            />
-          </Link>
-        </Fragment>
-      ))}
+      <main>
+        {wordsInCategories.map((item) => (
+          <Fragment key={item.key}>
+            <Link href={`/${item.slug}`}>
+              <CategoryOverview
+                name={item.categoryName}
+                number={item.categoryWords.length}
+              />
+            </Link>
+          </Fragment>
+        ))}
+      </main>
     </>
   );
 }
+
+const StyledMain = styled.main`
+  margin-bottom: 11vh;
+`;
