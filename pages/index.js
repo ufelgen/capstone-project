@@ -1,8 +1,9 @@
-import CategoryAnimals from "../components/CardSection/CategoryAnimals";
 import CategoryOverview from "../components/CategoryOverview/CategoryOverview";
+import Header from "../components/Header/Header";
 import { words } from "../dummydata/words";
 import { nanoid } from "nanoid";
 import Link from "next/link";
+import { Fragment } from "react";
 
 const allCategories = words.map((word) => word.category);
 const uniqueCategories = Array.from(new Set(allCategories));
@@ -21,19 +22,18 @@ export const wordsInCategories = singleCategories.map((item) => {
 });
 
 export default function Home() {
-  console.log(wordsInCategories);
-
   return (
     <>
+      <Header />
       {wordsInCategories.map((item) => (
-        <Link href={`/${item.slug}`}>
-          <CategoryOverview
-            key={item.key}
-            name={item.categoryName}
-            number={item.categoryWords.length}
-            wordsInCategories={wordsInCategories}
-          />
-        </Link>
+        <Fragment key={item.key}>
+          <Link href={`/${item.slug}`}>
+            <CategoryOverview
+              name={item.categoryName}
+              number={item.categoryWords.length}
+            />
+          </Link>
+        </Fragment>
       ))}
     </>
   );
