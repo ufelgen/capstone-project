@@ -14,8 +14,15 @@ export default function CardSection() {
         {animals.map((animal) => (
           <Fragment key={animal.id}>
             <StyledCard>
-              <p>{animal.base.translation}</p>
-              <p>{animal.query1.translation}</p>
+              <p>
+                <Flag>{animal.base.flag}</Flag>
+                {animal.base.translation}
+              </p>
+              <p>
+                <Flag>{animal.query1.flag}</Flag>
+                {animal.query1.translation}
+                <Gender>{animal.query1.gender}</Gender>
+              </p>
             </StyledCard>
           </Fragment>
         ))}
@@ -23,6 +30,15 @@ export default function CardSection() {
     </Fragment>
   );
 }
+
+const Gender = styled.span`
+  padding-left: 10px;
+  font-style: italic;
+`;
+
+const Flag = styled.span`
+  padding-right: 10px;
+`;
 
 const CardWrapper = styled.article`
   display: grid;
