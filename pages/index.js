@@ -1,5 +1,6 @@
 import CategoryOverview from "../components/CategoryOverview/CategoryOverview";
 import Header from "../components/Header/Header";
+import NewWordForm from "../components/NewWordForm/NewWordForm";
 import Link from "next/link";
 import { words } from "../dummydata/words";
 import { nanoid } from "nanoid";
@@ -29,6 +30,7 @@ export default function Home() {
     <>
       <Header />
       <StyledMain>
+        <NewWordForm />
         {wordsInCategories.map((item) => (
           <Fragment key={item.id}>
             <StyledLink href={`/${item.slug}`}>
