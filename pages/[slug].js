@@ -82,4 +82,5 @@ const StyledHeading = styled.h2`
   color: darkmagenta;
   text-align: center;
   padding: 7px;
+  cursor: default;
 `;
