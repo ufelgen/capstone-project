@@ -200,7 +200,7 @@ export const words = [
     id: nanoid(),
     category: "fruits",
     base: { language: "english", flag: "🇬🇧", translation: "apple" },
-    query: {
+    query1: {
       id: nanoid(),
       language: "slovenian",
       flag: "🇸🇮",
