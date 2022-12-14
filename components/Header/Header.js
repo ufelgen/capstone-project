@@ -12,4 +12,5 @@ const StyledHeader = styled.header`
   font-weight: bold;
   text-align: center;
   padding: 15px;
+  cursor: default;
 `;

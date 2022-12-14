@@ -70,6 +70,7 @@ const StyledCard = styled.div`
   height: auto;
   border: 1px solid darkmagenta;
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
+  cursor: default;
   p {
     padding: 7px 0px;
   }
