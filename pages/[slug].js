@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 // { wordsInCategories } from ".";
 import { Fragment } from "react";
+import { nanoid } from "nanoid";
 import Footer from "../components/Footer/Footer";
 
 export default function Category({ allWords }) {
@@ -13,7 +14,7 @@ export default function Category({ allWords }) {
   const uniqueCategories = Array.from(new Set(allCategories));
 
   const singleCategories = uniqueCategories.map((category) => {
-    return (category = words.filter((word) => word.category === category));
+    return (category = allWords.filter((word) => word.category === category));
   });
 
   const wordsInCategories = singleCategories.map((item) => {
