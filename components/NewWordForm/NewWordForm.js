@@ -1,8 +1,34 @@
 import styled from "styled-components";
+import { nanoid } from "nanoid";
 
-export default function NewWordForm() {
+export default function NewWordForm({ onCreateNew }) {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const fields = event.target.elements;
+    const newWord = {
+      category: fields.category.value,
+      base: {
+        language: "english",
+        flag: "🇬🇧",
+        translation: fields.english.value,
+      },
+      query1: {
+        id: nanoid(),
+        language: fields.queryLanguage.value[1],
+        flag: fields.queryLanguage.value[0],
+        translation: fields.queryLanguage1.value,
+        gender: fields.gender.value,
+      },
+    };
+
+    onCreateNew(newWord);
+
+    event.target.reset();
+    fields.english.focus();
+  }
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmit}>
       <fieldset>
         <label htmlFor="english" name="english">
           🇬🇧
@@ -13,11 +39,13 @@ export default function NewWordForm() {
           type="text"
           max="50"
           placeholder="type word in english"
+          required
         ></input>
       </fieldset>{" "}
       <fieldset>
         <label htmlFor="queryLanguage1" name="queryLanguage1">
           <select value="queryLanguage" id="queryLanguage">
+            <option>select language</option>
             <option value="[🇭🇷, croatian]" name="croatian">
               🇭🇷
             </option>
@@ -62,7 +90,27 @@ export default function NewWordForm() {
           type="text"
           max="50"
           placeholder="type translation"
+          required
         ></input>
+      </fieldset>
+      <fieldset>
+        <label htmlFor="gender" name="gender">
+          select gender
+        </label>
+        <select>
+          <option value="" name="none">
+            none
+          </option>
+          <option value="m" name="male">
+            m
+          </option>
+          <option value="f" name="female">
+            f
+          </option>
+          <option value="n" name="neuter">
+            n
+          </option>
+        </select>
       </fieldset>
       <fieldset>
         <label htmlFor="category" name="category">
