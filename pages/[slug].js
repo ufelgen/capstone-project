@@ -1,12 +1,29 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { wordsInCategories } from ".";
+// { wordsInCategories } from ".";
 import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
 
-export default function Category() {
+export default function Category({ allWords }) {
   const router = useRouter();
   const { slug } = router.query;
+  console.log("all Words: ", allWords);
+
+  const allCategories = allWords.map((word) => word.category);
+  const uniqueCategories = Array.from(new Set(allCategories));
+
+  const singleCategories = uniqueCategories.map((category) => {
+    return (category = words.filter((word) => word.category === category));
+  });
+
+  const wordsInCategories = singleCategories.map((item) => {
+    return {
+      id: nanoid(),
+      slug: item[0].category,
+      categoryName: item[0].category,
+      categoryWords: item,
+    };
+  });
 
   const currentCategory = wordsInCategories.find(
     (category) => category.slug === slug

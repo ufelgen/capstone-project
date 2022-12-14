@@ -9,7 +9,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function Home() {
-  const [wordss, setWords] = useState(words);
+  const [allWords, setAllWords] = useState(words);
 
   const allCategories = words.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
@@ -27,8 +27,10 @@ export default function Home() {
     };
   });
 
+  console.log("all Words: ", allWords);
+
   async function pushNewWord(newWord) {
-    setWords(...words, { id: nanoid(), ...newWord });
+    setAllWords([...allWords, { id: nanoid(), ...newWord }]);
   }
 
   return (

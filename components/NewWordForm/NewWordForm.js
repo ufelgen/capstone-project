@@ -7,7 +7,6 @@ export default function NewWordForm({ onCreateNew }) {
     const fields = event.target.elements;
 
     const language = fields.queryLanguage.value.split("-");
-    console.log("language: ", language);
     const newWord = {
       category: fields.category.value,
       base: {
@@ -103,7 +102,7 @@ export default function NewWordForm({ onCreateNew }) {
         <label htmlFor="gender" name="gender">
           select gender
         </label>
-        <select name="name" id="gender">
+        <select name="gender" id="gender">
           <option value="" name="none">
             none
           </option>
