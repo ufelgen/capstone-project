@@ -28,7 +28,7 @@ export default function Home() {
   });
 
   async function pushNewWord(newWord) {
-    setWords(...words, newWord);
+    setWords(...words, { id: nanoid(), ...newWord });
   }
 
   return (

@@ -5,6 +5,9 @@ export default function NewWordForm({ onCreateNew }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const fields = event.target.elements;
+
+    const language = fields.queryLanguage.value.split("-");
+    console.log("language: ", language);
     const newWord = {
       category: fields.category.value,
       base: {
@@ -14,14 +17,15 @@ export default function NewWordForm({ onCreateNew }) {
       },
       query1: {
         id: nanoid(),
-        language: fields.queryLanguage.value[1],
-        flag: fields.queryLanguage.value[0],
+        language: language[1],
+        flag: language[0],
         translation: fields.queryLanguage1.value,
         gender: fields.gender.value,
       },
     };
 
     onCreateNew(newWord);
+    console.log("new word: ", newWord);
 
     event.target.reset();
     fields.english.focus();
@@ -44,42 +48,44 @@ export default function NewWordForm({ onCreateNew }) {
       </fieldset>{" "}
       <fieldset>
         <label htmlFor="queryLanguage1" name="queryLanguage1">
-          <select value="queryLanguage" id="queryLanguage">
-            <option>select language</option>
-            <option value="[🇭🇷, croatian]" name="croatian">
+          <select name="queryLanguage" id="queryLanguage">
+            <option value="" name="select">
+              select language
+            </option>
+            <option value="🇭🇷-croatian" name="croatian">
               🇭🇷
             </option>
-            <option value="[🇨🇿, czech]" name="czech">
+            <option value="🇨🇿-czech" name="czech">
               🇨🇿
             </option>
-            <option value="[🇩🇰, danish]" name="danish">
+            <option value="🇩🇰-danish" name="danish">
               🇩🇰
             </option>
-            <option value="[🇩🇪, german]" name="german">
+            <option value="🇩🇪-german" name="german">
               🇩🇪
             </option>
-            <option value="[🇫🇷, french]" name="french">
+            <option value="🇫🇷-french" name="french">
               🇫🇷
             </option>
-            <option value="[🇬🇷, greek]" name="greek">
+            <option value="🇬🇷-greek" name="greek">
               🇬🇷
             </option>
-            <option value="[🇮🇹, italian]" name="italian">
+            <option value="🇮🇹-italian" name="italian">
               🇮🇹
             </option>
-            <option value="[🇵🇹, portuguese]" name="portuguese">
+            <option value="🇵🇹-portuguese" name="portuguese">
               🇵🇹
             </option>
-            <option value="[🇷🇺, russian]" name="russian">
+            <option value="🇷🇺-russian" name="russian">
               🇷🇺
             </option>
-            <option value="[🇸🇮, slovenian]" name="slovenian">
+            <option value="🇸🇮-slovenian" name="slovenian">
               🇸🇮
             </option>
-            <option value="[🇪🇸, spanish]" name="spanish">
+            <option value="🇪🇸-spanish" name="spanish">
               🇪🇸
             </option>
-            <option value="[🇹🇷, turkish]" name="turkish">
+            <option value="🇹🇷-turkish" name="turkish">
               🇹🇷
             </option>
           </select>
@@ -97,7 +103,7 @@ export default function NewWordForm({ onCreateNew }) {
         <label htmlFor="gender" name="gender">
           select gender
         </label>
-        <select>
+        <select name="name" id="gender">
           <option value="" name="none">
             none
           </option>
@@ -116,7 +122,7 @@ export default function NewWordForm({ onCreateNew }) {
         <label htmlFor="category" name="category">
           category:
         </label>
-        <select value="category" id="category">
+        <select name="category" id="category">
           <option value="animals" name="animals">
             animals
           </option>
