@@ -22,19 +22,21 @@ export const wordsInCategories = singleCategories.map((item) => {
   };
 });
 
+console.log(singleCategories);
+
 export default function Home() {
   return (
     <>
       <Header />
       <StyledMain>
         {wordsInCategories.map((item) => (
-          <Fragment key={item.key}>
-            <Link href={`/${item.slug}`} style={{ textDecoration: "none" }}>
+          <Fragment key={item.id}>
+            <StyledLink href={`/${item.slug}`}>
               <CategoryOverview
                 name={item.categoryName}
                 number={item.categoryWords.length}
               />
-            </Link>
+            </StyledLink>
           </Fragment>
         ))}
       </StyledMain>
@@ -44,4 +46,8 @@ export default function Home() {
 
 const StyledMain = styled.main`
   margin-bottom: 11vh;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
