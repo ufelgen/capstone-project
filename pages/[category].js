@@ -1,35 +1,22 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-// { wordsInCategories } from ".";
 import { Fragment } from "react";
-import { nanoid } from "nanoid";
 import Footer from "../components/Footer/Footer";
 import { useLocalStorage } from "../helpers/hooks";
+import { rearrangeData } from "../helpers/rearrangeData";
 
 export default function Category() {
   const router = useRouter();
   const { category } = router.query;
 
   const [allWords] = useLocalStorage("allWords");
-
   if (!allWords) {
     return null;
   }
+
+  const wordsInCategories = rearrangeData(allWords);
+
   console.log("all Words in dynamic page: ", allWords);
-
-  const allCategories = allWords.map((word) => word.category);
-  const uniqueCategories = Array.from(new Set(allCategories));
-
-  const singleCategories = uniqueCategories.map((category) => {
-    return (category = allWords.filter((word) => word.category === category));
-  });
-
-  const wordsInCategories = singleCategories.map((item) => {
-    return {
-      categoryName: item[0].category,
-      categoryWords: item,
-    };
-  });
   console.log("wordsinCategories dynamic", wordsInCategories);
 
   const currentCategory = wordsInCategories.find(

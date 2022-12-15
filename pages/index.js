@@ -5,31 +5,17 @@ import Link from "next/link";
 import { words } from "../dummydata/words";
 import { nanoid } from "nanoid";
 import { Fragment } from "react";
-//import { useState } from "react";
-//import useLocalStorageState from "use-local-storage-state";
 import { useLocalStorage } from "../helpers/hooks";
+import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 
 export default function Home() {
-  // const [allWords, setAllWords] = useLocalStorageState("allWords", {
-  //   defaultValue: words,
-  // });
-
   const [allWords, setAllWords] = useLocalStorage("allWords", words);
 
-  const allCategories = allWords.map((word) => word.category);
-  const uniqueCategories = Array.from(new Set(allCategories));
-
-  const singleCategories = uniqueCategories.map((category) => {
-    return (category = allWords.filter((word) => word.category === category));
-  });
-
-  const wordsInCategories = singleCategories.map((item) => {
-    return {
-      categoryName: item[0].category,
-      categoryWords: item,
-    };
-  });
+  if (!allWords) {
+    return null;
+  }
+  const wordsInCategories = rearrangeData(allWords);
 
   console.log("all Words: ", allWords);
 
