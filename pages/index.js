@@ -20,8 +20,6 @@ export default function Home() {
   }
   const wordsInCategories = rearrangeData(allWords);
 
-  console.log("all Words: ", allWords);
-
   async function pushNewWord(newWord) {
     setAllWords([...allWords, { id: nanoid(), ...newWord }]);
   }

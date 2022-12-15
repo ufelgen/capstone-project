@@ -17,9 +17,6 @@ export default function Category() {
 
   const wordsInCategories = rearrangeData(allWords);
 
-  console.log("all Words in dynamic page: ", allWords);
-  console.log("wordsinCategories dynamic", wordsInCategories);
-
   const currentCategory = wordsInCategories.find(
     (word) => word.categoryName === category
   );
