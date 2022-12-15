@@ -1,15 +1,24 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { wordsInCategories } from ".";
 import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
+import useLocalStorageState from "use-local-storage-state";
+import { rearrangeData } from "../helpers/rearrangeData";
 
 export default function Category() {
   const router = useRouter();
-  const { slug } = router.query;
+  const { category } = router.query;
+
+  const [allWords] = useLocalStorageState("allWords");
+
+  if (!allWords) {
+    return null;
+  }
+
+  const wordsInCategories = rearrangeData(allWords);
 
   const currentCategory = wordsInCategories.find(
-    (category) => category.slug === slug
+    (word) => word.categoryName === category
   );
 
   if (!currentCategory) {
