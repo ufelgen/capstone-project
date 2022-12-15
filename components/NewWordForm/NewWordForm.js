@@ -45,9 +45,7 @@ export default function NewWordForm({ onCreateNew }) {
 
       <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
         <select name="queryLanguage" id="queryLanguage">
-          <option selected disabled>
-            language
-          </option>
+          <option hidden={true}>language</option>
           <option value="🇭🇷-croatian" name="croatian">
             🇭🇷
           </option>
@@ -97,9 +95,7 @@ export default function NewWordForm({ onCreateNew }) {
 
       <LabelGender htmlFor="gender" name="gender">
         <select name="gender" id="gender">
-          <option selected disabled>
-            gender
-          </option>
+          <option hidden={true}>gender</option>
           <option value="" name="none">
             none
           </option>
