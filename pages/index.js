@@ -3,19 +3,17 @@ import Header from "../components/Header/Header";
 import NewWordForm from "../components/NewWordForm/NewWordForm";
 import Link from "next/link";
 import { words } from "../dummydata/words";
-import { nanoid } from "nanoid";
 import { Fragment } from "react";
-import { useLocalStorage } from "../helpers/hooks";
-import { useEffect } from "react";
+import { nanoid } from "nanoid";
+import useLocalStorageState from "use-local-storage-state";
+
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 
 export default function Home() {
-  const [allWords, setAllWords] = useLocalStorage("allWords", words);
-
-  useEffect(() => {
-    localStorage.setItem("allWords", JSON.stringify(allWords));
-  }, []);
+  const [allWords, setAllWords] = useLocalStorageState("allWords", {
+    defaultValue: words,
+  });
 
   if (!allWords) {
     return null;

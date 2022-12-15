@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
-import { useLocalStorage } from "../helpers/hooks";
+import useLocalStorageState from "use-local-storage-state";
 import { rearrangeData } from "../helpers/rearrangeData";
 
 export default function Category() {
   const router = useRouter();
   const { category } = router.query;
 
-  const [allWords] = useLocalStorage("allWords");
+  const [allWords] = useLocalStorageState("allWords");
 
   if (!allWords) {
     return null;
