@@ -24,7 +24,6 @@ export default function NewWordForm({ onCreateNew }) {
     };
 
     onCreateNew(newWord);
-    console.log("new word: ", newWord);
 
     event.target.reset();
     fields.english.focus();
