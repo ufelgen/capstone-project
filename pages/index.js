@@ -6,11 +6,16 @@ import { words } from "../dummydata/words";
 import { nanoid } from "nanoid";
 import { Fragment } from "react";
 import { useLocalStorage } from "../helpers/hooks";
+import { useEffect } from "react";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 
 export default function Home() {
   const [allWords, setAllWords] = useLocalStorage("allWords", words);
+
+  useEffect(() => {
+    localStorage.setItem("allWords", JSON.stringify(allWords));
+  }, []);
 
   if (!allWords) {
     return null;

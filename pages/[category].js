@@ -10,6 +10,7 @@ export default function Category() {
   const { category } = router.query;
 
   const [allWords] = useLocalStorage("allWords");
+
   if (!allWords) {
     return null;
   }
