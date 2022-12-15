@@ -4,11 +4,18 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
 import Footer from "../components/Footer/Footer";
+import { useLocalStorage } from "../helpers/hooks";
 
-export default function Category({ allWords }) {
+export default function Category() {
   const router = useRouter();
-  const { slug } = router.query;
-  console.log("all Words: ", allWords);
+  const { category } = router.query;
+
+  const [allWords] = useLocalStorage("allWords");
+
+  if (!allWords) {
+    return null;
+  }
+  console.log("all Words in dynamic page: ", allWords);
 
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
@@ -19,15 +26,14 @@ export default function Category({ allWords }) {
 
   const wordsInCategories = singleCategories.map((item) => {
     return {
-      id: nanoid(),
-      slug: item[0].category,
       categoryName: item[0].category,
       categoryWords: item,
     };
   });
+  console.log("wordsinCategories dynamic", wordsInCategories);
 
   const currentCategory = wordsInCategories.find(
-    (category) => category.slug === slug
+    (word) => word.categoryName === category
   );
 
   if (!currentCategory) {

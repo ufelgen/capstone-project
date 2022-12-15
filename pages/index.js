@@ -5,23 +5,27 @@ import Link from "next/link";
 import { words } from "../dummydata/words";
 import { nanoid } from "nanoid";
 import { Fragment } from "react";
-import { useState } from "react";
+//import { useState } from "react";
+//import useLocalStorageState from "use-local-storage-state";
+import { useLocalStorage } from "../helpers/hooks";
 import styled from "styled-components";
 
 export default function Home() {
-  const [allWords, setAllWords] = useState(words);
+  // const [allWords, setAllWords] = useLocalStorageState("allWords", {
+  //   defaultValue: words,
+  // });
 
-  const allCategories = words.map((word) => word.category);
+  const [allWords, setAllWords] = useLocalStorage("allWords", words);
+
+  const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
   const singleCategories = uniqueCategories.map((category) => {
-    return (category = words.filter((word) => word.category === category));
+    return (category = allWords.filter((word) => word.category === category));
   });
 
   const wordsInCategories = singleCategories.map((item) => {
     return {
-      id: nanoid(),
-      slug: item[0].category,
       categoryName: item[0].category,
       categoryWords: item,
     };
@@ -39,8 +43,8 @@ export default function Home() {
       <StyledMain>
         <NewWordForm onCreateNew={pushNewWord} />
         {wordsInCategories.map((item) => (
-          <Fragment key={item.id}>
-            <StyledLink href={`/${item.slug}`}>
+          <Fragment key={item.categoryName}>
+            <StyledLink href={`/${item.categoryName}`}>
               <CategoryOverview
                 name={item.categoryName}
                 number={item.categoryWords.length}

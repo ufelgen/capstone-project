@@ -1,14 +1,14 @@
 import GlobalStyles from "../components/GlobalStyles";
 import { useState } from "react";
-import { words } from "../dummydata/words";
+//import { words } from "../dummydata/words";
 
 function MyApp({ Component, pageProps }) {
-  const [allWords, setAllWords] = useState(words);
+  // const [allWords, setAllWords] = useState(words);
 
   return (
     <>
       <GlobalStyles />
-      <Component {...pageProps} allWords={allWords} />
+      <Component {...pageProps} />
     </>
   );
 }
