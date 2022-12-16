@@ -5,7 +5,9 @@ export default function CategoryOverview({ name, number }) {
     <>
       <StyledCategory>
         <h3>{name}</h3>
-        <p>{number} words</p>
+        <p>
+          {number} {number === 1 ? "word" : "words"}
+        </p>
       </StyledCategory>
     </>
   );
