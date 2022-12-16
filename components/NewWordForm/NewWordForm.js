@@ -95,6 +95,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       </LabelCat>
 
       <input
+        className="catinput"
         id="newCategory"
         name="category"
         type="text"
@@ -102,7 +103,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         placeholder="add a category"
         list="category"
       />
-      <InputCat name="category" id="category">
+      <datalist name="category" id="category" className="catinput">
         {uniqueCategories.map((uniqueCategory) => {
           return (
             <option
@@ -114,7 +115,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
             </option>
           );
         })}
-      </InputCat>
+      </datalist>
 
       <button type="submit">add word</button>
     </StyledForm>
@@ -132,7 +133,6 @@ const StyledForm = styled.form`
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "eng  enginput enginput"
     "query queryinput  gender"
@@ -156,6 +156,9 @@ const StyledForm = styled.form`
     border-radius: 5px;
   }
 
+  .catinput {
+    grid-area: catinput;
+  }
   button {
     padding: 4px;
     border: 1px solid darkmagenta;
@@ -189,8 +192,4 @@ const LabelGender = styled.label`
 
 const LabelCat = styled.label`
   grid-area: cat;
-`;
-
-const InputCat = styled.datalist`
-  grid-area: catinput;
 `;
