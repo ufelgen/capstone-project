@@ -2,7 +2,7 @@ import CategoryOverview from "../components/CategoryOverview/CategoryOverview";
 import Header from "../components/Header/Header";
 import NewWordForm from "../components/NewWordForm/NewWordForm";
 import Link from "next/link";
-import { words } from "../dummydata/words";
+import { words } from "../lib/words";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
 import useLocalStorageState from "use-local-storage-state";
@@ -28,7 +28,7 @@ export default function Home() {
     <>
       <Header />
       <StyledMain>
-        <NewWordForm onCreateNew={pushNewWord} />
+        <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
         {wordsInCategories.map((item) => (
           <Fragment key={item.categoryName}>
             <StyledLink href={`/${item.categoryName}`}>
