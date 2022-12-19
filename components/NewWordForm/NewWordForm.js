@@ -36,7 +36,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
   return (
     <StyledForm onSubmit={handleSubmit}>
       <LabelEng htmlFor="english" name="english">
-        🇬🇧 english :
+        🇬🇧 english
       </LabelEng>
       <InputEng
         id="english"
@@ -133,11 +133,14 @@ const StyledForm = styled.form`
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   position: relative;
   display: grid;
+  grid-template-columns: 27% 40% 33%;
   grid-template-areas:
     "eng  enginput enginput"
     "query queryinput  gender"
     "cat  catinput catinput"
     " . . button";
+  justify-content: center;
+  align-items: center;
 
   label {
     padding: 4px;
@@ -147,13 +150,15 @@ const StyledForm = styled.form`
     border: 1px solid darkmagenta;
     margin: 4px;
     border-radius: 5px;
+    height: 4vh;
   }
 
   select {
     padding: 4px;
     border: 1px solid darkmagenta;
-    margin: 4px;
+    margin: 4px 0;
     border-radius: 5px;
+    height: 4vh;
   }
 
   .catinput {

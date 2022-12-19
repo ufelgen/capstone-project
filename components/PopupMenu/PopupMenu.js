@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { HiDotsVertical } from "react-icons/hi";
-import { useState } from "react";
 
 export default function PopupMenu({ onDelete, id, setPopup }) {
   return (
