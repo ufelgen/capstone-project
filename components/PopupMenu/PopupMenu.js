@@ -4,15 +4,11 @@ import { useState } from "react";
 
 export default function PopupMenu({ onDelete, id, setPopup }) {
   return (
-    <>
-      <StyledPopupMenu>
-        <StyledMenuButton onClick={() => onDelete(id)}>delete</StyledMenuButton>
-        <StyledDivider></StyledDivider>
-        <StyledMenuButton onClick={() => setPopup(false)}>
-          close
-        </StyledMenuButton>
-      </StyledPopupMenu>
-    </>
+    <StyledPopupMenu>
+      <StyledMenuButton onClick={() => onDelete(id)}>delete</StyledMenuButton>
+      <StyledDivider></StyledDivider>
+      <StyledMenuButton onClick={() => setPopup(false)}>close</StyledMenuButton>
+    </StyledPopupMenu>
   );
 }
 
