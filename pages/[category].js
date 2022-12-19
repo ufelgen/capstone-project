@@ -2,14 +2,27 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
+import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
+import PopupMenu from "../components/PopupMenu/PopupMenu";
 import useLocalStorageState from "use-local-storage-state";
+import { useState } from "react";
 import { rearrangeData } from "../helpers/rearrangeData";
+import Link from "next/link";
 
 export default function Category() {
   const router = useRouter();
   const { category } = router.query;
 
-  const [allWords] = useLocalStorageState("allWords");
+  const [allWords, setAllWords] = useLocalStorageState("allWords");
+  const [popup, setPopup] = useState("");
+
+  function handlePopupClick(id) {
+    setPopup(id);
+  }
+
+  function handleDelete(id) {
+    setAllWords(allWords.filter((word) => word.id !== id));
+  }
 
   if (!allWords) {
     return null;
@@ -22,7 +35,12 @@ export default function Category() {
   );
 
   if (!currentCategory) {
-    return <p>not found </p>;
+    return (
+      <>
+        <h2>there are currently no words saved in this category!</h2>
+        <Link href={"/"}>back to main page</Link>
+      </>
+    );
   }
 
   const { categoryName, categoryWords } = currentCategory;
@@ -43,6 +61,16 @@ export default function Category() {
                 {word.query1.translation}
                 <Gender>{word.query1.gender}</Gender>
               </p>
+
+              {word.id === popup ? (
+                <PopupMenu
+                  setPopup={setPopup}
+                  id={word.id}
+                  onDelete={handleDelete}
+                />
+              ) : (
+                <PopupMenuButton id={word.id} onPopupClick={handlePopupClick} />
+              )}
             </StyledCard>
           </Fragment>
         ))}
@@ -69,6 +97,7 @@ const CardWrapper = styled.article`
 `;
 
 const StyledCard = styled.div`
+  position: relative;
   padding: 10px;
   margin: 10px 12px;
   background-color: white;
