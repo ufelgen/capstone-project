@@ -67,14 +67,17 @@ export default function EditVocabForm({
         ></InputEng>
 
         <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
-          <select name="queryLanguage" id="queryLanguage">
+          <select
+            defaultValue={word.query1.flag + "-" + word.query1.language}
+            name="queryLanguage"
+            id="queryLanguage"
+          >
             {languages.map((language) => {
               return (
                 <option
                   key={language.name}
                   value={language.value}
                   name={language.name}
-                  selected={language.name === word.query1.language}
                 >
                   {language.flag}
                 </option>
@@ -91,26 +94,18 @@ export default function EditVocabForm({
         ></InputQuery>
 
         <LabelGender htmlFor="gender" name="gender">
-          <select name="gender" id="gender">
+          <select defaultValue={word.query1.gender} name="gender" id="gender">
             <option hidden={true}>gender</option>
-            <option value="" name="none" selected={word.query1.gender === ""}>
+            <option value="" name="none">
               none
             </option>
-            <option value="m" name="male" selected={word.query1.gender === "m"}>
+            <option value="m" name="male">
               m
             </option>
-            <option
-              value="f"
-              name="female"
-              selected={word.query1.gender === "f"}
-            >
+            <option value="f" name="female">
               f
             </option>
-            <option
-              value="n"
-              name="neuter"
-              selected={word.query1.gender === "n"}
-            >
+            <option value="n" name="neuter">
               n
             </option>
           </select>
@@ -126,10 +121,15 @@ export default function EditVocabForm({
           name="category"
           type="text"
           maxLength={50}
-          defaultValue={word.category}
           list="category"
+          required
         />
-        <datalist name="category" id="category" className="catinput">
+        <datalist
+          defaultValue={word.category}
+          name="category"
+          id="category"
+          className="catinput"
+        >
           {uniqueCategories.map((uniqueCategory) => {
             return (
               <option
