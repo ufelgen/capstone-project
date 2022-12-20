@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
 import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import PopupMenu from "../components/PopupMenu/PopupMenu";
+import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
 import useLocalStorageState from "use-local-storage-state";
 import { useState } from "react";
 import { rearrangeData } from "../helpers/rearrangeData";
@@ -31,6 +32,10 @@ export default function Category() {
     setEditId(id);
   }
 
+  function handleEditedVocab(editId, updatedVocab) {
+    setAllWords();
+  }
+
   if (!allWords) {
     return null;
   }
@@ -56,32 +61,43 @@ export default function Category() {
     <Fragment>
       <StyledHeading>{categoryName}</StyledHeading>
       <CardWrapper>
-        {categoryWords.map((word) => (
-          <Fragment key={word.id}>
-            <StyledCard>
-              <p>
-                <Flag>{word.base.flag}</Flag>
-                {word.base.translation}
-              </p>
-              <p>
-                <Flag>{word.query1.flag}</Flag>
-                {word.query1.translation}
-                <Gender>{word.query1.gender}</Gender>
-              </p>
+        {categoryWords.map((word) =>
+          editing && editId === word.id ? (
+            <EditVocabForm
+              word={word}
+              setEditing={setEditing}
+              onSaveEdited={handleEditedVocab}
+            />
+          ) : (
+            <Fragment key={word.id}>
+              <StyledCard>
+                <p>
+                  <Flag>{word.base.flag}</Flag>
+                  {word.base.translation}
+                </p>
+                <p>
+                  <Flag>{word.query1.flag}</Flag>
+                  {word.query1.translation}
+                  <Gender>{word.query1.gender}</Gender>
+                </p>
 
-              {word.id === popup ? (
-                <PopupMenu
-                  setPopup={setPopup}
-                  id={word.id}
-                  onDelete={handleDelete}
-                  onEdit={handleEdit}
-                />
-              ) : (
-                <PopupMenuButton id={word.id} onPopupClick={handlePopupClick} />
-              )}
-            </StyledCard>
-          </Fragment>
-        ))}
+                {word.id === popup ? (
+                  <PopupMenu
+                    setPopup={setPopup}
+                    id={word.id}
+                    onDelete={handleDelete}
+                    onEdit={handleEdit}
+                  />
+                ) : (
+                  <PopupMenuButton
+                    id={word.id}
+                    onPopupClick={handlePopupClick}
+                  />
+                )}
+              </StyledCard>
+            </Fragment>
+          )
+        )}
       </CardWrapper>
       <Footer />
     </Fragment>
