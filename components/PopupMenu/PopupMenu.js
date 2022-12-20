@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export default function PopupMenu({ onDelete, id, setPopup }) {
+export default function PopupMenu({ onDelete, onEdit, id, setPopup }) {
   return (
     <StyledPopupMenu>
       <StyledMenuButton onClick={() => onDelete(id)}>delete</StyledMenuButton>
+      <StyledMenuButton onClick={() => onEdit(id)}>edit</StyledMenuButton>
       <StyledDivider></StyledDivider>
       <StyledMenuButton onClick={() => setPopup(false)}>close</StyledMenuButton>
     </StyledPopupMenu>

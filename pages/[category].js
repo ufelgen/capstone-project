@@ -15,6 +15,8 @@ export default function Category() {
 
   const [allWords, setAllWords] = useLocalStorageState("allWords");
   const [popup, setPopup] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [editId, setEditId] = useState();
 
   function handlePopupClick(id) {
     setPopup(id);
@@ -22,6 +24,11 @@ export default function Category() {
 
   function handleDelete(id) {
     setAllWords(allWords.filter((word) => word.id !== id));
+  }
+
+  function handleEdit(id) {
+    setEditing(true);
+    setEditId(id);
   }
 
   if (!allWords) {
@@ -67,6 +74,7 @@ export default function Category() {
                   setPopup={setPopup}
                   id={word.id}
                   onDelete={handleDelete}
+                  onEdit={handleEdit}
                 />
               ) : (
                 <PopupMenuButton id={word.id} onPopupClick={handlePopupClick} />
