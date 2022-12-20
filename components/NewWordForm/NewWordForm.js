@@ -133,7 +133,7 @@ const StyledForm = styled.form`
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   position: relative;
   display: grid;
-  grid-template-columns: 27% 40% 33%;
+  grid-template-columns: 27% 46% 27%;
   grid-template-areas:
     "eng  enginput enginput"
     "query queryinput  gender"
@@ -189,10 +189,12 @@ const LabelQuery = styled.label`
 
 const InputQuery = styled.input`
   grid-area: queryinput;
+  width: 100%;
 `;
 
 const LabelGender = styled.label`
   grid-area: gender;
+  justify-self: end;
 `;
 
 const LabelCat = styled.label`
