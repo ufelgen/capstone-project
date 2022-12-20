@@ -1,8 +1,15 @@
 import { languages } from "../../lib/languages";
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
+import { nanoid } from "nanoid";
 
-export default function EditVocabForm({ word, setEditing, onSaveEdited }) {
+export default function EditVocabForm({
+  word,
+  editId,
+  setEditing,
+  onSaveEdited,
+  setPopup,
+}) {
   const [allWords] = useLocalStorageState("allWords");
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
@@ -37,6 +44,12 @@ export default function EditVocabForm({ word, setEditing, onSaveEdited }) {
     onSaveEdited(editId, updatedVocab);
 
     setEditing(false);
+    setPopup(false);
+  }
+
+  function returnFromEditMode() {
+    setEditing(false);
+    setPopup(false);
   }
 
   return (
@@ -55,13 +68,13 @@ export default function EditVocabForm({ word, setEditing, onSaveEdited }) {
 
         <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
           <select name="queryLanguage" id="queryLanguage">
-            <option hidden={true}>language</option>
             {languages.map((language) => {
               return (
                 <option
                   key={language.name}
                   value={language.value}
                   name={language.name}
+                  selected={language.name === word.query1.language}
                 >
                   {language.flag}
                 </option>
@@ -80,16 +93,24 @@ export default function EditVocabForm({ word, setEditing, onSaveEdited }) {
         <LabelGender htmlFor="gender" name="gender">
           <select name="gender" id="gender">
             <option hidden={true}>gender</option>
-            <option value="" name="none">
+            <option value="" name="none" selected={word.query1.gender === ""}>
               none
             </option>
-            <option value="m" name="male">
+            <option value="m" name="male" selected={word.query1.gender === "m"}>
               m
             </option>
-            <option value="f" name="female">
+            <option
+              value="f"
+              name="female"
+              selected={word.query1.gender === "f"}
+            >
               f
             </option>
-            <option value="n" name="neuter">
+            <option
+              value="n"
+              name="neuter"
+              selected={word.query1.gender === "n"}
+            >
               n
             </option>
           </select>
@@ -123,6 +144,7 @@ export default function EditVocabForm({ word, setEditing, onSaveEdited }) {
         </datalist>
 
         <button type="submit">edit word</button>
+        <button onClick={returnFromEditMode}>back</button>
       </StyledForm>
     </>
   );

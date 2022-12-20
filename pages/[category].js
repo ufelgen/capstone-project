@@ -33,7 +33,9 @@ export default function Category() {
   }
 
   function handleEditedVocab(editId, updatedVocab) {
-    setAllWords();
+    setAllWords(
+      allWords.map((word) => (word.id === editId ? updatedVocab : word))
+    );
   }
 
   if (!allWords) {
@@ -63,11 +65,15 @@ export default function Category() {
       <CardWrapper>
         {categoryWords.map((word) =>
           editing && editId === word.id ? (
-            <EditVocabForm
-              word={word}
-              setEditing={setEditing}
-              onSaveEdited={handleEditedVocab}
-            />
+            <Fragment key={word.id}>
+              <EditVocabForm
+                word={word}
+                setEditing={setEditing}
+                onSaveEdited={handleEditedVocab}
+                editId={editId}
+                setPopup={setPopup}
+              />
+            </Fragment>
           ) : (
             <Fragment key={word.id}>
               <StyledCard>
