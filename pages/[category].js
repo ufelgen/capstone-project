@@ -38,6 +38,11 @@ export default function Category() {
     );
   }
 
+  function handleReturnFromEditMode() {
+    setEditing(false);
+    setPopup(false);
+  }
+
   if (!allWords) {
     return null;
   }
@@ -68,10 +73,9 @@ export default function Category() {
             <Fragment key={word.id}>
               <EditVocabForm
                 word={word}
-                setEditing={setEditing}
+                onReturnFromEditMode={handleReturnFromEditMode}
                 onSaveEdited={handleEditedVocab}
                 editId={editId}
-                setPopup={setPopup}
               />
             </Fragment>
           ) : (

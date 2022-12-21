@@ -7,9 +7,8 @@ import { StyledForm } from "../StyledForm";
 export default function EditVocabForm({
   word,
   editId,
-  setEditing,
   onSaveEdited,
-  setPopup,
+  onReturnFromEditMode,
 }) {
   const [allWords] = useLocalStorageState("allWords");
   const allCategories = allWords.map((word) => word.category);
@@ -44,13 +43,7 @@ export default function EditVocabForm({
     console.log("updated vocab: ", updatedVocab);
     onSaveEdited(editId, updatedVocab);
 
-    setEditing(false);
-    setPopup(false);
-  }
-
-  function returnFromEditMode() {
-    setEditing(false);
-    setPopup(false);
+    onReturnFromEditMode();
   }
 
   return (
@@ -125,7 +118,7 @@ export default function EditVocabForm({
           placeholder={word.category}
           required
         />
-        <datalist name="category" id="category" className="catinput">
+        <datalist name="category" id="category">
           {uniqueCategories.map((uniqueCategory) => {
             return (
               <option
@@ -140,7 +133,7 @@ export default function EditVocabForm({
         </datalist>
 
         <button type="submit">edit word</button>
-        <button onClick={returnFromEditMode}>back</button>
+        <button onClick={onReturnFromEditMode}>back</button>
       </StyledEditForm>
     </>
   );
