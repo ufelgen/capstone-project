@@ -122,14 +122,10 @@ export default function EditVocabForm({
           type="text"
           maxLength={50}
           list="category"
+          placeholder={word.category}
           required
         />
-        <datalist
-          defaultValue={word.category}
-          name="category"
-          id="category"
-          className="catinput"
-        >
+        <datalist name="category" id="category" className="catinput">
           {uniqueCategories.map((uniqueCategory) => {
             return (
               <option
