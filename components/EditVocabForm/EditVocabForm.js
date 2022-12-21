@@ -2,6 +2,7 @@ import { languages } from "../../lib/languages";
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
+import { StyledForm } from "../StyledForm";
 
 export default function EditVocabForm({
   word,
@@ -54,19 +55,19 @@ export default function EditVocabForm({
 
   return (
     <>
-      <StyledForm onSubmit={handleEditVocab}>
-        <LabelEng htmlFor="english" name="english">
+      <StyledEditForm onSubmit={handleEditVocab}>
+        <label htmlFor="english" name="english">
           🇬🇧 english
-        </LabelEng>
-        <InputEng
+        </label>
+        <input
           id="english"
           name="english"
           type="text"
           maxLength={50}
           defaultValue={word.base.translation}
-        ></InputEng>
+        ></input>
 
-        <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
+        <label htmlFor="queryLanguage1" name="queryLanguage1">
           <select
             defaultValue={word.query1.flag + "-" + word.query1.language}
             name="queryLanguage"
@@ -84,16 +85,16 @@ export default function EditVocabForm({
               );
             })}
           </select>
-        </LabelQuery>
-        <InputQuery
+        </label>
+        <input
           id="queryLanguage1"
           name="queryLanguage1"
           type="text"
           maxLength={50}
           defaultValue={word.query1.translation}
-        ></InputQuery>
+        ></input>
 
-        <LabelGender htmlFor="gender" name="gender">
+        <label htmlFor="gender" name="gender">
           <select defaultValue={word.query1.gender} name="gender" id="gender">
             <option hidden={true}>gender</option>
             <option value="" name="none">
@@ -109,14 +110,13 @@ export default function EditVocabForm({
               n
             </option>
           </select>
-        </LabelGender>
+        </label>
 
-        <LabelCat htmlFor="category" name="category">
+        <label htmlFor="category" name="category">
           category:
-        </LabelCat>
+        </label>
 
         <input
-          className="catinput"
           id="newCategory"
           name="category"
           type="text"
@@ -141,81 +141,12 @@ export default function EditVocabForm({
 
         <button type="submit">edit word</button>
         <button onClick={returnFromEditMode}>back</button>
-      </StyledForm>
+      </StyledEditForm>
     </>
   );
 }
 
-const StyledForm = styled.form`
-  padding: 10px;
-  margin: 10px 12px;
-  background-color: white;
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  color: black;
-  height: auto;
-  border: 1px solid darkmagenta;
-  box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
-  position: relative;
+const StyledEditForm = styled(StyledForm)`
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-
-  label {
-    padding: 4px;
-  }
-  input {
-    padding: 4px;
-    border: 1px solid darkmagenta;
-    margin: 4px;
-    border-radius: 5px;
-    height: 4vh;
-  }
-
-  select {
-    padding: 4px;
-    border: 1px solid darkmagenta;
-    margin: 4px 0;
-    border-radius: 5px;
-    height: 4vh;
-  }
-
-  .catinput {
-    grid-area: catinput;
-  }
-  button {
-    padding: 4px;
-    border: 1px solid darkmagenta;
-    border-radius: 5px;
-    margin: 4px;
-    grid-area: button;
-    background-color: darkmagenta;
-    color: white;
-  }
-`;
-
-const LabelEng = styled.label`
-  grid-area: eng;
-`;
-
-const InputEng = styled.input`
-  grid-area: enginput;
-`;
-
-const LabelQuery = styled.label`
-  grid-area: query;
-`;
-
-const InputQuery = styled.input`
-  grid-area: queryinput;
-  width: 100%;
-`;
-
-const LabelGender = styled.label`
-  grid-area: gender;
-  justify-self: end;
-`;
-
-const LabelCat = styled.label`
-  grid-area: cat;
 `;
