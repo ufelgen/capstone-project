@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledForm } from "../StyledForm";
 import { nanoid } from "nanoid";
 import { languages } from "../../lib/languages";
 
@@ -34,7 +35,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledNewWordForm onSubmit={handleSubmit}>
       <LabelEng htmlFor="english" name="english">
         🇬🇧 english
       </LabelEng>
@@ -118,60 +119,24 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       </datalist>
 
       <button type="submit">add word</button>
-    </StyledForm>
+    </StyledNewWordForm>
   );
 }
 
-const StyledForm = styled.form`
-  padding: 10px;
-  margin: 10px 12px;
-  background-color: white;
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  color: black;
-  height: auto;
-  border: 1px solid darkmagenta;
-  box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
-  position: relative;
+const StyledNewWordForm = styled(StyledForm)`
   display: grid;
-  grid-template-columns: 27% 40% 33%;
+  grid-template-columns: 27% 46% 27%;
   grid-template-areas:
     "eng  enginput enginput"
     "query queryinput  gender"
     "cat  catinput catinput"
     " . . button";
-  justify-content: center;
-  align-items: center;
-
-  label {
-    padding: 4px;
-  }
-  input {
-    padding: 4px;
-    border: 1px solid darkmagenta;
-    margin: 4px;
-    border-radius: 5px;
-    height: 4vh;
-  }
-
-  select {
-    padding: 4px;
-    border: 1px solid darkmagenta;
-    margin: 4px 0;
-    border-radius: 5px;
-    height: 4vh;
-  }
 
   .catinput {
     grid-area: catinput;
   }
   button {
-    padding: 4px;
-    border: 1px solid darkmagenta;
-    border-radius: 5px;
-    margin: 4px;
     grid-area: button;
-    background-color: darkmagenta;
-    color: white;
   }
 `;
 
@@ -193,6 +158,7 @@ const InputQuery = styled.input`
 
 const LabelGender = styled.label`
   grid-area: gender;
+  justify-self: end;
 `;
 
 const LabelCat = styled.label`

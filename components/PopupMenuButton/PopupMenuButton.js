@@ -11,7 +11,8 @@ export default function PopupMenuButton({ id, onPopupClick }) {
 
 const StyledPopupMenuButton = styled.button`
   position: absolute;
-  right: 10%;
-  bottom: 10%;
+  right: 5%;
+  bottom: 5%;
   border: none;
+  background-color: transparent;
 `;
