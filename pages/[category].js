@@ -43,6 +43,10 @@ export default function Category() {
     setPopup(false);
   }
 
+  function handleClosePopup() {
+    setPopup(false);
+  }
+
   if (!allWords) {
     return null;
   }
@@ -93,7 +97,7 @@ export default function Category() {
 
                 {word.id === popup ? (
                   <PopupMenu
-                    setPopup={setPopup}
+                    onClosePopup={handleClosePopup}
                     id={word.id}
                     onDelete={handleDelete}
                     onEdit={handleEdit}
