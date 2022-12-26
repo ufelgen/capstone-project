@@ -11,7 +11,9 @@ export default function DeclensionPage({ currentWord }) {
         <h2>{base.flag}</h2>
         <h2>{query1.flag}</h2>
         <h2>{base.translation}</h2>
-        <h2>{query1.translation}</h2>
+        <h2>
+          {query1.translation} ({query1.gender})
+        </h2>
       </StyledHeadingWrapper>
       <StyledSpecification>declension type:</StyledSpecification>
       <StyledSpecification>
