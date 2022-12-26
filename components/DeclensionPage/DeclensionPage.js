@@ -7,10 +7,10 @@ export default function DeclensionPage({ currentWord }) {
   return (
     <>
       <StyledHeadingWrapper>
-        <BaseFlag>{base.flag}</BaseFlag>
-        <BaseTranslation>{base.translation}</BaseTranslation>
-        <Query1Flag>{query1.flag}</Query1Flag>
-        <Query1Translation>{query1.translation}</Query1Translation>
+        <h2>{base.flag}</h2>
+        <h2>{query1.flag}</h2>
+        <h2>{base.translation}</h2>
+        <h2>{query1.translation}</h2>
       </StyledHeadingWrapper>
       <StyledDeclensionWrapper>
         <p>1</p>
@@ -44,23 +44,7 @@ const StyledHeadingWrapper = styled.section`
   padding: 7px;
   cursor: default;
   display: grid;
-  grid-template-areas: "base-flag query1-flag" "base-translation query1-translation";
-`;
-
-const BaseFlag = styled.h2`
-  grid-area: "base-flag";
-`;
-
-const Query1Flag = styled.h2`
-  grid-area: "query1-flag";
-`;
-
-const BaseTranslation = styled.h2`
-  grid-area: "base-translation";
-`;
-
-const Query1Translation = styled.h2`
-  grid-area: "query1-translation";
+  grid-template-columns: 1fr 1fr;
 `;
 
 const StyledDeclensionWrapper = styled.section`

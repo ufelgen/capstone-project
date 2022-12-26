@@ -1,6 +1,8 @@
-import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import DeclensionPage from "../../components/DeclensionPage/DeclensionPage";
+import DeclensionForm from "../../components/DeclensionForm/DeclensionForm";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function Declension() {
   const router = useRouter();
@@ -22,4 +24,14 @@ export default function Declension() {
       </>
     );
   }
+
+  return (
+    <>
+      {currentWord.query1.declension ? (
+        <DeclensionPage currentWord={currentWord} />
+      ) : (
+        <DeclensionForm currentWord={currentWord} />
+      )}
+    </>
+  );
 }
