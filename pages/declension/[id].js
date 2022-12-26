@@ -25,12 +25,25 @@ export default function Declension() {
     );
   }
 
+  function handleAddDeclensionForm(declensionId, declension) {
+    setAllWords(
+      allWords.map((word) =>
+        word.id === declensionId
+          ? { ...word, query1: { ...word.query1, ...declension } }
+          : word
+      )
+    );
+  }
+
   return (
     <>
       {currentWord.query1.declension ? (
         <DeclensionPage currentWord={currentWord} />
       ) : (
-        <DeclensionForm currentWord={currentWord} />
+        <DeclensionForm
+          currentWord={currentWord}
+          onAddDeclensionForm={handleAddDeclensionForm}
+        />
       )}
     </>
   );

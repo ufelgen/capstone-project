@@ -1,8 +1,37 @@
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 
-export default function DeclensionForm({ currentWord }) {
+export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
   const { base, query1 } = currentWord;
+
+  function handleSubmitDeclensionForm(event) {
+    event.preventDefault();
+
+    const fields = event.target.elements;
+    const addedDeclension = {
+      declension: {
+        specification: fields.specification.value,
+        singular: {
+          nominative: fields.nominativeSingular.value,
+          genitive: fields.genitiveSingular.value,
+          dative: fields.dativeSingular.value,
+          accusative: fields.accusativeSingular.value,
+          locative: fields.locativeSingular.value,
+          instrumental: fields.instrumentalSingular.value,
+        },
+        plural: {
+          nominative: fields.nominativePlural.value,
+          genitive: fields.genitivePlural.value,
+          dative: fields.dativePlural.value,
+          accusative: fields.accusativePlural.value,
+          locative: fields.locativePlural.value,
+          instrumental: fields.instrumentalPlural.value,
+        },
+      },
+    };
+
+    onAddDeclensionForm(currentWord.id, addedDeclension);
+  }
 
   return (
     <>
@@ -14,7 +43,7 @@ export default function DeclensionForm({ currentWord }) {
           {query1.translation} ({query1.gender})
         </h2>
       </StyledHeadingWrapper>
-      <form>
+      <form onSubmit={handleSubmitDeclensionForm}>
         <label htmlFor="specification">declension type:</label>
         <input type="text" name="specification" />
         <StyledDeclensionWrapper>
@@ -70,6 +99,7 @@ export default function DeclensionForm({ currentWord }) {
             placeholder="instrumental"
           />
         </StyledDeclensionWrapper>
+        <button type="submit">add</button>
       </form>
       <Footer path={currentWord.category} />
     </>

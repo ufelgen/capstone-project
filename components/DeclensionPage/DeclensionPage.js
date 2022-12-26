@@ -17,30 +17,30 @@ export default function DeclensionPage({ currentWord }) {
       </StyledHeadingWrapper>
       <StyledSpecification>declension type:</StyledSpecification>
       <StyledSpecification>
-        {query1.declension.specification}
+        {query1.declension?.specification}
       </StyledSpecification>
       <StyledDeclensionWrapper>
         <p></p>
         <h4>singular</h4>
         <h4>plural</h4>
         <p>1</p>
-        <p>{query1.declension.singular.nominative}</p>
-        <p>{query1.declension.plural.nominative}</p>
+        <p>{query1.declension?.singular.nominative}</p>
+        <p>{query1.declension?.plural.nominative}</p>
         <p>2</p>
-        <p>{query1.declension.singular.genitive}</p>
-        <p>{query1.declension.plural.genitive}</p>
+        <p>{query1.declension?.singular.genitive}</p>
+        <p>{query1.declension?.plural.genitive}</p>
         <p>3</p>
-        <p>{query1.declension.singular.dative}</p>
-        <p>{query1.declension.plural.dative}</p>
+        <p>{query1.declension?.singular.dative}</p>
+        <p>{query1.declension?.plural.dative}</p>
         <p>4</p>
-        <p>{query1.declension.singular.accusative}</p>
-        <p>{query1.declension.plural.accusative}</p>
+        <p>{query1.declension?.singular.accusative}</p>
+        <p>{query1.declension?.plural.accusative}</p>
         <p>5</p>
-        <p>{query1.declension.singular.locative}</p>
-        <p>{query1.declension.plural.locative}</p>
+        <p>{query1.declension?.singular.locative}</p>
+        <p>{query1.declension?.plural.locative}</p>
         <p>6</p>
-        <p>{query1.declension.singular.instrumental}</p>
-        <p>{query1.declension.plural.instrumental}</p>
+        <p>{query1.declension?.singular.instrumental}</p>
+        <p>{query1.declension?.plural.instrumental}</p>
       </StyledDeclensionWrapper>
       <Footer path={currentWord.category} />
     </>

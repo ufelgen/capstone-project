@@ -40,7 +40,6 @@ export default function EditVocabForm({
       },
     };
 
-    console.log("updated vocab: ", updatedVocab);
     onSaveEdited(editId, updatedVocab);
 
     onReturnFromEditMode();
