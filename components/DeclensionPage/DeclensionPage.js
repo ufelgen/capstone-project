@@ -13,7 +13,14 @@ export default function DeclensionPage({ currentWord }) {
         <h2>{base.translation}</h2>
         <h2>{query1.translation}</h2>
       </StyledHeadingWrapper>
+      <StyledSpecification>declension type:</StyledSpecification>
+      <StyledSpecification>
+        {query1.declension.specification}
+      </StyledSpecification>
       <StyledDeclensionWrapper>
+        <p></p>
+        <h4>singular</h4>
+        <h4>plural</h4>
         <p>1</p>
         <p>{query1.declension.singular.nominative}</p>
         <p>{query1.declension.plural.nominative}</p>
@@ -39,7 +46,7 @@ export default function DeclensionPage({ currentWord }) {
 }
 
 const StyledHeadingWrapper = styled.section`
-  margin: 10px;
+  margin: 10px 10px 20px 10px;
   background-color: White;
   color: darkmagenta;
   text-align: center;
@@ -47,6 +54,11 @@ const StyledHeadingWrapper = styled.section`
   cursor: default;
   display: grid;
   grid-template-columns: 1fr 1fr;
+`;
+
+const StyledSpecification = styled.h3`
+  display: flex;
+  justify-content: center;
 `;
 
 const StyledDeclensionWrapper = styled.section`
@@ -57,5 +69,9 @@ const StyledDeclensionWrapper = styled.section`
 
   p {
     padding: 7px;
+  }
+
+  h4 {
+    margin-bottom: 10px;
   }
 `;
