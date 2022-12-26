@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Footer from "../Footer/Footer";
 import Link from "next/link";
 
 export default function DeclensionPage({ currentWord }) {
@@ -32,6 +33,7 @@ export default function DeclensionPage({ currentWord }) {
         <p>{query1.declension.singular.instrumental}</p>
         <p>{query1.declension.plural.instrumental}</p>
       </StyledDeclensionWrapper>
+      <Footer path={currentWord.category} />
     </>
   );
 }
@@ -52,4 +54,8 @@ const StyledDeclensionWrapper = styled.section`
   grid-template-columns: 1fr 2fr 2fr;
   margin: 10px;
   padding: 7px;
+
+  p {
+    padding: 7px;
+  }
 `;
