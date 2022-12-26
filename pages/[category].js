@@ -9,6 +9,7 @@ import useLocalStorageState from "use-local-storage-state";
 import { useState } from "react";
 import { rearrangeData } from "../helpers/rearrangeData";
 import Link from "next/link";
+import { DeclensionIcon } from "../components/StyledIcons";
 
 export default function Category() {
   const router = useRouter();
@@ -94,13 +95,14 @@ export default function Category() {
                   {word.query1.translation}
                   <Gender>{word.query1.gender}</Gender>
                 </p>
-
+                {word.query1.declension && <DeclensionIcon />}
                 {word.id === popup ? (
                   <PopupMenu
                     onClosePopup={handleClosePopup}
                     id={word.id}
                     onDelete={handleDelete}
                     onEdit={handleEdit}
+                    word={word}
                   />
                 ) : (
                   <PopupMenuButton

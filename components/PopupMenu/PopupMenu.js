@@ -1,13 +1,21 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function PopupMenu({ onDelete, onEdit, id, onClosePopup }) {
+export default function PopupMenu({
+  onDelete,
+  onEdit,
+  id,
+  onClosePopup,
+  word,
+}) {
   return (
     <StyledPopupMenu>
       <StyledMenuButton onClick={() => onDelete(id)}>delete</StyledMenuButton>
       <StyledMenuButton onClick={() => onEdit(id)}>edit</StyledMenuButton>
       <Link href={`/declension/${id}`}>
-        <StyledMenuButton>+ declension</StyledMenuButton>
+        <StyledMenuButton>
+          {word.query1.declension ? "declension" : "+ declension"}
+        </StyledMenuButton>
       </Link>
       <StyledDivider></StyledDivider>
       <StyledMenuButton onClick={onClosePopup}>close</StyledMenuButton>
@@ -26,6 +34,7 @@ const StyledPopupMenu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   z-index: 5;
 `;
 
