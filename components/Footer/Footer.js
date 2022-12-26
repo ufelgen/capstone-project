@@ -5,7 +5,6 @@ import { HiHome, HiOutlineArrowCircleLeft } from "react-icons/hi";
 
 export default function Footer({ path }) {
   const { pathname } = useRouter();
-  console.log(pathname);
 
   return (
     <StyledFooter>
