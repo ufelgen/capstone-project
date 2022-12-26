@@ -15,33 +15,35 @@ export default function DeclensionPage({ currentWord }) {
           {query1.translation} ({query1.gender})
         </h2>
       </StyledHeadingWrapper>
-      <StyledSpecification>declension type:</StyledSpecification>
-      <StyledSpecification>
-        {query1.declension?.specification}
-      </StyledSpecification>
-      <StyledDeclensionWrapper>
-        <p></p>
-        <h4>singular</h4>
-        <h4>plural</h4>
-        <p>1</p>
-        <p>{query1.declension?.singular.nominative}</p>
-        <p>{query1.declension?.plural.nominative}</p>
-        <p>2</p>
-        <p>{query1.declension?.singular.genitive}</p>
-        <p>{query1.declension?.plural.genitive}</p>
-        <p>3</p>
-        <p>{query1.declension?.singular.dative}</p>
-        <p>{query1.declension?.plural.dative}</p>
-        <p>4</p>
-        <p>{query1.declension?.singular.accusative}</p>
-        <p>{query1.declension?.plural.accusative}</p>
-        <p>5</p>
-        <p>{query1.declension?.singular.locative}</p>
-        <p>{query1.declension?.plural.locative}</p>
-        <p>6</p>
-        <p>{query1.declension?.singular.instrumental}</p>
-        <p>{query1.declension?.plural.instrumental}</p>
-      </StyledDeclensionWrapper>
+      <StyledDeclensionPage>
+        <StyledSpecification>declension type:</StyledSpecification>
+        <StyledSpecification>
+          {query1.declension?.specification}
+        </StyledSpecification>
+        <StyledDeclensionWrapper>
+          <p></p>
+          <h4>singular</h4>
+          <h4>plural</h4>
+          <p>1</p>
+          <p>{query1.declension?.singular.nominative}</p>
+          <p>{query1.declension?.plural.nominative}</p>
+          <p>2</p>
+          <p>{query1.declension?.singular.genitive}</p>
+          <p>{query1.declension?.plural.genitive}</p>
+          <p>3</p>
+          <p>{query1.declension?.singular.dative}</p>
+          <p>{query1.declension?.plural.dative}</p>
+          <p>4</p>
+          <p>{query1.declension?.singular.accusative}</p>
+          <p>{query1.declension?.plural.accusative}</p>
+          <p>5</p>
+          <p>{query1.declension?.singular.locative}</p>
+          <p>{query1.declension?.plural.locative}</p>
+          <p>6</p>
+          <p>{query1.declension?.singular.instrumental}</p>
+          <p>{query1.declension?.plural.instrumental}</p>
+        </StyledDeclensionWrapper>
+      </StyledDeclensionPage>
       <Footer path={currentWord.category} />
     </>
   );
@@ -76,4 +78,15 @@ const StyledDeclensionWrapper = styled.section`
   h4 {
     margin-bottom: 10px;
   }
+`;
+
+const StyledDeclensionPage = styled.section`
+  padding: 10px;
+  margin: 10px 12px;
+  background-color: white;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  color: black;
+  height: auto;
+  border: 1px solid darkmagenta;
+  box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
 `;
