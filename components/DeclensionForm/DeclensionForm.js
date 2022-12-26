@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
+import { StyledForm } from "../StyledForm";
 
 export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
   const { base, query1 } = currentWord;
@@ -43,9 +44,11 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
           {query1.translation} ({query1.gender})
         </h2>
       </StyledHeadingWrapper>
-      <form onSubmit={handleSubmitDeclensionForm}>
-        <label htmlFor="specification">declension type:</label>
-        <input type="text" name="specification" />
+      <StyledForm onSubmit={handleSubmitDeclensionForm}>
+        <StyledSpecificationWrapper>
+          <label htmlFor="specification">declension type:</label>
+          <input type="text" name="specification" />
+        </StyledSpecificationWrapper>
         <StyledDeclensionWrapper>
           <p></p>
           <p></p>
@@ -99,8 +102,10 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
             placeholder="instrumental"
           />
         </StyledDeclensionWrapper>
-        <button type="submit">add</button>
-      </form>
+        <StyledDeclensionButtonWrapper>
+          <button type="submit">add</button>
+        </StyledDeclensionButtonWrapper>
+      </StyledForm>
       <Footer path={currentWord.category} />
     </>
   );
@@ -117,14 +122,16 @@ const StyledHeadingWrapper = styled.section`
   grid-template-columns: 1fr 1fr;
 `;
 
-const StyledSpecification = styled.h3`
+const StyledSpecificationWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const StyledDeclensionWrapper = styled.section`
   display: grid;
-  grid-template-columns: 1fr 0fr 2fr 0fr 2fr;
+  grid-template-columns: 1fr 0fr 5fr 0fr 5fr;
   margin: 10px;
   padding: 7px;
 
@@ -134,6 +141,12 @@ const StyledDeclensionWrapper = styled.section`
   }
 
   h4 {
-    margin-bottom: 10px;
+    margin: 0 0 10px 10px;
   }
+`;
+
+const StyledDeclensionButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
 `;
