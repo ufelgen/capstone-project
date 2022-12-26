@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
-import Link from "next/link";
 
 export default function DeclensionPage({ currentWord }) {
   const { base, query1 } = currentWord;
