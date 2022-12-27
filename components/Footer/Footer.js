@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { HiHome } from "react-icons/hi";
+import { useRouter } from "next/router";
+import { HiHome, HiOutlineArrowCircleLeft } from "react-icons/hi";
 
-export default function Footer() {
+export default function Footer({ path }) {
+  const { pathname } = useRouter();
+
   return (
     <StyledFooter>
-      <ul>
-        <li>
-          <Link href={`/`}>
-            <HiHome size="7.7vh" color="darkmagenta" />
-          </Link>{" "}
-        </li>
-      </ul>
+      <Link href={`/`}>
+        <HiHome size="7.7vh" color="darkmagenta" />
+      </Link>{" "}
+      {pathname === "/declension/[id]" && (
+        <Link href={`/${path}`}>
+          <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
+        </Link>
+      )}
     </StyledFooter>
   );
 }
@@ -23,7 +27,8 @@ const StyledFooter = styled.footer`
   width: 100%;
   background-color: lightgray;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   ul {
     list-style: none;

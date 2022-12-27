@@ -8,9 +8,9 @@ const StyledHeader = styled.header`
   height: 10vh;
   background-color: lightgray;
   color: darkmagenta;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
-  padding: 15px;
+  padding: 1rem;
   cursor: default;
 `;
