@@ -49,11 +49,11 @@ export default function DeclensionPage({ currentWord }) {
 }
 
 const StyledHeadingWrapper = styled.section`
-  margin: 10px 10px 20px 10px;
+  margin: 0.625rem 0.625rem 1.25rem 0.625rem;
   background-color: White;
   color: darkmagenta;
   text-align: center;
-  padding: 7px;
+  padding: 0.43rem;
   cursor: default;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -67,21 +67,21 @@ const StyledSpecification = styled.h3`
 const StyledDeclensionWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  margin: 10px;
-  padding: 7px;
+  margin: 0.625rem;
+  padding: 0.43rem;
 
   p {
-    padding: 7px;
+    padding: 0.43rem;
   }
 
   h4 {
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
   }
 `;
 
 const StyledDeclensionPage = styled.section`
-  padding: 10px;
-  margin: 10px 12px;
+  padding: 0.625rem;
+  margin: 0.625rem 12px;
   background-color: white;
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;

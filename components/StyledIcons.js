@@ -5,8 +5,8 @@ export function DeclensionIcon() {
 }
 
 const StyledIcon = styled.div`
-  height: 20px;
-  width: 20px;
+  height: 1.25rem;
+  width: 1.25rem;
   background-color: lightgray;
   color: white;
   border-radius: 50%;

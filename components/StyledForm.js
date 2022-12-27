@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
-  padding: 10px;
-  margin: 10px 12px;
+  padding: 0.625rem;
+  margin: 0.625rem 0.75rem;
   background-color: white;
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;

@@ -112,11 +112,11 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
 }
 
 const StyledHeadingWrapper = styled.section`
-  margin: 10px 10px 20px 10px;
+  margin: 0.625rem 0.625rem 1.25rem 0.625rem;
   background-color: White;
   color: darkmagenta;
   text-align: center;
-  padding: 7px;
+  padding: 0.43rem;
   cursor: default;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -132,21 +132,21 @@ const StyledSpecificationWrapper = styled.div`
 const StyledDeclensionWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 0fr 5fr 0fr 5fr;
-  margin: 10px;
-  padding: 7px;
+  margin: 0.625rem;
+  padding: 0.43rem;
 
   p,
   input {
-    padding: 7px;
+    padding: 0.43rem;
   }
 
   h4 {
-    margin: 0 0 10px 10px;
+    margin: 0 0 0.625rem 0.625rem;
   }
 `;
 
 const StyledDeclensionButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right: 10px;
+  margin-right: 0.625rem;
 `;

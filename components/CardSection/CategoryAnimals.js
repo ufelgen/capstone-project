@@ -32,12 +32,12 @@ export default function CardSection() {
 }
 
 const Gender = styled.span`
-  padding-left: 10px;
+  padding-left: 0.625rem;
   font-style: italic;
 `;
 
 const Flag = styled.span`
-  padding-right: 10px;
+  padding-right: 0.625rem;
 `;
 
 const CardWrapper = styled.article`
@@ -47,8 +47,8 @@ const CardWrapper = styled.article`
 `;
 
 const StyledCard = styled.div`
-  padding: 10px;
-  margin: 10px 12px;
+  padding: 0.625rem;
+  margin: 0.625rem 0.75rem;
   background-color: white;
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;
@@ -58,14 +58,14 @@ const StyledCard = styled.div`
   border: 1px solid darkmagenta;
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   p {
-    padding: 7px 0px;
+    padding: 0.43rem 0;
   }
 `;
 
 const StyledHeader = styled.h2`
-  margin: 10px;
+  margin: 0.625rem;
   background-color: White;
   color: darkmagenta;
   text-align: center;
-  padding: 7px;
+  padding: 0.43rem;
 `;
