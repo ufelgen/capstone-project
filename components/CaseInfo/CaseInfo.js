@@ -1,33 +1,19 @@
 import styled from "styled-components";
+import { cases } from "../../lib/cases";
+import { Fragment } from "react";
 
 export default function CaseInfo() {
   return (
     <StyledDeclensionPage>
       <StyledDeclensionWrapper>
-        <p>1</p>
-        <p>Nominative:</p>
-        <GridPOne>kdo ali kaj?</GridPOne>
-        <GridPTwo>(Imenovalnik)</GridPTwo>
-        <p>2</p>
-        <p>Genitive:</p>
-        <GridPOne>koga ali česa?</GridPOne>
-        <GridPTwo>(Rodilnik)</GridPTwo>
-        <p>3</p>
-        <p>Dative:</p>
-        <GridPOne>komu ali čemu?</GridPOne>
-        <GridPTwo>(Dajalnik)</GridPTwo>
-        <p>4</p>
-        <p>Accusative:</p>
-        <GridPOne>koga ali kaj?</GridPOne>
-        <GridPTwo>(Tožilnik)</GridPTwo>
-        <p>5</p>
-        <p>Locative:</p>
-        <GridPOne>pri kom ali pri čem?</GridPOne>
-        <GridPTwo>(Mestnik)</GridPTwo>
-        <p>6</p>
-        <p>Instrumental:</p>
-        <GridPOne>s kom ali s čim?</GridPOne>
-        <GridPTwo>(Orodnik)</GridPTwo>
+        {cases.map((singleCase) => (
+          <Fragment key={singleCase.id}>
+            <p>{singleCase.id}</p>
+            <p>{singleCase.english.toUpperCase()}</p>
+            <GridPOne>{singleCase.question}</GridPOne>
+            <GridPTwo>({singleCase.slovenian})</GridPTwo>
+          </Fragment>
+        ))}
       </StyledDeclensionWrapper>
     </StyledDeclensionPage>
   );
@@ -35,7 +21,7 @@ export default function CaseInfo() {
 
 const StyledDeclensionWrapper = styled.section`
   display: grid;
-  grid-template-columns: 1fr 4fr 5fr;
+  grid-template-columns: 1fr 5.5fr 7fr;
   margin: 0.625rem;
   padding: 0.43rem;
 
@@ -47,10 +33,12 @@ const StyledDeclensionWrapper = styled.section`
 const GridPOne = styled.p`
   grid-column: 3;
   grid-row: span 2;
+  font-weight: bold;
 `;
 
 const GridPTwo = styled.p`
   grid-column: 2 / span 1;
+  font-style: italic;
 `;
 
 const StyledDeclensionPage = styled.section`
