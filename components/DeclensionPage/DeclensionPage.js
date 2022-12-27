@@ -81,7 +81,7 @@ const StyledDeclensionWrapper = styled.section`
 
 const StyledDeclensionPage = styled.section`
   padding: 0.625rem;
-  margin: 0.625rem 12px;
+  margin: 0.625rem 0.75rem;
   background-color: white;
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;
