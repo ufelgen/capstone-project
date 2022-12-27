@@ -1,10 +1,18 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { HiHome, HiOutlineArrowCircleLeft } from "react-icons/hi";
+import {
+  HiHome,
+  HiOutlineInformationCircle,
+  HiOutlineArrowCircleLeft,
+} from "react-icons/hi";
+import CaseInfo from "../CaseInfo/CaseInfo";
 
 export default function Footer({ path }) {
   const { pathname } = useRouter();
+
+  const [showInfo, setShowInfo] = useState(false);
 
   return (
     <StyledFooter>
@@ -12,10 +20,19 @@ export default function Footer({ path }) {
         <HiHome size="7.7vh" color="darkmagenta" />
       </Link>{" "}
       {pathname === "/declension/[id]" && (
-        <Link href={`/${path}`}>
-          <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
-        </Link>
+        <>
+          <HiOutlineInformationCircle
+            size="7.7vh"
+            color="darkmagenta"
+            onClick={() => setShowInfo(!showInfo)}
+          />
+
+          <Link href={`/${path}`}>
+            <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
+          </Link>
+        </>
       )}
+      {showInfo && <CaseInfo />}
     </StyledFooter>
   );
 }
