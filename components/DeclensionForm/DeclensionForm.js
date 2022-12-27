@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import { StyledForm } from "../StyledForm";
+import { cases } from "../../lib/cases";
+import { Fragment } from "react";
 
 export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
   const { base, query1 } = currentWord;
@@ -50,57 +52,25 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
           <input type="text" name="specification" />
         </StyledSpecificationWrapper>
         <StyledDeclensionWrapper>
-          <p></p>
-          <p></p>
-          <h4>singular</h4>
-          <p></p>
-          <h4>plural</h4>
-          <p>1</p>
-          <label htmlFor="nominativeSingular"></label>
-          <input
-            type="text"
-            name="nominativeSingular"
-            placeholder="nominative"
-          />
-          <label htmlFor="nominativePlural"></label>
-          <input type="text" name="nominativePlural" placeholder="nominative" />
-          <p>2</p>
-          <label htmlFor="genitiveSingular"></label>
-          <input type="text" name="genitiveSingular" placeholder="genitive" />
-          <label htmlFor="genitivePlural"></label>
-          <input type="text" name="genitivePlural" placeholder="genitive" />
-          <p>3</p>
-          <label htmlFor="dativeSingular"></label>
-          <input type="text" name="dativeSingular" placeholder="dative" />
-          <label htmlFor="dativePlural"></label>
-          <input type="text" name="dativePlural" placeholder="dative" />
-          <p>4</p>
-          <label htmlFor="accusativeSingular"></label>
-          <input
-            type="text"
-            name="accusativeSingular"
-            placeholder="accusative"
-          />
-          <label htmlFor="accusativePlural"></label>
-          <input type="text" name="accusativePlural" placeholder="accusative" />
-          <p>5</p>
-          <label htmlFor="locativeSingular"></label>
-          <input type="text" name="locativeSingular" placeholder="locative" />
-          <label htmlFor="locativePlural"></label>
-          <input type="text" name="locativePlural" placeholder="locative" />
-          <p>6</p>
-          <label htmlFor="instrumentalSingular"></label>
-          <input
-            type="text"
-            name="instrumentalSingular"
-            placeholder="instrumental"
-          />
-          <label htmlFor="instrumentalPlural"></label>
-          <input
-            type="text"
-            name="instrumentalPlural"
-            placeholder="instrumental"
-          />
+          <SingularH4>singular</SingularH4>
+          <PluralH4>plural</PluralH4>
+          {cases.map((singleCase) => (
+            <Fragment key={singleCase.id}>
+              <p>{singleCase.id}</p>
+              <label htmlFor={singleCase.english + "Singular"}></label>
+              <input
+                type="text"
+                name={singleCase.english + "Singular"}
+                placeholder={singleCase.english}
+              />
+              <label htmlFor={singleCase.english + "Plural"}></label>
+              <input
+                type="text"
+                name={singleCase.english + "Plural"}
+                placeholder={singleCase.english}
+              />
+            </Fragment>
+          ))}
         </StyledDeclensionWrapper>
         <StyledDeclensionButtonWrapper>
           <button type="submit">add</button>
@@ -143,6 +113,14 @@ const StyledDeclensionWrapper = styled.section`
   h4 {
     margin: 0 0 0.625rem 0.625rem;
   }
+`;
+
+const SingularH4 = styled.h4`
+  grid-column: 3;
+`;
+
+const PluralH4 = styled.h4`
+  grid-column: 5;
 `;
 
 const StyledDeclensionButtonWrapper = styled.div`
