@@ -7,6 +7,7 @@ import { nanoid } from "nanoid";
 import useLocalStorageState from "use-local-storage-state";
 import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import PopupMenu from "../components/PopupMenu/PopupMenu";
+import EditCategory from "../components/EditCategory/EditCategory";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 
@@ -35,7 +36,20 @@ export default function Home({
   function handleDeleteCategory(event, category) {
     event.preventDefault();
     event.stopPropagation();
-    setAllWords(allWords.filter((word) => word.category !== category));
+    const confirmation = confirm(
+      "do you wish to delete all words saved in this category?"
+    );
+    if (confirmation) {
+      setAllWords(allWords.filter((word) => word.category !== category));
+    }
+  }
+
+  function handleEditedCategory(editId, updatedCategory) {
+    setAllWords(
+      allWords.map((word) =>
+        word.category === editId ? { ...word, category: updatedCategory } : word
+      )
+    );
   }
 
   return (
@@ -43,33 +57,42 @@ export default function Home({
       <Header />
       <StyledMain>
         <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
-        {wordsInCategories.map((item) => (
-          <Fragment key={item.categoryName}>
-            <StyledLink href={`/${item.categoryName}`}>
-              <StyledCategory>
-                <h3>{item.categoryName}</h3>
-                <p>
-                  {item.categoryWords.length}{" "}
-                  {item.number === 1 ? "word" : "words"}
-                </p>
-                {item.categoryName === popup ? (
-                  <PopupMenu
-                    onClosePopup={onClosePopup}
-                    id={item.categoryName}
-                    onDelete={handleDeleteCategory}
-                    onEdit={onEdit}
-                    prop={item}
-                  />
-                ) : (
-                  <PopupMenuButton
-                    id={item.categoryName}
-                    onPopupClick={onPopupClick}
-                  />
-                )}
-              </StyledCategory>
-            </StyledLink>
-          </Fragment>
-        ))}
+        {wordsInCategories.map((item) =>
+          editing && editId === item.categoryName ? (
+            <EditCategory
+              item={item}
+              onReturnFromEditMode={onReturnFromEditMode}
+              onSaveEdited={handleEditedCategory}
+              editId={editId}
+            />
+          ) : (
+            <Fragment key={item.id}>
+              <StyledLink href={`/${item.categoryName}`}>
+                <StyledCategory>
+                  <h3>{item.categoryName}</h3>
+                  <p>
+                    {item.categoryWords.length}{" "}
+                    {item.number === 1 ? "word" : "words"}
+                  </p>
+                  {item.categoryName === popup ? (
+                    <PopupMenu
+                      onClosePopup={onClosePopup}
+                      id={item.categoryName}
+                      onDelete={handleDeleteCategory}
+                      onEdit={onEdit}
+                      prop={item}
+                    />
+                  ) : (
+                    <PopupMenuButton
+                      id={item.categoryName}
+                      onPopupClick={onPopupClick}
+                    />
+                  )}
+                </StyledCategory>
+              </StyledLink>
+            </Fragment>
+          )
+        )}
       </StyledMain>
     </>
   );

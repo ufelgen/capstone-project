@@ -131,8 +131,8 @@ export default function EditVocabForm({
           })}
         </datalist>
 
-        <button type="submit">edit word</button>
         <button onClick={onReturnFromEditMode}>back</button>
+        <button type="submit">edit word</button>
       </StyledEditForm>
     </>
   );

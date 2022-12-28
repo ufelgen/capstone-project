@@ -17,14 +17,14 @@ export const StyledForm = styled.form`
   input,
   select,
   button {
-    padding: 4px;
+    padding: 0.25rem;
   }
 
   input,
   select,
   button {
     border: 1px solid darkmagenta;
-    margin: 4px;
+    margin: 0.25rem;
     border-radius: 5px;
     height: 4vh;
   }
@@ -34,7 +34,7 @@ export const StyledForm = styled.form`
   }
 
   select {
-    margin: 4px 0;
+    margin: 0.25rem 0;
   }
 
   button {

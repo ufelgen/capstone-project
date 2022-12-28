@@ -11,6 +11,7 @@ export function rearrangeData(words) {
 
   const wordsInCategories = singleCategories.map((item) => {
     return {
+      id: nanoid(),
       categoryName: item[0].category,
       categoryWords: item,
     };
