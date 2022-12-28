@@ -1,4 +1,3 @@
-import CategoryOverview from "../components/CategoryOverview/CategoryOverview";
 import Header from "../components/Header/Header";
 import NewWordForm from "../components/NewWordForm/NewWordForm";
 import Link from "next/link";
@@ -6,11 +5,11 @@ import { words } from "../lib/words";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
 import useLocalStorageState from "use-local-storage-state";
-
+import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 
-export default function Home() {
+export default function Home({ popup, onPopupClick }) {
   const [allWords, setAllWords] = useLocalStorageState("allWords", {
     defaultValue: words,
   });
@@ -30,12 +29,16 @@ export default function Home() {
       <StyledMain>
         <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
         {wordsInCategories.map((item) => (
-          <Fragment key={item.categoryName}>
+          <Fragment key={item.id}>
             <StyledLink href={`/${item.categoryName}`}>
-              <CategoryOverview
-                name={item.categoryName}
-                number={item.categoryWords.length}
-              />
+              <StyledCategory>
+                <h3>{item.categoryName}</h3>
+                <p>
+                  {item.categoryWords.length}{" "}
+                  {item.number === 1 ? "word" : "words"}
+                </p>
+                <PopupMenuButton id={item.id} onPopupClick={onPopupClick} />
+              </StyledCategory>
             </StyledLink>
           </Fragment>
         ))}
@@ -50,4 +53,16 @@ const StyledMain = styled.main`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+`;
+
+const StyledCategory = styled.section`
+  position: relative;
+  padding: 0.625rem;
+  margin: 0.625rem 0.75rem;
+  background-color: white;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  color: black;
+  height: auto;
+  border: 1px solid darkmagenta;
+  box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
 `;

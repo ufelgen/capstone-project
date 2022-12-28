@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PopupMenuButton from "../PopupMenuButton/PopupMenuButton";
 
 export default function CategoryOverview({ name, number }) {
   return (
@@ -8,6 +9,7 @@ export default function CategoryOverview({ name, number }) {
         <p>
           {number} {number === 1 ? "word" : "words"}
         </p>
+        <PopupMenuButton id={item.id} onPopupClick={onPopupClick} />
       </StyledCategory>
     </>
   );

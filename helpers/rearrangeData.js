@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export function rearrangeData(words) {
   const allCategories = words.map((word) => word.category);
 
@@ -9,6 +11,7 @@ export function rearrangeData(words) {
 
   const wordsInCategories = singleCategories.map((item) => {
     return {
+      id: nanoid(),
       categoryName: item[0].category,
       categoryWords: item,
     };

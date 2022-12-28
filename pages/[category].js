@@ -6,46 +6,32 @@ import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import PopupMenu from "../components/PopupMenu/PopupMenu";
 import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
 import useLocalStorageState from "use-local-storage-state";
-import { useState } from "react";
 import { rearrangeData } from "../helpers/rearrangeData";
 import Link from "next/link";
 import { DeclensionIcon } from "../components/StyledIcons";
 
-export default function Category() {
+export default function Category({
+  popup,
+  editing,
+  editId,
+  onPopupClick,
+  onClosePopup,
+  onEdit,
+  onReturnFromEditMode,
+}) {
   const router = useRouter();
   const { category } = router.query;
 
   const [allWords, setAllWords] = useLocalStorageState("allWords");
-  const [popup, setPopup] = useState("");
-  const [editing, setEditing] = useState(false);
-  const [editId, setEditId] = useState();
-
-  function handlePopupClick(id) {
-    setPopup(id);
-  }
 
   function handleDelete(id) {
     setAllWords(allWords.filter((word) => word.id !== id));
-  }
-
-  function handleEdit(id) {
-    setEditing(true);
-    setEditId(id);
   }
 
   function handleEditedVocab(editId, updatedVocab) {
     setAllWords(
       allWords.map((word) => (word.id === editId ? updatedVocab : word))
     );
-  }
-
-  function handleReturnFromEditMode() {
-    setEditing(false);
-    setPopup(false);
-  }
-
-  function handleClosePopup() {
-    setPopup(false);
   }
 
   if (!allWords) {
@@ -78,7 +64,7 @@ export default function Category() {
             <Fragment key={word.id}>
               <EditVocabForm
                 word={word}
-                onReturnFromEditMode={handleReturnFromEditMode}
+                onReturnFromEditMode={onReturnFromEditMode}
                 onSaveEdited={handleEditedVocab}
                 editId={editId}
               />
@@ -98,17 +84,14 @@ export default function Category() {
                 {word.query1.declension && <DeclensionIcon />}
                 {word.id === popup ? (
                   <PopupMenu
-                    onClosePopup={handleClosePopup}
+                    onClosePopup={onClosePopup}
                     id={word.id}
                     onDelete={handleDelete}
-                    onEdit={handleEdit}
+                    onEdit={onEdit}
                     word={word}
                   />
                 ) : (
-                  <PopupMenuButton
-                    id={word.id}
-                    onPopupClick={handlePopupClick}
-                  />
+                  <PopupMenuButton id={word.id} onPopupClick={onPopupClick} />
                 )}
               </StyledCard>
             </Fragment>
