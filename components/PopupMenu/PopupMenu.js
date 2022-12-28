@@ -54,6 +54,7 @@ const StyledMenuButton = styled.button`
   margin: 2px;
   border: none;
   background-color: transparent;
+  width: 100%;
 `;
 
 const StyledDivider = styled.hr`
