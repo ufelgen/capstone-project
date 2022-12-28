@@ -24,7 +24,9 @@ export default function Category({
 
   const [allWords, setAllWords] = useLocalStorageState("allWords");
 
-  function handleDelete(id) {
+  function handleDelete(event, id) {
+    event.preventDefault();
+    event.stopPropagation();
     setAllWords(allWords.filter((word) => word.id !== id));
   }
 
@@ -88,7 +90,7 @@ export default function Category({
                     id={word.id}
                     onDelete={handleDelete}
                     onEdit={onEdit}
-                    word={word}
+                    prop={word}
                   />
                 ) : (
                   <PopupMenuButton id={word.id} onPopupClick={onPopupClick} />

@@ -11,11 +11,16 @@ function MyApp({ Component, pageProps }) {
     event.stopPropagation();
     setPopup(id);
   }
-  function handleClosePopup() {
+
+  function handleClosePopup(event) {
+    event.preventDefault();
+    event.stopPropagation();
     setPopup(false);
   }
 
-  function handleEdit(id) {
+  function handleEdit(event, id) {
+    event.preventDefault();
+    event.stopPropagation();
     setEditing(true);
     setEditId(id);
   }

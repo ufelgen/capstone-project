@@ -6,10 +6,19 @@ import { Fragment } from "react";
 import { nanoid } from "nanoid";
 import useLocalStorageState from "use-local-storage-state";
 import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
+import PopupMenu from "../components/PopupMenu/PopupMenu";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 
-export default function Home({ popup, onPopupClick }) {
+export default function Home({
+  popup,
+  editing,
+  editId,
+  onPopupClick,
+  onClosePopup,
+  onEdit,
+  onReturnFromEditMode,
+}) {
   const [allWords, setAllWords] = useLocalStorageState("allWords", {
     defaultValue: words,
   });
@@ -23,13 +32,19 @@ export default function Home({ popup, onPopupClick }) {
     setAllWords([...allWords, { id: nanoid(), ...newWord }]);
   }
 
+  function handleDeleteCategory(event, category) {
+    event.preventDefault();
+    event.stopPropagation();
+    setAllWords(allWords.filter((word) => word.category !== category));
+  }
+
   return (
     <>
       <Header />
       <StyledMain>
         <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
         {wordsInCategories.map((item) => (
-          <Fragment key={item.id}>
+          <Fragment key={item.categoryName}>
             <StyledLink href={`/${item.categoryName}`}>
               <StyledCategory>
                 <h3>{item.categoryName}</h3>
@@ -37,7 +52,20 @@ export default function Home({ popup, onPopupClick }) {
                   {item.categoryWords.length}{" "}
                   {item.number === 1 ? "word" : "words"}
                 </p>
-                <PopupMenuButton id={item.id} onPopupClick={onPopupClick} />
+                {item.categoryName === popup ? (
+                  <PopupMenu
+                    onClosePopup={onClosePopup}
+                    id={item.categoryName}
+                    onDelete={handleDeleteCategory}
+                    onEdit={onEdit}
+                    prop={item}
+                  />
+                ) : (
+                  <PopupMenuButton
+                    id={item.categoryName}
+                    onPopupClick={onPopupClick}
+                  />
+                )}
               </StyledCategory>
             </StyledLink>
           </Fragment>

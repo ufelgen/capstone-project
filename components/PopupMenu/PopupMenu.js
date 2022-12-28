@@ -1,24 +1,35 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function PopupMenu({
   onDelete,
   onEdit,
   id,
   onClosePopup,
-  word,
+  prop,
 }) {
+  const { pathname } = useRouter();
   return (
     <StyledPopupMenu>
-      <StyledMenuButton onClick={() => onDelete(id)}>delete</StyledMenuButton>
-      <StyledMenuButton onClick={() => onEdit(id)}>edit</StyledMenuButton>
-      <Link href={`/declension/${id}`}>
-        <StyledMenuButton>
-          {word.query1.declension ? "declension" : "+ declension"}
-        </StyledMenuButton>
-      </Link>
+      <StyledMenuButton onClick={(event) => onDelete(event, id)}>
+        delete
+      </StyledMenuButton>
+      <StyledMenuButton onClick={(event) => onEdit(event, id)}>
+        edit
+      </StyledMenuButton>
+      {pathname === "/[category]" && (
+        <Link href={`/declension/${id}`}>
+          <StyledMenuButton>
+            {prop.query1?.declension ? "declension" : "+ declension"}
+          </StyledMenuButton>
+        </Link>
+      )}
+
       <StyledDivider></StyledDivider>
-      <StyledMenuButton onClick={onClosePopup}>close</StyledMenuButton>
+      <StyledMenuButton onClick={(event) => onClosePopup(event)}>
+        close
+      </StyledMenuButton>
     </StyledPopupMenu>
   );
 }
