@@ -20,18 +20,20 @@ export default function Footer({ path }) {
         <HiHome size="7.7vh" color="darkmagenta" />
       </Link>{" "}
       {pathname === "/declension/[id]" && (
-        <>
-          <HiOutlineInformationCircle
-            size="7.7vh"
-            color="darkmagenta"
-            onClick={() => setShowInfo(!showInfo)}
-          />
-
-          <Link href={`/${path}`}>
-            <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
-          </Link>
-        </>
+        <HiOutlineInformationCircle
+          size="7.7vh"
+          color="darkmagenta"
+          onClick={() => setShowInfo(!showInfo)}
+        />
       )}
+      {pathname === "/declension/[id]" ||
+        (pathname === "/notes/[id]" && (
+          <>
+            <Link href={`/${path}`}>
+              <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
+            </Link>
+          </>
+        ))}
       {showInfo && <CaseInfo />}
     </StyledFooter>
   );

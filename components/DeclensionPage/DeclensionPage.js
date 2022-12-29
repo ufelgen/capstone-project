@@ -1,19 +1,13 @@
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
+import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
 
 export default function DeclensionPage({ currentWord }) {
   const { base, query1 } = currentWord;
 
   return (
     <>
-      <StyledHeadingWrapper>
-        <h2>{base.flag}</h2>
-        <h2>{query1.flag}</h2>
-        <h2>{base.translation}</h2>
-        <h2>
-          {query1.translation} ({query1.gender})
-        </h2>
-      </StyledHeadingWrapper>
+      <SingleWordHeading base={base} query1={query1} />
       <StyledDeclensionPage>
         <StyledSpecification>declension type:</StyledSpecification>
         <StyledSpecification>
