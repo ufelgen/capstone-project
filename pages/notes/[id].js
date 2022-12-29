@@ -2,9 +2,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import NotesForm from "../../components/NotesForm/NotesForm";
 import NotesPage from "../../components/NotesPage/NotesPage";
+import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
 import useLocalStorageState from "use-local-storage-state";
 
-export default function Declension() {
+export default function Notes({
+  onEdit,
+  editId,
+  editing,
+  onReturnFromEditMode,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -35,10 +41,24 @@ export default function Declension() {
 
   return (
     <>
+      <SingleWordHeading base={currentWord.base} query1={currentWord.query1} />
       {currentWord.notes ? (
-        <NotesPage currentWord={currentWord} />
+        <NotesPage
+          currentWord={currentWord}
+          onEdit={onEdit}
+          editing={editing}
+          editId={editId}
+          onReturnFromEditMode={onReturnFromEditMode}
+        />
       ) : (
-        <NotesForm currentWord={currentWord} onSaveNotes={handleSaveNotes} />
+        <NotesForm
+          currentWord={currentWord}
+          onSaveNotes={handleSaveNotes}
+          inputLabel={"add your notes to this word"}
+          buttonLabel={"add notes"}
+          editing={editing}
+          onReturnFromEditMode={onReturnFromEditMode}
+        />
       )}
     </>
   );

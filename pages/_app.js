@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }) {
     event.stopPropagation();
     setEditing(true);
     setEditId(id);
+    console.log("editing");
   }
 
   function handleReturnFromEditMode() {

@@ -1,9 +1,17 @@
 import styled from "styled-components";
 import { StyledForm } from "../StyledForm";
-import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
 import Footer from "../Footer/Footer";
+import { useRouter } from "next/router";
 
-export default function NotesForm({ currentWord, onSaveNotes }) {
+export default function NotesForm({
+  currentWord,
+  onSaveNotes,
+  inputLabel,
+  buttonLabel,
+  editing,
+  onReturnFromEditMode,
+}) {
+  const pathname = useRouter();
   function handleAddNotes(event) {
     event.preventDefault();
     const wordNotes = event.target.elements.notes.value;
@@ -12,11 +20,11 @@ export default function NotesForm({ currentWord, onSaveNotes }) {
 
   return (
     <>
-      <SingleWordHeading base={currentWord.base} query1={currentWord.query1} />
       <StyledForm onSubmit={handleAddNotes}>
-        <label htmlFor="notes">add your notes to this word</label>
+        <label htmlFor="notes">{inputLabel}</label>
         <textarea id="notes" name="notes" rows="7"></textarea>
-        <button type="submit">add notes</button>
+        {editing && <button onClick={onReturnFromEditMode}>back</button>}
+        <button type="submit">{buttonLabel}</button>
       </StyledForm>
       <Footer path={currentWord.category} />
     </>

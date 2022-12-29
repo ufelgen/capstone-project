@@ -1,14 +1,41 @@
 import styled from "styled-components";
-import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
 import Footer from "../Footer/Footer";
+import NotesForm from "../NotesForm/NotesForm";
 
-export default function NotesPage({ currentWord }) {
+export default function NotesPage({
+  currentWord,
+  onEdit,
+  editId,
+  editing,
+  onReturnFromEditMode,
+}) {
+  function handleEditNotes(event) {
+    event.preventDefault();
+    const wordNotes = event.target.elements.notes.value;
+    onSaveNotes(editId, wordNotes);
+    onReturnFromEditMode();
+  }
+
   return (
     <>
-      <SingleWordHeading base={currentWord.base} query1={currentWord.query1} />
-      <StyledNotes>
-        <p>{currentWord.notes}</p>
-      </StyledNotes>
+      {editing && editId === currentWord.id ? (
+        <NotesForm
+          currentWord={currentWord}
+          onSaveNotes={handleEditNotes}
+          inputLabel={"edit your notes to this word"}
+          buttonLabel={"edit notes"}
+        />
+      ) : (
+        <StyledNotes>
+          <p>{currentWord.notes}</p>
+          <button
+            type="button"
+            onClick={(event) => onEdit(event, currentWord.id)}
+          >
+            edit
+          </button>
+        </StyledNotes>
+      )}
       <Footer path={currentWord.category} />
     </>
   );
@@ -26,4 +53,13 @@ const StyledNotes = styled.section`
   position: relative;
   justify-content: center;
   align-items: center;
+  button {
+    padding: 0.25rem;
+    border: 1px solid darkmagenta;
+    margin: 0.25rem;
+    border-radius: 5px;
+    height: 4vh;
+    background-color: darkmagenta;
+    color: white;
+  }
 `;
