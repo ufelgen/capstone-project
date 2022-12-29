@@ -7,7 +7,7 @@ export default function SingleWordHeading({ base, query1 }) {
       <h2>{query1.flag}</h2>
       <h2>{base.translation}</h2>
       <h2>
-        {query1.translation} ({query1.gender})
+        {query1.translation} {query1.gender && `(${query1.gender})`}
       </h2>
     </StyledHeadingWrapper>
   );
