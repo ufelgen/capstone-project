@@ -59,6 +59,7 @@ export default function Notes({
           inputLabel={"add your notes to this word"}
           buttonLabel={"add notes"}
           editing={editing}
+          editId={editId}
           onReturnFromEditMode={onReturnFromEditMode}
         />
       )}

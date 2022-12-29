@@ -7,6 +7,7 @@ export default function NotesForm({
   inputLabel,
   buttonLabel,
   editing,
+  editId,
   onReturnFromEditMode,
   defaultValue,
 }) {
@@ -14,9 +15,10 @@ export default function NotesForm({
     event.preventDefault();
     const wordNotes = event.target.elements.notes.value;
     onSaveNotes(currentWord.id, wordNotes);
-    //onReturnFromEditMode();
+    editing && onReturnFromEditMode();
   }
 
+  console.log("editing in notes form: ", editing);
   return (
     <>
       <StyledForm onSubmit={handleAddNotes}>
@@ -24,7 +26,7 @@ export default function NotesForm({
         <StyledTextarea
           id="notes"
           name="notes"
-          rows="7"
+          rows="15"
           defaultValue={defaultValue}
         ></StyledTextarea>
         {editing && <button onClick={onReturnFromEditMode}>back</button>}

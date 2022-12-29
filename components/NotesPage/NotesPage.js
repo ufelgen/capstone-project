@@ -6,8 +6,8 @@ export default function NotesPage({
   onEdit,
   editId,
   editing,
-  onReturnFromEditMode,
   onSaveNotes,
+  onReturnFromEditMode,
 }) {
   // function handleEditNotes(event) {
   //   event.preventDefault();
@@ -15,7 +15,7 @@ export default function NotesPage({
   //   onSaveNotes(editId, wordNotes);
   //   onReturnFromEditMode();
   // }
-
+  console.log("editing on notes page: ", editing);
   return (
     <>
       {editing && editId === currentWord.id ? (
@@ -25,6 +25,8 @@ export default function NotesPage({
           inputLabel={"edit your notes to this word"}
           buttonLabel={"edit notes"}
           defaultValue={currentWord.notes}
+          editing={editing}
+          onReturnFromEditMode={onReturnFromEditMode}
         />
       ) : (
         <StyledNotes>
