@@ -3,7 +3,7 @@ import { HiDotsVertical } from "react-icons/hi";
 
 export default function PopupMenuButton({ id, onPopupClick }) {
   return (
-    <StyledPopupMenuButton onClick={() => onPopupClick(id)}>
+    <StyledPopupMenuButton onClick={(event) => onPopupClick(event, id)}>
       <HiDotsVertical size={15} />
     </StyledPopupMenuButton>
   );
