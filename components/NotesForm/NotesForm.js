@@ -18,10 +18,9 @@ export default function NotesForm({
     editing && onReturnFromEditMode();
   }
 
-  console.log("editing in notes form: ", editing);
   return (
     <>
-      <StyledForm onSubmit={handleAddNotes}>
+      <StyledNotesForm onSubmit={handleAddNotes}>
         <label htmlFor="notes">{inputLabel}</label>
         <StyledTextarea
           id="notes"
@@ -29,13 +28,24 @@ export default function NotesForm({
           rows="15"
           defaultValue={defaultValue}
         ></StyledTextarea>
-        {editing && <button onClick={onReturnFromEditMode}>back</button>}
-        <button type="submit">{buttonLabel}</button>
-      </StyledForm>
+        <div>
+          {editing && <button onClick={onReturnFromEditMode}>back</button>}
+          <button type="submit">{buttonLabel}</button>
+        </div>
+      </StyledNotesForm>
     </>
   );
 }
 
 const StyledTextarea = styled.textarea`
   width: 100%;
+  margin-bottom: 1rem;
+`;
+
+const StyledNotesForm = styled(StyledForm)`
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 `;

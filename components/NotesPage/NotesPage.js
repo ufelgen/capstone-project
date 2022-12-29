@@ -9,13 +9,6 @@ export default function NotesPage({
   onSaveNotes,
   onReturnFromEditMode,
 }) {
-  // function handleEditNotes(event) {
-  //   event.preventDefault();
-  //   const wordNotes = event.target.elements.notes.value;
-  //   onSaveNotes(editId, wordNotes);
-  //   onReturnFromEditMode();
-  // }
-  console.log("editing on notes page: ", editing);
   return (
     <>
       {editing && editId === currentWord.id ? (
@@ -31,12 +24,14 @@ export default function NotesPage({
       ) : (
         <StyledNotes>
           <p>{currentWord.notes}</p>
-          <button
-            type="button"
-            onClick={(event) => onEdit(event, currentWord.id)}
-          >
-            edit
-          </button>
+          <div>
+            <button
+              type="button"
+              onClick={(event) => onEdit(event, currentWord.id)}
+            >
+              edit
+            </button>
+          </div>
         </StyledNotes>
       )}
     </>
@@ -55,6 +50,18 @@ const StyledNotes = styled.section`
   position: relative;
   justify-content: center;
   align-items: center;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+
   button {
     padding: 0.25rem;
     border: 1px solid darkmagenta;
