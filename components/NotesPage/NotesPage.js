@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Footer from "../Footer/Footer";
 import NotesForm from "../NotesForm/NotesForm";
 
 export default function NotesPage({
@@ -8,22 +7,24 @@ export default function NotesPage({
   editId,
   editing,
   onReturnFromEditMode,
+  onSaveNotes,
 }) {
-  function handleEditNotes(event) {
-    event.preventDefault();
-    const wordNotes = event.target.elements.notes.value;
-    onSaveNotes(editId, wordNotes);
-    onReturnFromEditMode();
-  }
+  // function handleEditNotes(event) {
+  //   event.preventDefault();
+  //   const wordNotes = event.target.elements.notes.value;
+  //   onSaveNotes(editId, wordNotes);
+  //   onReturnFromEditMode();
+  // }
 
   return (
     <>
       {editing && editId === currentWord.id ? (
         <NotesForm
           currentWord={currentWord}
-          onSaveNotes={handleEditNotes}
+          onSaveNotes={onSaveNotes}
           inputLabel={"edit your notes to this word"}
           buttonLabel={"edit notes"}
+          defaultValue={currentWord.notes}
         />
       ) : (
         <StyledNotes>
@@ -36,7 +37,6 @@ export default function NotesPage({
           </button>
         </StyledNotes>
       )}
-      <Footer path={currentWord.category} />
     </>
   );
 }

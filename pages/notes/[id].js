@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import NotesForm from "../../components/NotesForm/NotesForm";
 import NotesPage from "../../components/NotesPage/NotesPage";
+import Footer from "../../components/Footer/Footer";
 import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
 import useLocalStorageState from "use-local-storage-state";
 
@@ -49,6 +50,7 @@ export default function Notes({
           editing={editing}
           editId={editId}
           onReturnFromEditMode={onReturnFromEditMode}
+          onSaveNotes={handleSaveNotes}
         />
       ) : (
         <NotesForm
@@ -60,6 +62,10 @@ export default function Notes({
           onReturnFromEditMode={onReturnFromEditMode}
         />
       )}
+      <Footer
+        path={currentWord.category}
+        onReturnFromEditMode={onReturnFromEditMode}
+      />
     </>
   );
 }
