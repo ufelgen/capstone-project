@@ -40,7 +40,7 @@ export default function DeclensionForm({
     };
 
     onAddDeclensionForm(currentWord.id, addedDeclension);
-    onReturnFromEditMode();
+    editing && onReturnFromEditMode();
   }
 
   return (
@@ -52,7 +52,8 @@ export default function DeclensionForm({
           <input
             type="text"
             name="specification"
-            defaultValue={query1.declension.specification}
+            defaultValue={query1.declension?.specification}
+            required
           />
         </StyledSpecificationWrapper>
         <StyledDeclensionWrapper>
@@ -69,12 +70,14 @@ export default function DeclensionForm({
                     defaultValue={
                       query1.declension.singular[singleCase.english]
                     }
+                    required
                   />
                   <label htmlFor={singleCase.english + "Plural"}></label>
                   <input
                     type="text"
                     name={singleCase.english + "Plural"}
                     defaultValue={query1.declension.plural[singleCase.english]}
+                    required
                   />
                 </Fragment>
               ))
@@ -86,12 +89,14 @@ export default function DeclensionForm({
                     type="text"
                     name={singleCase.english + "Singular"}
                     placeholder={singleCase.english}
+                    required
                   />
                   <label htmlFor={singleCase.english + "Plural"}></label>
                   <input
                     type="text"
                     name={singleCase.english + "Plural"}
                     placeholder={singleCase.english}
+                    required
                   />
                 </Fragment>
               ))}
