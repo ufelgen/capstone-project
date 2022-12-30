@@ -4,7 +4,12 @@ import DeclensionPage from "../../components/DeclensionPage/DeclensionPage";
 import DeclensionForm from "../../components/DeclensionForm/DeclensionForm";
 import useLocalStorageState from "use-local-storage-state";
 
-export default function Declension() {
+export default function Declension({
+  editing,
+  editId,
+  onEdit,
+  onReturnFromEditMode,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -38,7 +43,14 @@ export default function Declension() {
   return (
     <>
       {currentWord.query1.declension ? (
-        <DeclensionPage currentWord={currentWord} />
+        <DeclensionPage
+          currentWord={currentWord}
+          editing={editing}
+          editId={editId}
+          onEdit={onEdit}
+          onReturnFromEditMode={onReturnFromEditMode}
+          onAddDeclensionForm={handleAddDeclensionForm}
+        />
       ) : (
         <DeclensionForm
           currentWord={currentWord}
