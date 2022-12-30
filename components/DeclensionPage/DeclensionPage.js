@@ -1,19 +1,13 @@
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
+import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
 
 export default function DeclensionPage({ currentWord }) {
   const { base, query1 } = currentWord;
 
   return (
     <>
-      <StyledHeadingWrapper>
-        <h2>{base.flag}</h2>
-        <h2>{query1.flag}</h2>
-        <h2>{base.translation}</h2>
-        <h2>
-          {query1.translation} ({query1.gender})
-        </h2>
-      </StyledHeadingWrapper>
+      <SingleWordHeading base={base} query1={query1} />
       <StyledDeclensionPage>
         <StyledSpecification>declension type:</StyledSpecification>
         <StyledSpecification>
@@ -47,17 +41,6 @@ export default function DeclensionPage({ currentWord }) {
     </>
   );
 }
-
-const StyledHeadingWrapper = styled.section`
-  margin: 0.625rem 0.625rem 1.25rem 0.625rem;
-  background-color: White;
-  color: darkmagenta;
-  text-align: center;
-  padding: 0.43rem;
-  cursor: default;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
 
 const StyledSpecification = styled.h3`
   display: flex;

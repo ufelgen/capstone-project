@@ -19,11 +19,18 @@ export default function PopupMenu({
         edit
       </StyledMenuButton>
       {pathname === "/[category]" && (
-        <Link href={`/declension/${id}`}>
-          <StyledMenuButton>
-            {prop.query1?.declension ? "declension" : "+ declension"}
-          </StyledMenuButton>
-        </Link>
+        <>
+          <Link href={`/declension/${id}`}>
+            <StyledMenuButton>
+              {prop.query1?.declension ? "declension" : "+ declension"}
+            </StyledMenuButton>
+          </Link>
+          <Link href={`/notes/${id}`}>
+            <StyledMenuButton>
+              {prop.notes ? "notes" : "+ notes"}
+            </StyledMenuButton>
+          </Link>
+        </>
       )}
 
       <StyledDivider></StyledDivider>

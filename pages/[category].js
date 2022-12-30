@@ -8,7 +8,7 @@ import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
 import useLocalStorageState from "use-local-storage-state";
 import { rearrangeData } from "../helpers/rearrangeData";
 import Link from "next/link";
-import { DeclensionIcon } from "../components/StyledIcons";
+import { DeclensionIcon, NotesIcon } from "../components/StyledIcons";
 
 export default function Category({
   popup,
@@ -84,6 +84,7 @@ export default function Category({
                   <Gender>{word.query1.gender}</Gender>
                 </p>
                 {word.query1.declension && <DeclensionIcon />}
+                {word.notes && <NotesIcon />}
                 {word.id === popup ? (
                   <PopupMenu
                     onClosePopup={onClosePopup}

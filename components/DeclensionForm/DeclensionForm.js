@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
+import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
 import { StyledForm } from "../StyledForm";
 import { cases } from "../../lib/cases";
 import { Fragment } from "react";
@@ -38,14 +39,7 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
 
   return (
     <>
-      <StyledHeadingWrapper>
-        <h2>{base.flag}</h2>
-        <h2>{query1.flag}</h2>
-        <h2>{base.translation}</h2>
-        <h2>
-          {query1.translation} ({query1.gender})
-        </h2>
-      </StyledHeadingWrapper>
+      <SingleWordHeading base={base} query1={query1} />
       <StyledForm onSubmit={handleSubmitDeclensionForm}>
         <StyledSpecificationWrapper>
           <label htmlFor="specification">declension type:</label>
@@ -80,17 +74,6 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
     </>
   );
 }
-
-const StyledHeadingWrapper = styled.section`
-  margin: 0.625rem 0.625rem 1.25rem 0.625rem;
-  background-color: White;
-  color: darkmagenta;
-  text-align: center;
-  padding: 0.43rem;
-  cursor: default;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
 
 const StyledSpecificationWrapper = styled.div`
   display: flex;

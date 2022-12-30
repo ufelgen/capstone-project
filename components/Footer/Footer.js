@@ -9,10 +9,14 @@ import {
 } from "react-icons/hi";
 import CaseInfo from "../CaseInfo/CaseInfo";
 
-export default function Footer({ path }) {
+export default function Footer({ path, onReturnFromEditMode }) {
   const { pathname } = useRouter();
 
   const [showInfo, setShowInfo] = useState(false);
+
+  function handleReturn() {
+    onReturnFromEditMode();
+  }
 
   return (
     <StyledFooter>
@@ -20,14 +24,15 @@ export default function Footer({ path }) {
         <HiHome size="7.7vh" color="darkmagenta" />
       </Link>{" "}
       {pathname === "/declension/[id]" && (
+        <HiOutlineInformationCircle
+          size="7.7vh"
+          color="darkmagenta"
+          onClick={() => setShowInfo(!showInfo)}
+        />
+      )}
+      {(pathname === "/declension/[id]" || pathname === "/notes/[id]") && (
         <>
-          <HiOutlineInformationCircle
-            size="7.7vh"
-            color="darkmagenta"
-            onClick={() => setShowInfo(!showInfo)}
-          />
-
-          <Link href={`/${path}`}>
+          <Link href={`/${path}`} onClick={handleReturn}>
             <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
           </Link>
         </>
