@@ -7,7 +7,6 @@ export default function NotesForm({
   inputLabel,
   buttonLabel,
   editing,
-  editId,
   onReturnFromEditMode,
   defaultValue,
 }) {

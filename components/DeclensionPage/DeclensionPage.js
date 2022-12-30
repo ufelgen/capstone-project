@@ -42,17 +42,6 @@ export default function DeclensionPage({ currentWord }) {
   );
 }
 
-const StyledHeadingWrapper = styled.section`
-  margin: 0.625rem 0.625rem 1.25rem 0.625rem;
-  background-color: White;
-  color: darkmagenta;
-  text-align: center;
-  padding: 0.43rem;
-  cursor: default;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
-
 const StyledSpecification = styled.h3`
   display: flex;
   justify-content: center;

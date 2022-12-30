@@ -75,17 +75,6 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
   );
 }
 
-const StyledHeadingWrapper = styled.section`
-  margin: 0.625rem 0.625rem 1.25rem 0.625rem;
-  background-color: White;
-  color: darkmagenta;
-  text-align: center;
-  padding: 0.43rem;
-  cursor: default;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
-
 const StyledSpecificationWrapper = styled.div`
   display: flex;
   flex-direction: column;
