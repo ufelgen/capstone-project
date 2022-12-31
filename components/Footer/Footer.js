@@ -20,7 +20,7 @@ export default function Footer({ path, onReturnFromEditMode }) {
 
   return (
     <StyledFooter>
-      <Link href={`/`}>
+      <Link href={`/`} onClick={handleReturn}>
         <HiHome size="7.7vh" color="darkmagenta" />
       </Link>{" "}
       {pathname === "/declension/[id]" && (

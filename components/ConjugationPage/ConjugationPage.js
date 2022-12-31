@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import ConjugationButtons from "./ConjugationButtons";
+import ConjugationButtons from "../ConjugationButtons/ConjugationButtons";
 
 export default function ConjugationPage({ currentWord }) {
   const present = currentWord.query1.conjugation.present;

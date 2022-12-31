@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ConjugationPage from "../../components/WrongConjugationPage";
-import ConjugationForm from "../../components/ConjugationForm";
+import ConjugationPage from "../../components/ConjugationPage/ConjugationPage";
+import ConjugationForm from "../../components/ConjugationForm/ConjugationForm";
+import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function Conjugation() {
@@ -25,11 +26,11 @@ export default function Conjugation() {
     );
   }
 
-  function handleAddConjugationForm(conjugationId, conjugation) {
+  function handleAddConjugationForm(conjugationId, newConjugation) {
     setAllWords(
       allWords.map((word) =>
         word.id === conjugationId
-          ? { ...word, query1: { ...word.query1, ...conjugation } }
+          ? { ...word, query1: { ...word.query1, conjugation: newConjugation } }
           : word
       )
     );
@@ -37,7 +38,7 @@ export default function Conjugation() {
 
   return (
     <>
-      {/* <SingleWordHeading base={currentWord.base} query1={currentWord.query1} */}
+      <SingleWordHeading base={currentWord.base} query1={currentWord.query1} />
       {currentWord.query1.conjugation ? (
         <ConjugationPage currentWord={currentWord} />
       ) : (

@@ -1,4 +1,4 @@
-export function conjugation(present, participleMasc, participleFem) {
+export function handleConjugation(present, participleMasc, participleFem) {
   const participleStem = participleFem.slice(0, participleFem.length - 1);
 
   const conjugation = {

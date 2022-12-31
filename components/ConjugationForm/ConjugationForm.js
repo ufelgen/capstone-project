@@ -1,5 +1,5 @@
-import { StyledForm } from "./StyledForm";
-import { conjugation } from "../../lib/conjugation";
+import { StyledForm } from "../StyledForm";
+import { handleConjugation } from "../../helpers/handleConjugation";
 
 export default function ConjugationForm({
   onAddConjugationForm,
@@ -10,9 +10,15 @@ export default function ConjugationForm({
     const present = event.target.elements.present.value;
     const participleMasc = event.target.elements.participleMasc.value;
     const participleFem = event.target.elements.participleFem.value;
-    const conjugation = conjugation(present, participleMasc, participleFem);
+    const newConjugation = handleConjugation(
+      present,
+      participleMasc,
+      participleFem
+    );
 
-    onAddConjugationForm(conjugationId, conjugation);
+    onAddConjugationForm(id, newConjugation);
+    console.log("conjugation: ", newConjugation),
+      console.log("id", conjugationId);
   }
   return (
     <StyledForm
