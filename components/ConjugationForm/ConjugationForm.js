@@ -1,5 +1,6 @@
 import { StyledForm } from "../StyledForm";
 import { handleConjugation } from "../../helpers/handleConjugation";
+import styled from "styled-components";
 
 export default function ConjugationForm({
   onAddConjugationForm,
@@ -21,36 +22,56 @@ export default function ConjugationForm({
       console.log("id", conjugationId);
   }
   return (
-    <StyledForm
+    <StyledConjugationForm
       onSubmit={(event) => handleConjugationForm(event, conjugationId)}
     >
       <p>Please provide the verb root:</p>
-      <label htmlFor="present">on/ona (present)</label>
-      <input
-        type="text"
-        id="present"
-        name="present"
-        placeholder="third person singular present"
-        required
-      />
+      <div>
+        <label htmlFor="present">on/ona</label>
+        <input
+          type="text"
+          id="present"
+          name="present"
+          placeholder="third person singular present"
+          required
+        />
+      </div>
       <p>Please provide the participle:</p>
-      <label htmlFor="participleMasc">on je</label>
-      <input
-        type="text"
-        id="participleMasc"
-        name="participleMasc"
-        placeholder="participle masculinum"
-        required
-      />
-      <label htmlFor="participleFem">on je</label>
-      <input
-        type="text"
-        id="participleFem"
-        name="participleFem"
-        placeholder="participle femininum"
-        required
-      />
-      <button type="submit">add</button>
-    </StyledForm>
+      <div>
+        <label htmlFor="participleMasc">on je</label>
+        <input
+          type="text"
+          id="participleMasc"
+          name="participleMasc"
+          placeholder="participle masculinum"
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="participleFem">ona je</label>
+        <input
+          type="text"
+          id="participleFem"
+          name="participleFem"
+          placeholder="participle femininum"
+          required
+        />
+      </div>
+      <div>
+        <button type="submit">add</button>
+      </div>
+    </StyledConjugationForm>
   );
 }
+
+const StyledConjugationForm = styled(StyledForm)`
+  div {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    text-align: right;
+  }
+
+  button {
+    grid-column: 5;
+  }
+`;
