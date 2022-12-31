@@ -5,7 +5,12 @@ import { StyledForm } from "../StyledForm";
 import { cases } from "../../lib/cases";
 import { Fragment } from "react";
 
-export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
+export default function DeclensionForm({
+  currentWord,
+  onAddDeclensionForm,
+  editing,
+  onReturnFromEditMode,
+}) {
   const { base, query1 } = currentWord;
 
   function handleSubmitDeclensionForm(event) {
@@ -35,6 +40,7 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
     };
 
     onAddDeclensionForm(currentWord.id, addedDeclension);
+    editing && onReturnFromEditMode();
   }
 
   return (
@@ -43,31 +49,69 @@ export default function DeclensionForm({ currentWord, onAddDeclensionForm }) {
       <StyledForm onSubmit={handleSubmitDeclensionForm}>
         <StyledSpecificationWrapper>
           <label htmlFor="specification">declension type:</label>
-          <input type="text" name="specification" />
+          <input
+            type="text"
+            name="specification"
+            defaultValue={query1.declension?.specification}
+            required
+          />
         </StyledSpecificationWrapper>
         <StyledDeclensionWrapper>
           <SingularH4>singular</SingularH4>
           <PluralH4>plural</PluralH4>
-          {cases.map((singleCase) => (
-            <Fragment key={singleCase.id}>
-              <p>{singleCase.id}</p>
-              <label htmlFor={singleCase.english + "Singular"}></label>
-              <input
-                type="text"
-                name={singleCase.english + "Singular"}
-                placeholder={singleCase.english}
-              />
-              <label htmlFor={singleCase.english + "Plural"}></label>
-              <input
-                type="text"
-                name={singleCase.english + "Plural"}
-                placeholder={singleCase.english}
-              />
-            </Fragment>
-          ))}
+          {editing
+            ? cases.map((singleCase) => (
+                <Fragment key={singleCase.id}>
+                  <p>{singleCase.id}</p>
+                  <label htmlFor={singleCase.english + "Singular"}></label>
+                  <input
+                    type="text"
+                    name={singleCase.english + "Singular"}
+                    defaultValue={
+                      query1.declension.singular[singleCase.english]
+                    }
+                    required
+                  />
+                  <label htmlFor={singleCase.english + "Plural"}></label>
+                  <input
+                    type="text"
+                    name={singleCase.english + "Plural"}
+                    defaultValue={query1.declension.plural[singleCase.english]}
+                    required
+                  />
+                </Fragment>
+              ))
+            : cases.map((singleCase) => (
+                <Fragment key={singleCase.id}>
+                  <p>{singleCase.id}</p>
+                  <label htmlFor={singleCase.english + "Singular"}></label>
+                  <input
+                    type="text"
+                    name={singleCase.english + "Singular"}
+                    placeholder={singleCase.english}
+                    required
+                  />
+                  <label htmlFor={singleCase.english + "Plural"}></label>
+                  <input
+                    type="text"
+                    name={singleCase.english + "Plural"}
+                    placeholder={singleCase.english}
+                    required
+                  />
+                </Fragment>
+              ))}
         </StyledDeclensionWrapper>
         <StyledDeclensionButtonWrapper>
-          <button type="submit">add</button>
+          {editing ? (
+            <>
+              <button type="button" onClick={onReturnFromEditMode}>
+                back
+              </button>
+              <button type="submit">edit</button>
+            </>
+          ) : (
+            <button type="submit">add</button>
+          )}
         </StyledDeclensionButtonWrapper>
       </StyledForm>
       <Footer path={currentWord.category} />
