@@ -18,8 +18,6 @@ export default function ConjugationForm({
     );
 
     onAddConjugationForm(id, newConjugation);
-    console.log("conjugation: ", newConjugation),
-      console.log("id", conjugationId);
   }
   return (
     <StyledConjugationForm
