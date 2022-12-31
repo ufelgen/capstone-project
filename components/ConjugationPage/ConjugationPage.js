@@ -15,9 +15,8 @@ export default function ConjugationPage({ currentWord }) {
   return (
     <>
       <StyledSection>
-        <ConjugationButtons onChangeTense={changeTense} />
+        <ConjugationButtons tense={tense} onChangeTense={changeTense} />
         <StyledTable>
-          {" "}
           <tbody>
             {tense === "present" &&
               present.map((word) => (
@@ -25,21 +24,21 @@ export default function ConjugationPage({ currentWord }) {
                   <StyledPronouns>{word.pronouns}</StyledPronouns>
                   <StyledVerbform>{word.verbForm}</StyledVerbform>
                 </StyledTableRowsPresent>
-              ))}{" "}
+              ))}
             {tense === "past" &&
               past.map((word) => (
                 <StyledTableRows key={word.person}>
                   <StyledPronouns>{word.pronouns}</StyledPronouns>
                   <StyledVerbform>{word.verbForm}</StyledVerbform>
                 </StyledTableRows>
-              ))}{" "}
+              ))}
             {tense === "future" &&
               future.map((word) => (
                 <StyledTableRows key={word.person}>
                   <StyledPronouns>{word.pronouns}</StyledPronouns>
                   <StyledVerbform>{word.verbForm}</StyledVerbform>
                 </StyledTableRows>
-              ))}{" "}
+              ))}
           </tbody>
         </StyledTable>
       </StyledSection>
@@ -51,7 +50,6 @@ const StyledTable = styled.table`
   padding: 0.625rem;
   margin: 0.625rem 0.75rem;
   background-color: lightgray;
-  //background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;
   height: auto;
   border: 1px solid darkmagenta;
@@ -64,14 +62,15 @@ const StyledTable = styled.table`
 
 const StyledTableRows = styled.tr`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 0.8fr 2fr;
   border-bottom: 1px solid white;
+  padding: 0.1rem;
   :last-child {
     border-bottom: none;
   }
 `;
 const StyledTableRowsPresent = styled(StyledTableRows)`
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const StyledPronouns = styled.td`

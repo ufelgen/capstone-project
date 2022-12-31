@@ -4,6 +4,7 @@ import ConjugationPage from "../../components/ConjugationPage/ConjugationPage";
 import ConjugationForm from "../../components/ConjugationForm/ConjugationForm";
 import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
 import useLocalStorageState from "use-local-storage-state";
+import Footer from "../../components/Footer/Footer";
 
 export default function Conjugation() {
   const router = useRouter();
@@ -47,6 +48,7 @@ export default function Conjugation() {
           conjugationId={currentWord.id}
         />
       )}
+      <Footer path={currentWord.category} />
     </>
   );
 }

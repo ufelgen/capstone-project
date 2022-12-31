@@ -30,7 +30,9 @@ export default function Footer({ path, onReturnFromEditMode }) {
           onClick={() => setShowInfo(!showInfo)}
         />
       )}
-      {(pathname === "/declension/[id]" || pathname === "/notes/[id]") && (
+      {(pathname === "/declension/[id]" ||
+        pathname === "/notes/[id]" ||
+        pathname === "/conjugation/[id]") && (
         <>
           <Link href={`/${path}`} onClick={handleReturn}>
             <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />

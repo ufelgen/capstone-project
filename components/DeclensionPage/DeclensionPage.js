@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Footer from "../Footer/Footer";
 import DeclensionForm from "../DeclensionForm/DeclensionForm";
 import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
 
@@ -61,8 +60,6 @@ export default function DeclensionPage({
           </StyledDeclensionPage>
         </>
       )}
-
-      <Footer path={currentWord.category} />
     </>
   );
 }
