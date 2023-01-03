@@ -25,6 +25,11 @@ export default function PopupMenu({
               {prop.query1?.declension ? "declension" : "+ declension"}
             </StyledMenuButton>
           </Link>
+          <Link href={`/conjugation/${id}`}>
+            <StyledMenuButton>
+              {prop.query1?.conjugation ? "conjugation" : "+ conjugation"}
+            </StyledMenuButton>
+          </Link>
           <Link href={`/notes/${id}`}>
             <StyledMenuButton>
               {prop.notes ? "notes" : "+ notes"}

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Footer from "../Footer/Footer";
 import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
 import { StyledForm } from "../StyledForm";
 import { cases } from "../../lib/cases";
@@ -114,7 +113,6 @@ export default function DeclensionForm({
           )}
         </StyledDeclensionButtonWrapper>
       </StyledForm>
-      <Footer path={currentWord.category} />
     </>
   );
 }

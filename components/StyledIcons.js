@@ -4,6 +4,10 @@ export function DeclensionIcon() {
   return <StyledDeclensionIcon>D</StyledDeclensionIcon>;
 }
 
+export function ConjugationIcon() {
+  return <StyledDeclensionIcon>C</StyledDeclensionIcon>;
+}
+
 export function NotesIcon() {
   return <StyledNotesIcon>N</StyledNotesIcon>;
 }
