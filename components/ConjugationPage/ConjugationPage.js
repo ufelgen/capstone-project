@@ -45,6 +45,7 @@ export default function ConjugationPage({
       return updatedConjugation;
     }
   }
+
   function handleSubmitEditConjugation(event) {
     event.preventDefault();
 
@@ -178,9 +179,7 @@ const StyledVerbform = styled.td`
   input {
     padding: 0.25rem;
     border: 1px solid darkmagenta;
-    //margin: 0.25rem;
     border-radius: 5px;
-    //height: 4vh;
     width: 100%;
   }
 `;

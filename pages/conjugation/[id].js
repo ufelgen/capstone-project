@@ -96,12 +96,10 @@ export default function Conjugation({ editing, onEdit, onReturnFromEditMode }) {
         )
       );
     }
-
-    console.log("conjugation in [id].js", updatedConjugation);
   }
 
   return (
-    <main>
+    <>
       <SingleWordHeading base={currentWord.base} query1={currentWord.query1} />
       {currentWord.query1.conjugation ? (
         <ConjugationPage
@@ -120,6 +118,6 @@ export default function Conjugation({ editing, onEdit, onReturnFromEditMode }) {
         />
       )}
       <Footer path={currentWord.category} />
-    </main>
+    </>
   );
 }
