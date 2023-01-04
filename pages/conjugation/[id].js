@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import ConjugationPage from "../../components/ConjugationPage/ConjugationPage";
 import ConjugationForm from "../../components/ConjugationForm/ConjugationForm";
 import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
 import useLocalStorageState from "use-local-storage-state";
 import Footer from "../../components/Footer/Footer";
 
-export default function Conjugation() {
+export default function Conjugation({ editing, onEdit, onReturnFromEditMode }) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -26,6 +27,11 @@ export default function Conjugation() {
       </>
     );
   }
+  const [tense, setTense] = useState("present");
+
+  function changeTense(tense) {
+    setTense(tense);
+  }
 
   function handleAddConjugationForm(conjugationId, newConjugation) {
     setAllWords(
@@ -37,11 +43,74 @@ export default function Conjugation() {
     );
   }
 
+  function handleEditConjugation(conjugationId, updatedConjugation) {
+    if (tense === "present") {
+      setAllWords(
+        allWords.map((word) =>
+          word.id === conjugationId
+            ? {
+                ...word,
+                query1: {
+                  ...word.query1,
+                  conjugation: {
+                    ...word.query1.conjugation,
+                    present: updatedConjugation,
+                  },
+                },
+              }
+            : word
+        )
+      );
+    } else if (tense === "past") {
+      setAllWords(
+        allWords.map((word) =>
+          word.id === conjugationId
+            ? {
+                ...word,
+                query1: {
+                  ...word.query1,
+                  conjugation: {
+                    ...word.query1.conjugation,
+                    past: updatedConjugation,
+                  },
+                },
+              }
+            : word
+        )
+      );
+    } else if (tense === "future") {
+      setAllWords(
+        allWords.map((word) =>
+          word.id === conjugationId
+            ? {
+                ...word,
+                query1: {
+                  ...word.query1,
+                  conjugation: {
+                    ...word.query1.conjugation,
+                    future: updatedConjugation,
+                  },
+                },
+              }
+            : word
+        )
+      );
+    }
+  }
+
   return (
     <>
       <SingleWordHeading base={currentWord.base} query1={currentWord.query1} />
       {currentWord.query1.conjugation ? (
-        <ConjugationPage currentWord={currentWord} />
+        <ConjugationPage
+          currentWord={currentWord}
+          editing={editing}
+          onEdit={onEdit}
+          onReturnFromEditMode={onReturnFromEditMode}
+          onEditConjugation={handleEditConjugation}
+          tense={tense}
+          onChangeTense={changeTense}
+        />
       ) : (
         <ConjugationForm
           onAddConjugationForm={handleAddConjugationForm}
