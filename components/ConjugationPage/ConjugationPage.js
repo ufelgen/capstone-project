@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 import ConjugationButtons from "../ConjugationButtons/ConjugationButtons";
 
 export default function ConjugationPage({
@@ -50,38 +49,6 @@ export default function ConjugationPage({
     event.preventDefault();
 
     const updatedConjugation = updateConjugation(event, present, past, future);
-    // const updatedConjugationPresent = present.map((word) => {
-    //   return {
-    //     verbForm: fields[word.person].value,
-    //   };
-    // });
-
-    // if (tense === "present") {
-    //   const updatedConjugation = present.map((word) => {
-    //     return {
-    //       verbForm: fields[word.person].value,
-    //     };
-    //   });
-    //   return updatedConjugation;
-    // } else if (tense === "past") {
-    //   const updatedConjugation = past.map((word) => {
-    //     return {
-    //       verbForm: fields[word.person].value,
-    //     };
-    //   });
-    //   return updatedConjugation;
-    // } else if (tense === "future") {
-    //   const updatedConjugation = future.map((word) => {
-    //     return {
-    //       verbForm: fields[word.person].value,
-    //     };
-    //   });
-    //   return updatedConjugation;
-    // }
-
-    //////////////////////
-    console.log("updatedConjugation in ConjugationPage", updatedConjugation);
-    /////////////////////
 
     onEditConjugation(currentWord.id, updatedConjugation);
     onReturnFromEditMode();
@@ -149,22 +116,24 @@ export default function ConjugationPage({
                   </StyledTableRows>
                 ))}
             </tbody>
+            <StyledButtonContainer>
+              {editing ? (
+                <>
+                  <button type="button" onClick={onReturnFromEditMode}>
+                    back
+                  </button>
+                  <button type="submit">update</button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  onClick={(event) => onEdit(event, currentWord.id)}
+                >
+                  edit
+                </button>
+              )}
+            </StyledButtonContainer>
           </StyledTable>
-          {editing ? (
-            <>
-              <button type="button" onClick={onReturnFromEditMode}>
-                back
-              </button>
-              <button type="submit">update</button>
-            </>
-          ) : (
-            <button
-              type="button"
-              onClick={(event) => onEdit(event, currentWord.id)}
-            >
-              edit
-            </button>
-          )}
         </form>
       </StyledSection>
     </>
@@ -206,9 +175,32 @@ const StyledPronouns = styled.td`
 const StyledVerbform = styled.td`
   text-align: left;
   padding-left: 1rem;
+  input {
+    padding: 0.25rem;
+    border: 1px solid darkmagenta;
+    //margin: 0.25rem;
+    border-radius: 5px;
+    //height: 4vh;
+    width: 100%;
+  }
 `;
 const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 11vh;
+`;
+
+const StyledButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  button {
+    border: 1px solid darkmagenta;
+    margin: 0.25rem;
+    border-radius: 5px;
+    height: 4vh;
+    padding: 0.25rem;
+    background-color: darkmagenta;
+    color: white;
+  }
 `;
