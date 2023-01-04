@@ -59,64 +59,66 @@ export default function ConjugationPage({
     <>
       <StyledSection>
         <ConjugationButtons tense={tense} onChangeTense={onChangeTense} />
-        <form onSubmit={handleSubmitEditConjugation}>
-          <StyledTable>
-            <tbody>
-              {tense === "present" &&
-                present.map((word) => (
-                  <StyledTableRowsPresent key={word.person}>
-                    <StyledPronouns>{word.pronouns}</StyledPronouns>
-                    {editing ? (
-                      <StyledVerbform>
-                        <input
-                          aria-label={word.person}
-                          name={word.person}
-                          id={word.person}
-                          defaultValue={word.verbForm}
-                        />
-                      </StyledVerbform>
-                    ) : (
-                      <StyledVerbform>{word.verbForm}</StyledVerbform>
-                    )}
-                  </StyledTableRowsPresent>
-                ))}
-              {tense === "past" &&
-                past.map((word) => (
-                  <StyledTableRows key={word.person}>
-                    <StyledPronouns>{word.pronouns}</StyledPronouns>
-                    {editing ? (
-                      <StyledVerbform>
-                        <input
-                          aria-label={word.person}
-                          name={word.person}
-                          id={word.person}
-                          defaultValue={word.verbForm}
-                        />
-                      </StyledVerbform>
-                    ) : (
-                      <StyledVerbform>{word.verbForm}</StyledVerbform>
-                    )}
-                  </StyledTableRows>
-                ))}
-              {tense === "future" &&
-                future.map((word) => (
-                  <StyledTableRows key={word.person}>
-                    <StyledPronouns>{word.pronouns}</StyledPronouns>
-                    {editing ? (
-                      <StyledVerbform>
-                        <input
-                          aria-label={word.person}
-                          name={word.person}
-                          id={word.person}
-                          defaultValue={word.verbForm}
-                        />
-                      </StyledVerbform>
-                    ) : (
-                      <StyledVerbform>{word.verbForm}</StyledVerbform>
-                    )}
-                  </StyledTableRows>
-                ))}
-            </tbody>
+        <StyledWrapper>
+          <form onSubmit={handleSubmitEditConjugation}>
+            <StyledTable>
+              <tbody>
+                {tense === "present" &&
+                  present.map((word) => (
+                    <StyledTableRowsPresent key={word.person}>
+                      <StyledPronouns>{word.pronouns}</StyledPronouns>
+                      {editing ? (
+                        <StyledVerbform>
+                          <input
+                            aria-label={word.person}
+                            name={word.person}
+                            id={word.person}
+                            defaultValue={word.verbForm}
+                          />
+                        </StyledVerbform>
+                      ) : (
+                        <StyledVerbform>{word.verbForm}</StyledVerbform>
+                      )}
+                    </StyledTableRowsPresent>
+                  ))}
+                {tense === "past" &&
+                  past.map((word) => (
+                    <StyledTableRows key={word.person}>
+                      <StyledPronouns>{word.pronouns}</StyledPronouns>
+                      {editing ? (
+                        <StyledVerbform>
+                          <input
+                            aria-label={word.person}
+                            name={word.person}
+                            id={word.person}
+                            defaultValue={word.verbForm}
+                          />
+                        </StyledVerbform>
+                      ) : (
+                        <StyledVerbform>{word.verbForm}</StyledVerbform>
+                      )}
+                    </StyledTableRows>
+                  ))}
+                {tense === "future" &&
+                  future.map((word) => (
+                    <StyledTableRows key={word.person}>
+                      <StyledPronouns>{word.pronouns}</StyledPronouns>
+                      {editing ? (
+                        <StyledVerbform>
+                          <input
+                            aria-label={word.person}
+                            name={word.person}
+                            id={word.person}
+                            defaultValue={word.verbForm}
+                          />
+                        </StyledVerbform>
+                      ) : (
+                        <StyledVerbform>{word.verbForm}</StyledVerbform>
+                      )}
+                    </StyledTableRows>
+                  ))}
+              </tbody>
+            </StyledTable>
             <StyledButtonContainer>
               {editing ? (
                 <>
@@ -134,8 +136,8 @@ export default function ConjugationPage({
                 </button>
               )}
             </StyledButtonContainer>
-          </StyledTable>
-        </form>
+          </form>
+        </StyledWrapper>
       </StyledSection>
     </>
   );
@@ -143,12 +145,6 @@ export default function ConjugationPage({
 
 const StyledTable = styled.table`
   padding: 0.625rem;
-  margin: 0.625rem 0.75rem;
-  background-color: lightgray;
-  color: black;
-  height: auto;
-  border: 1px solid darkmagenta;
-  box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   position: relative;
   justify-content: center;
   align-items: center;
@@ -193,6 +189,7 @@ const StyledSection = styled.section`
 const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin: 0.25rem 1rem;
   button {
     border: 1px solid darkmagenta;
     margin: 0.25rem;
@@ -202,4 +199,13 @@ const StyledButtonContainer = styled.div`
     background-color: darkmagenta;
     color: white;
   }
+`;
+
+const StyledWrapper = styled.article`
+  background-color: lightgray;
+  color: black;
+  height: auto;
+  border: 1px solid darkmagenta;
+  box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
+  margin: 1rem;
 `;

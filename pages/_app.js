@@ -5,6 +5,11 @@ function MyApp({ Component, pageProps }) {
   const [popup, setPopup] = useState("");
   const [editing, setEditing] = useState(false);
   const [editId, setEditId] = useState();
+  const [tense, setTense] = useState("present");
+
+  function changeTense(tense) {
+    setTense(tense);
+  }
 
   function handlePopupClick(event, id) {
     event.preventDefault();
@@ -42,6 +47,8 @@ function MyApp({ Component, pageProps }) {
         onClosePopup={handleClosePopup}
         onEdit={handleEdit}
         onReturnFromEditMode={handleReturnFromEditMode}
+        tense={tense}
+        onChangeTense={changeTense}
       />
     </>
   );
