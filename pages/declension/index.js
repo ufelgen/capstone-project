@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { StyledHeading } from "../[category]";
 
-export default function ConjugationHome() {
+export default function DeclensionHome() {
   return (
     <>
       <StyledHeading>there's nothing here</StyledHeading>
