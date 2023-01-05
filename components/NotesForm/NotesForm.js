@@ -29,11 +29,11 @@ export default function NotesForm({
         ></StyledTextarea>
         <div>
           {editing && (
-            <BackButton onClick={onReturnFromEditMode}>back</BackButton>
+            <BackButton aria-label="go back" onClick={onReturnFromEditMode}>
+              back
+            </BackButton>
           )}
-          <ActionButton type="submit" aria-label="submit">
-            {buttonLabel}
-          </ActionButton>
+          <ActionButton type="submit">{buttonLabel}</ActionButton>
         </div>
       </StyledNotesForm>
     </>

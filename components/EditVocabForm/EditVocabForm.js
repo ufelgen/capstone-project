@@ -144,7 +144,7 @@ export default function EditVocabForm({
         >
           back
         </BackButton>
-        <ActionButton type="submit" aria-label="submit">
+        <ActionButton type="submit" aria-label="edit flashcard">
           edit
         </ActionButton>
       </StyledEditForm>

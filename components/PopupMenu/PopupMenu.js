@@ -14,14 +14,14 @@ export default function PopupMenu({
     <StyledPopupMenu>
       <StyledMenuButton
         type="button"
-        aria-label="delete flashcard"
+        aria-label="delete this flashcard"
         onClick={(event) => onDelete(event, id)}
       >
         delete
       </StyledMenuButton>
       <StyledMenuButton
         type="button"
-        aria-label="edit flashcard"
+        aria-label="edit this flashcard"
         onClick={(event) => onEdit(event, id)}
       >
         edit

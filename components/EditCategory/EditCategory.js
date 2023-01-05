@@ -35,7 +35,7 @@ export default function EditCategory({
         >
           back
         </BackButton>
-        <BiggerActionButton type="submit" aria-label="submit">
+        <BiggerActionButton type="submit" aria-label="edit category">
           edit category
         </BiggerActionButton>
       </div>

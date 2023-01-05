@@ -118,7 +118,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         })}
       </datalist>
 
-      <StyledButton type="submit" aria-label="submit">
+      <StyledButton type="submit" aria-label="add new flashcard">
         add word
       </StyledButton>
     </StyledNewWordForm>

@@ -115,12 +115,12 @@ export default function DeclensionForm({
               >
                 back
               </BackButton>
-              <ActionButton type="submit" aria-label="submit">
+              <ActionButton type="submit" aria-label="update declension">
                 update
               </ActionButton>
             </>
           ) : (
-            <ActionButton type="submit" aria-label="submit">
+            <ActionButton type="submit" aria-label="add declension">
               add
             </ActionButton>
           )}

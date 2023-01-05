@@ -57,7 +57,7 @@ export default function ConjugationForm({
         />
       </div>
       <div>
-        <ActionButton type="submit" aria-label="submit">
+        <ActionButton type="submit" aria-label="add conjugation">
           add
         </ActionButton>
       </div>

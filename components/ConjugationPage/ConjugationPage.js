@@ -130,7 +130,7 @@ export default function ConjugationPage({
                   >
                     back
                   </BackButton>
-                  <ActionButton type="submit" aria-label="submit">
+                  <ActionButton type="submit" aria-label="update conjugation">
                     update
                   </ActionButton>
                 </>
