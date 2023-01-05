@@ -1,13 +1,18 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import ConjugationPage from "../../components/ConjugationPage/ConjugationPage";
 import ConjugationForm from "../../components/ConjugationForm/ConjugationForm";
 import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
 import useLocalStorageState from "use-local-storage-state";
 import Footer from "../../components/Footer/Footer";
 
-export default function Conjugation({ editing, onEdit, onReturnFromEditMode }) {
+export default function Conjugation({
+  editing,
+  onEdit,
+  onReturnFromEditMode,
+  tense,
+  onChangeTense,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -26,11 +31,6 @@ export default function Conjugation({ editing, onEdit, onReturnFromEditMode }) {
         <Link href={"/"}>back to main page</Link>
       </>
     );
-  }
-  const [tense, setTense] = useState("present");
-
-  function changeTense(tense) {
-    setTense(tense);
   }
 
   function handleAddConjugationForm(conjugationId, newConjugation) {
@@ -109,7 +109,7 @@ export default function Conjugation({ editing, onEdit, onReturnFromEditMode }) {
           onReturnFromEditMode={onReturnFromEditMode}
           onEditConjugation={handleEditConjugation}
           tense={tense}
-          onChangeTense={changeTense}
+          onChangeTense={onChangeTense}
         />
       ) : (
         <ConjugationForm
