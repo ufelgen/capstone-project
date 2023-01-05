@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import DeclensionForm from "../DeclensionForm/DeclensionForm";
 import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
+import { ActionButton } from "../StyledForm";
 
 export default function DeclensionPage({
   currentWord,
@@ -53,12 +54,12 @@ export default function DeclensionPage({
               <p>{query1.declension?.plural.instrumental}</p>
             </StyledDeclensionWrapper>
             <div>
-              <button
+              <ActionButton
                 aria-label="edit declension"
                 onClick={(event) => onEdit(event, currentWord.id)}
               >
                 edit
-              </button>
+              </ActionButton>
             </div>
           </StyledDeclensionPage>
         </>
@@ -90,24 +91,14 @@ const StyledDeclensionWrapper = styled.section`
 const StyledDeclensionPage = styled.section`
   padding: 0.625rem;
   margin: 0.625rem 0.75rem;
-  background-color: white;
+  background-color: var(--white);
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;
   height: auto;
-  border: 1px solid darkmagenta;
+  border: 1px solid var(--darkmagenta);
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   div {
     display: flex;
     justify-content: flex-end;
-  }
-  button {
-    padding: 0.25rem;
-    border: 1px solid darkmagenta;
-    margin: 0.25rem;
-    border-radius: 5px;
-    height: 4vh;
-    background-color: darkmagenta;
-    color: white;
-    grid-column: 3;
   }
 `;

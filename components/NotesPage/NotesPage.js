@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import NotesForm from "../NotesForm/NotesForm";
+import { ActionButton } from "../StyledForm";
 
 export default function NotesPage({
   currentWord,
@@ -16,7 +17,7 @@ export default function NotesPage({
           currentWord={currentWord}
           onSaveNotes={onSaveNotes}
           inputLabel={"edit your notes to this word"}
-          buttonLabel={"edit notes"}
+          buttonLabel={"update"}
           defaultValue={currentWord.notes}
           editing={editing}
           onReturnFromEditMode={onReturnFromEditMode}
@@ -25,13 +26,13 @@ export default function NotesPage({
         <StyledNotes>
           <p>{currentWord.notes}</p>
           <div>
-            <button
+            <ActionButton
               type="button"
               aria-label="edit notes"
               onClick={(event) => onEdit(event, currentWord.id)}
             >
               edit
-            </button>
+            </ActionButton>
           </div>
         </StyledNotes>
       )}
@@ -42,11 +43,11 @@ export default function NotesPage({
 const StyledNotes = styled.section`
   padding: 0.625rem;
   margin: 0.625rem 0.75rem;
-  background-color: white;
+  background-color: var(--white);
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;
   height: auto;
-  border: 1px solid darkmagenta;
+  border: 1px solid var(--darkmagenta);
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   position: relative;
   justify-content: center;
@@ -61,15 +62,5 @@ const StyledNotes = styled.section`
   p {
     margin-bottom: 1rem;
     text-align: justify;
-  }
-
-  button {
-    padding: 0.25rem;
-    border: 1px solid darkmagenta;
-    margin: 0.25rem;
-    border-radius: 5px;
-    height: 4vh;
-    background-color: darkmagenta;
-    color: white;
   }
 `;

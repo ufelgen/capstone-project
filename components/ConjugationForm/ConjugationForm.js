@@ -1,6 +1,7 @@
 import { StyledForm } from "../StyledForm";
 import { handleConjugation } from "../../helpers/handleConjugation";
 import styled from "styled-components";
+import { ActionButton } from "../StyledForm";
 
 export default function ConjugationForm({
   onAddConjugationForm,
@@ -56,9 +57,9 @@ export default function ConjugationForm({
         />
       </div>
       <div>
-        <button type="submit" aria-label="submit">
+        <ActionButton type="submit" aria-label="submit">
           add
-        </button>
+        </ActionButton>
       </div>
     </StyledConjugationForm>
   );

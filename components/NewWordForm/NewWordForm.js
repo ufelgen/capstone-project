@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledForm } from "../StyledForm";
+import { StyledForm, ActionButton, Dropdown, InputField } from "../StyledForm";
 import { nanoid } from "nanoid";
 import { languages } from "../../lib/languages";
 
@@ -49,7 +49,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       ></InputEng>
 
       <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
-        <select name="queryLanguage" id="queryLanguage">
+        <Dropdown name="queryLanguage" id="queryLanguage">
           <option hidden={true}>language</option>
           {languages.map((language) => {
             return (
@@ -62,7 +62,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
               </option>
             );
           })}
-        </select>
+        </Dropdown>
       </LabelQuery>
       <InputQuery
         id="queryLanguage1"
@@ -74,7 +74,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       ></InputQuery>
 
       <LabelGender htmlFor="gender" name="gender">
-        <select name="gender" id="gender">
+        <Dropdown name="gender" id="gender">
           <option hidden={true}>gender</option>
           <option value="" name="none">
             none
@@ -88,14 +88,14 @@ export default function NewWordForm({ onCreateNew, allWords }) {
           <option value="n" name="neuter">
             n
           </option>
-        </select>
+        </Dropdown>
       </LabelGender>
 
       <LabelCat htmlFor="category" name="category">
         category:
       </LabelCat>
 
-      <input
+      <InputField
         className="catinput"
         id="newCategory"
         name="category"
@@ -118,9 +118,9 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         })}
       </datalist>
 
-      <button type="submit" aria-label="submit">
+      <StyledButton type="submit" aria-label="submit">
         add word
-      </button>
+      </StyledButton>
     </StyledNewWordForm>
   );
 }
@@ -137,16 +137,17 @@ const StyledNewWordForm = styled(StyledForm)`
   .catinput {
     grid-area: catinput;
   }
-  button {
-    grid-area: button;
-  }
 `;
 
+const StyledButton = styled(ActionButton)`
+  grid-area: button;
+  width: 100%;
+`;
 const LabelEng = styled.label`
   grid-area: eng;
 `;
 
-const InputEng = styled.input`
+const InputEng = styled(InputField)`
   grid-area: enginput;
 `;
 
@@ -154,7 +155,7 @@ const LabelQuery = styled.label`
   grid-area: query;
 `;
 
-const InputQuery = styled.input`
+const InputQuery = styled(InputField)`
   grid-area: queryinput;
 `;
 

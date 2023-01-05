@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import SingleWordHeading from "../SingleWordHeading/SingleWordHeading";
-import { StyledForm } from "../StyledForm";
+import {
+  StyledForm,
+  BackButton,
+  ActionButton,
+  InputField,
+} from "../StyledForm";
 import { cases } from "../../lib/cases";
 import { Fragment } from "react";
 
@@ -48,7 +53,7 @@ export default function DeclensionForm({
       <StyledForm onSubmit={handleSubmitDeclensionForm}>
         <StyledSpecificationWrapper>
           <label htmlFor="specification">declension type:</label>
-          <input
+          <InputField
             type="text"
             name="specification"
             defaultValue={query1.declension?.specification}
@@ -63,7 +68,7 @@ export default function DeclensionForm({
                 <Fragment key={singleCase.id}>
                   <p>{singleCase.id}</p>
                   <label htmlFor={singleCase.english + "Singular"}></label>
-                  <input
+                  <StyledInput
                     type="text"
                     name={singleCase.english + "Singular"}
                     defaultValue={
@@ -72,7 +77,7 @@ export default function DeclensionForm({
                     required
                   />
                   <label htmlFor={singleCase.english + "Plural"}></label>
-                  <input
+                  <StyledInput
                     type="text"
                     name={singleCase.english + "Plural"}
                     defaultValue={query1.declension.plural[singleCase.english]}
@@ -84,14 +89,14 @@ export default function DeclensionForm({
                 <Fragment key={singleCase.id}>
                   <p>{singleCase.id}</p>
                   <label htmlFor={singleCase.english + "Singular"}></label>
-                  <input
+                  <StyledInput
                     type="text"
                     name={singleCase.english + "Singular"}
                     placeholder={singleCase.english}
                     required
                   />
                   <label htmlFor={singleCase.english + "Plural"}></label>
-                  <input
+                  <StyledInput
                     type="text"
                     name={singleCase.english + "Plural"}
                     placeholder={singleCase.english}
@@ -103,21 +108,21 @@ export default function DeclensionForm({
         <StyledDeclensionButtonWrapper>
           {editing ? (
             <>
-              <button
+              <BackButton
                 type="button"
                 aria-label="go back"
                 onClick={onReturnFromEditMode}
               >
                 back
-              </button>
-              <button type="submit" aria-label="submit">
+              </BackButton>
+              <ActionButton type="submit" aria-label="submit">
                 update
-              </button>
+              </ActionButton>
             </>
           ) : (
-            <button type="submit" aria-label="submit">
+            <ActionButton type="submit" aria-label="submit">
               add
-            </button>
+            </ActionButton>
           )}
         </StyledDeclensionButtonWrapper>
       </StyledForm>
@@ -134,12 +139,11 @@ const StyledSpecificationWrapper = styled.div`
 
 const StyledDeclensionWrapper = styled.section`
   display: grid;
-  grid-template-columns: 1fr 0fr 5fr 0fr 5fr;
+  grid-template-columns: 1fr 0fr 5fr 0.2fr 5fr;
   margin: 0.625rem;
   padding: 0.43rem;
 
-  p,
-  input {
+  p {
     padding: 0.43rem;
   }
 
@@ -148,6 +152,9 @@ const StyledDeclensionWrapper = styled.section`
   }
 `;
 
+const StyledInput = styled(InputField)`
+  padding: 0.43rem;
+`;
 const SingularH4 = styled.h4`
   grid-column: 3;
 `;

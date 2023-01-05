@@ -6,8 +6,8 @@ export default function Header() {
 
 const StyledHeader = styled.header`
   height: 10vh;
-  background-color: lightgray;
-  color: darkmagenta;
+  background-color: var(--lightgrey);
+  color: var(--darkmagenta);
   font-size: 1.25rem;
   font-weight: bold;
   text-align: center;

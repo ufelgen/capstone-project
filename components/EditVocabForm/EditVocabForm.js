@@ -2,7 +2,13 @@ import { languages } from "../../lib/languages";
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
-import { StyledForm } from "../StyledForm";
+import {
+  StyledForm,
+  ActionButton,
+  BackButton,
+  InputField,
+  Dropdown,
+} from "../StyledForm";
 
 export default function EditVocabForm({
   word,
@@ -51,16 +57,16 @@ export default function EditVocabForm({
         <label htmlFor="english" name="english">
           🇬🇧 english
         </label>
-        <input
+        <InputField
           id="english"
           name="english"
           type="text"
           maxLength={50}
           defaultValue={word.base.translation}
-        ></input>
+        ></InputField>
 
         <label htmlFor="queryLanguage1" name="queryLanguage1">
-          <select
+          <Dropdown
             defaultValue={word.query1.flag + "-" + word.query1.language}
             name="queryLanguage"
             id="queryLanguage"
@@ -76,18 +82,18 @@ export default function EditVocabForm({
                 </option>
               );
             })}
-          </select>
+          </Dropdown>
         </label>
-        <input
+        <InputField
           id="queryLanguage1"
           name="queryLanguage1"
           type="text"
           maxLength={50}
           defaultValue={word.query1.translation}
-        ></input>
+        ></InputField>
 
         <label htmlFor="gender" name="gender">
-          <select defaultValue={word.query1.gender} name="gender" id="gender">
+          <Dropdown defaultValue={word.query1.gender} name="gender" id="gender">
             <option hidden={true}>gender</option>
             <option value="" name="none">
               none
@@ -101,14 +107,14 @@ export default function EditVocabForm({
             <option value="n" name="neuter">
               n
             </option>
-          </select>
+          </Dropdown>
         </label>
 
         <label htmlFor="category" name="category">
           category:
         </label>
 
-        <input
+        <InputField
           id="newCategory"
           name="category"
           type="text"
@@ -131,16 +137,16 @@ export default function EditVocabForm({
           })}
         </datalist>
 
-        <button
+        <BackButton
           type="button"
           aria-label="go back"
           onClick={onReturnFromEditMode}
         >
           back
-        </button>
-        <button type="submit" aria-label="submit">
-          edit word
-        </button>
+        </BackButton>
+        <ActionButton type="submit" aria-label="submit">
+          edit
+        </ActionButton>
       </StyledEditForm>
     </>
   );
@@ -149,4 +155,7 @@ export default function EditVocabForm({
 const StyledEditForm = styled(StyledForm)`
   display: flex;
   flex-flow: row wrap;
+  label {
+    margin: 0.1rem;
+  }
 `;

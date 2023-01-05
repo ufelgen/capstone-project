@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { StyledForm } from "../StyledForm";
+import {
+  StyledForm,
+  BiggerActionButton,
+  BackButton,
+  InputField,
+} from "../StyledForm";
 
 export default function EditCategory({
   item,
@@ -17,34 +22,36 @@ export default function EditCategory({
   return (
     <StyledEditCategoryForm onSubmit={handleEditCategoryName}>
       <label htmlFor="updatedCategory">edit category name:</label>
-      <input
+      <StyledInput
         id="updatedCategory"
         type="text"
         defaultValue={item.categoryName}
       />
       <div>
-        <button
+        <BackButton
           type="button"
           aria-label="go back"
           onClick={onReturnFromEditMode}
         >
           back
-        </button>
-        <button type="submit" aria-label="submit">
+        </BackButton>
+        <BiggerActionButton type="submit" aria-label="submit">
           edit category
-        </button>
+        </BiggerActionButton>
       </div>
     </StyledEditCategoryForm>
   );
 }
 
 const StyledEditCategoryForm = styled(StyledForm)`
-  input {
-    width: 100;
-    margin: 0.25rem;
-  }
   div {
     display: flex;
     justify-content: flex-end;
+    margin: 0 -0.43rem;
   }
+`;
+
+const StyledInput = styled(InputField)`
+  width: 100;
+  margin: 0.25rem;
 `;

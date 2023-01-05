@@ -50,7 +50,7 @@ const StyledFooter = styled.footer`
   bottom: 0;
   height: 10vh;
   width: 100%;
-  background-color: lightgray;
+  background-color: var(--lightgrey);
   display: flex;
   flex-direction: row;
   justify-content: space-around;

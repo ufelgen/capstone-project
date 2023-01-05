@@ -72,8 +72,10 @@ export default function PopupMenu({
 }
 
 const StyledPopupMenu = styled.div`
-  background-color: lightgray;
+  background-color: var(--darkgrey);
+  color: var(--white);
   border: 1px solid black;
+  border-radius: 5px;
   width: 60%;
   height: auto;
   position: absolute;
@@ -91,6 +93,7 @@ const StyledMenuButton = styled.button`
   margin: 2px;
   border: none;
   background-color: transparent;
+  color: var(--lightgrey);
   width: 100%;
 `;
 
@@ -99,5 +102,5 @@ const StyledDivider = styled.hr`
   width: 100%;
   margin: 0;
   height: 1px;
-  background: darkgray;
+  background: var(--lightgrey);
 `;
