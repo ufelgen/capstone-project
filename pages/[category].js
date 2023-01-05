@@ -145,7 +145,7 @@ const StyledCard = styled.div`
   }
 `;
 
-const StyledHeading = styled.h2`
+export const StyledHeading = styled.h2`
   margin: 0.625rem;
   background-color: var(--white);
   color: var(--darkmagenta);
