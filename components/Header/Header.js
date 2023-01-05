@@ -8,7 +8,7 @@ const StyledHeader = styled.header`
   height: 10vh;
   background-color: var(--lightgrey);
   color: var(--darkmagenta);
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
   padding: 1rem;
