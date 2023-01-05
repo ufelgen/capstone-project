@@ -27,6 +27,7 @@ export default function NotesPage({
           <div>
             <button
               type="button"
+              aria-label="edit notes"
               onClick={(event) => onEdit(event, currentWord.id)}
             >
               edit

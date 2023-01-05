@@ -56,7 +56,9 @@ export default function ConjugationForm({
         />
       </div>
       <div>
-        <button type="submit">add</button>
+        <button type="submit" aria-label="submit">
+          add
+        </button>
       </div>
     </StyledConjugationForm>
   );

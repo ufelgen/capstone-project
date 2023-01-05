@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function Header() {
-  return <StyledHeader>this app will soon have a cool name</StyledHeader>;
+  return <StyledHeader>flashcards extreme</StyledHeader>;
 }
 
 const StyledHeader = styled.header`

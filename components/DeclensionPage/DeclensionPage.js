@@ -53,7 +53,10 @@ export default function DeclensionPage({
               <p>{query1.declension?.plural.instrumental}</p>
             </StyledDeclensionWrapper>
             <div>
-              <button onClick={(event) => onEdit(event, currentWord.id)}>
+              <button
+                aria-label="edit declension"
+                onClick={(event) => onEdit(event, currentWord.id)}
+              >
                 edit
               </button>
             </div>

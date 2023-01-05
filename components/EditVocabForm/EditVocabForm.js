@@ -131,8 +131,16 @@ export default function EditVocabForm({
           })}
         </datalist>
 
-        <button onClick={onReturnFromEditMode}>back</button>
-        <button type="submit">edit word</button>
+        <button
+          type="button"
+          aria-label="go back"
+          onClick={onReturnFromEditMode}
+        >
+          back
+        </button>
+        <button type="submit" aria-label="submit">
+          edit word
+        </button>
       </StyledEditForm>
     </>
   );

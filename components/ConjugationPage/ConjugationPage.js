@@ -122,14 +122,21 @@ export default function ConjugationPage({
             <StyledButtonContainer>
               {editing ? (
                 <>
-                  <button type="button" onClick={onReturnFromEditMode}>
+                  <button
+                    type="button"
+                    aria-label="go back"
+                    onClick={onReturnFromEditMode}
+                  >
                     back
                   </button>
-                  <button type="submit">update</button>
+                  <button type="submit" aria-label="submit">
+                    update
+                  </button>
                 </>
               ) : (
                 <button
                   type="button"
+                  aria-label="edit conjugation"
                   onClick={(event) => onEdit(event, currentWord.id)}
                 >
                   edit

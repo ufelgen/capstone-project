@@ -67,7 +67,10 @@ export default function Home({
             />
           ) : (
             <Fragment key={item.id}>
-              <StyledLink href={`/${item.categoryName}`}>
+              <StyledLink
+                aria-label={`open ${item.categoryName} category`}
+                href={`/${item.categoryName}`}
+              >
                 <StyledCategory>
                   <h3>{item.categoryName}</h3>
                   <p>

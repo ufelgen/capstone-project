@@ -20,13 +20,14 @@ export default function Footer({ path, onReturnFromEditMode }) {
 
   return (
     <StyledFooter>
-      <Link href={`/`} onClick={handleReturn}>
+      <Link aria-label="return to home page" href={`/`} onClick={handleReturn}>
         <HiHome size="7.7vh" color="darkmagenta" />
       </Link>{" "}
       {pathname === "/declension/[id]" && (
         <HiOutlineInformationCircle
           size="7.7vh"
           color="darkmagenta"
+          aria-label="show more info"
           onClick={() => setShowInfo(!showInfo)}
         />
       )}
@@ -34,7 +35,7 @@ export default function Footer({ path, onReturnFromEditMode }) {
         pathname === "/notes/[id]" ||
         pathname === "/conjugation/[id]") && (
         <>
-          <Link href={`/${path}`} onClick={handleReturn}>
+          <Link aria-label="go back" href={`/${path}`} onClick={handleReturn}>
             <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
           </Link>
         </>

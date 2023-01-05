@@ -23,8 +23,16 @@ export default function EditCategory({
         defaultValue={item.categoryName}
       />
       <div>
-        <button onClick={onReturnFromEditMode}>back</button>
-        <button type="submit">edit category</button>
+        <button
+          type="button"
+          aria-label="go back"
+          onClick={onReturnFromEditMode}
+        >
+          back
+        </button>
+        <button type="submit" aria-label="submit">
+          edit category
+        </button>
       </div>
     </StyledEditCategoryForm>
   );

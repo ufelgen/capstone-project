@@ -103,13 +103,21 @@ export default function DeclensionForm({
         <StyledDeclensionButtonWrapper>
           {editing ? (
             <>
-              <button type="button" onClick={onReturnFromEditMode}>
+              <button
+                type="button"
+                aria-label="go back"
+                onClick={onReturnFromEditMode}
+              >
                 back
               </button>
-              <button type="submit">edit</button>
+              <button type="submit" aria-label="submit">
+                update
+              </button>
             </>
           ) : (
-            <button type="submit">add</button>
+            <button type="submit" aria-label="submit">
+              add
+            </button>
           )}
         </StyledDeclensionButtonWrapper>
       </StyledForm>

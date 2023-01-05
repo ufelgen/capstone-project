@@ -7,6 +7,7 @@ export default function ConjugationButtons({ tense, onChangeTense }) {
         type="button"
         className={tense === "past" ? "current" : ""}
         onClick={() => onChangeTense("past")}
+        aria-label="conjugation for past tense"
       >
         past
       </StyledTenseButton>
@@ -14,6 +15,7 @@ export default function ConjugationButtons({ tense, onChangeTense }) {
         type="button"
         className={tense === "present" ? "current" : ""}
         onClick={() => onChangeTense("present")}
+        aria-label="conjugation for present tense"
       >
         present
       </StyledTenseButton>
@@ -21,6 +23,7 @@ export default function ConjugationButtons({ tense, onChangeTense }) {
         type="button"
         className={tense === "future" ? "current" : ""}
         onClick={() => onChangeTense("future")}
+        aria-label="conjugation for future tense"
       >
         future
       </StyledTenseButton>

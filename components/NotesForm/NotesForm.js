@@ -29,7 +29,9 @@ export default function NotesForm({
         ></StyledTextarea>
         <div>
           {editing && <button onClick={onReturnFromEditMode}>back</button>}
-          <button type="submit">{buttonLabel}</button>
+          <button type="submit" aria-label="submit">
+            {buttonLabel}
+          </button>
         </div>
       </StyledNotesForm>
     </>

@@ -12,26 +12,47 @@ export default function PopupMenu({
   const { pathname } = useRouter();
   return (
     <StyledPopupMenu>
-      <StyledMenuButton onClick={(event) => onDelete(event, id)}>
+      <StyledMenuButton
+        type="button"
+        aria-label="delete flashcard"
+        onClick={(event) => onDelete(event, id)}
+      >
         delete
       </StyledMenuButton>
-      <StyledMenuButton onClick={(event) => onEdit(event, id)}>
+      <StyledMenuButton
+        type="button"
+        aria-label="edit flashcard"
+        onClick={(event) => onEdit(event, id)}
+      >
         edit
       </StyledMenuButton>
       {pathname === "/[category]" && (
         <>
           <Link href={`/declension/${id}`}>
-            <StyledMenuButton>
+            <StyledMenuButton
+              type="button"
+              aria-label={
+                prop.query1?.declension ? "see declension" : "add declension"
+              }
+            >
               {prop.query1?.declension ? "declension" : "+ declension"}
             </StyledMenuButton>
           </Link>
           <Link href={`/conjugation/${id}`}>
-            <StyledMenuButton>
+            <StyledMenuButton
+              type="button"
+              aria-label={
+                prop.query1?.conjugation ? "see conjugation" : "add conjugation"
+              }
+            >
               {prop.query1?.conjugation ? "conjugation" : "+ conjugation"}
             </StyledMenuButton>
           </Link>
           <Link href={`/notes/${id}`}>
-            <StyledMenuButton>
+            <StyledMenuButton
+              type="button"
+              aria-label={prop.notes ? "see notes" : "add notes"}
+            >
               {prop.notes ? "notes" : "+ notes"}
             </StyledMenuButton>
           </Link>
@@ -39,7 +60,11 @@ export default function PopupMenu({
       )}
 
       <StyledDivider></StyledDivider>
-      <StyledMenuButton onClick={(event) => onClosePopup(event)}>
+      <StyledMenuButton
+        type="button"
+        aria-label="close popup menu"
+        onClick={(event) => onClosePopup(event)}
+      >
         close
       </StyledMenuButton>
     </StyledPopupMenu>
