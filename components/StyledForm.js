@@ -12,35 +12,6 @@ export const StyledForm = styled.form`
   position: relative;
   justify-content: center;
   align-items: center;
-
-  /* label,
-  input,
-  select,
-  button {
-    padding: 0.25rem;
-  }
-
-  input,
-  select,
-  button {
-    border: 1px solid var(--darkmagenta);
-    margin: 0.25rem;
-    border-radius: 5px;
-    height: 4vh;
-  }
-
-  input {
-    width: 100%;
-  }
-
-  select {
-    margin: 0.25rem 0;
-  }
-
-  button {
-    background-color: var(--darkmagenta);
-    color: var(--white);
-  } */
 `;
 
 export const ActionButton = styled.button`
