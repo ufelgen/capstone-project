@@ -1,6 +1,7 @@
 import { StyledForm } from "../StyledForm";
 import { handleConjugation } from "../../helpers/handleConjugation";
 import styled from "styled-components";
+import { ActionButton, InputField, Label } from "../StyledForm";
 
 export default function ConjugationForm({
   onAddConjugationForm,
@@ -25,8 +26,8 @@ export default function ConjugationForm({
     >
       <p>Please provide the verb root:</p>
       <div>
-        <label htmlFor="present">on/ona</label>
-        <input
+        <Label htmlFor="present">on/ona</Label>
+        <InputField
           type="text"
           id="present"
           name="present"
@@ -36,8 +37,8 @@ export default function ConjugationForm({
       </div>
       <p>Please provide the participle:</p>
       <div>
-        <label htmlFor="participleMasc">on je</label>
-        <input
+        <Label htmlFor="participleMasc">on je</Label>
+        <InputField
           type="text"
           id="participleMasc"
           name="participleMasc"
@@ -46,8 +47,8 @@ export default function ConjugationForm({
         />
       </div>
       <div>
-        <label htmlFor="participleFem">ona je</label>
-        <input
+        <Label htmlFor="participleFem">ona je</Label>
+        <InputField
           type="text"
           id="participleFem"
           name="participleFem"
@@ -56,7 +57,9 @@ export default function ConjugationForm({
         />
       </div>
       <div>
-        <button type="submit">add</button>
+        <ActionButton type="submit" aria-label="add conjugation">
+          add
+        </ActionButton>
       </div>
     </StyledConjugationForm>
   );

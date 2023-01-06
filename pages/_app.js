@@ -1,5 +1,6 @@
 import GlobalStyles from "../components/GlobalStyles";
 import { useState } from "react";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
   const [popup, setPopup] = useState("");
@@ -37,6 +38,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <title>flashcards extreme</title>
+      </Head>
       <GlobalStyles />
       <Component
         {...pageProps}

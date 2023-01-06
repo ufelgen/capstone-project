@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ConjugationButtons from "../ConjugationButtons/ConjugationButtons";
+import { ActionButton, BackButton, InputField } from "../StyledForm";
 
 export default function ConjugationPage({
   currentWord,
@@ -69,7 +70,7 @@ export default function ConjugationPage({
                       <StyledPronouns>{word.pronouns}</StyledPronouns>
                       {editing ? (
                         <StyledVerbform>
-                          <input
+                          <StyledInput
                             aria-label={word.person}
                             name={word.person}
                             id={word.person}
@@ -87,7 +88,7 @@ export default function ConjugationPage({
                       <StyledPronouns>{word.pronouns}</StyledPronouns>
                       {editing ? (
                         <StyledVerbform>
-                          <input
+                          <StyledInput
                             aria-label={word.person}
                             name={word.person}
                             id={word.person}
@@ -105,7 +106,7 @@ export default function ConjugationPage({
                       <StyledPronouns>{word.pronouns}</StyledPronouns>
                       {editing ? (
                         <StyledVerbform>
-                          <input
+                          <StyledInput
                             aria-label={word.person}
                             name={word.person}
                             id={word.person}
@@ -122,18 +123,25 @@ export default function ConjugationPage({
             <StyledButtonContainer>
               {editing ? (
                 <>
-                  <button type="button" onClick={onReturnFromEditMode}>
+                  <BackButton
+                    type="button"
+                    aria-label="go back"
+                    onClick={onReturnFromEditMode}
+                  >
                     back
-                  </button>
-                  <button type="submit">update</button>
+                  </BackButton>
+                  <ActionButton type="submit" aria-label="update conjugation">
+                    update
+                  </ActionButton>
                 </>
               ) : (
-                <button
+                <ActionButton
                   type="button"
+                  aria-label="edit conjugation"
                   onClick={(event) => onEdit(event, currentWord.id)}
                 >
                   edit
-                </button>
+                </ActionButton>
               )}
             </StyledButtonContainer>
           </form>
@@ -154,7 +162,7 @@ const StyledTable = styled.table`
 const StyledTableRows = styled.tr`
   display: grid;
   grid-template-columns: 0.8fr 2fr;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--white);
   padding: 0.1rem;
   :last-child {
     border-bottom: none;
@@ -172,12 +180,6 @@ const StyledPronouns = styled.td`
 const StyledVerbform = styled.td`
   text-align: left;
   padding-left: 1rem;
-  input {
-    padding: 0.25rem;
-    border: 1px solid darkmagenta;
-    border-radius: 5px;
-    width: 100%;
-  }
 `;
 const StyledSection = styled.section`
   display: flex;
@@ -190,22 +192,18 @@ const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 0.25rem 1rem;
-  button {
-    border: 1px solid darkmagenta;
-    margin: 0.25rem;
-    border-radius: 5px;
-    height: 4vh;
-    padding: 0.25rem;
-    background-color: darkmagenta;
-    color: white;
-  }
 `;
 
 const StyledWrapper = styled.article`
-  background-color: lightgray;
+  background-color: var(--lightgrey);
   color: black;
   height: auto;
-  border: 1px solid darkmagenta;
+  border: 1px solid var(--darkmagenta);
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
   margin: 1rem;
+`;
+
+const StyledInput = styled(InputField)`
+  height: auto;
+  margin: 0;
 `;

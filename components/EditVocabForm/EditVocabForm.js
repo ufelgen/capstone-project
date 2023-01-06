@@ -2,7 +2,14 @@ import { languages } from "../../lib/languages";
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
-import { StyledForm } from "../StyledForm";
+import {
+  StyledForm,
+  ActionButton,
+  BackButton,
+  InputField,
+  Dropdown,
+  Label,
+} from "../StyledForm";
 
 export default function EditVocabForm({
   word,
@@ -48,19 +55,19 @@ export default function EditVocabForm({
   return (
     <>
       <StyledEditForm onSubmit={handleEditVocab}>
-        <label htmlFor="english" name="english">
+        <Label htmlFor="english" name="english">
           🇬🇧 english
-        </label>
-        <input
+        </Label>
+        <InputField
           id="english"
           name="english"
           type="text"
           maxLength={50}
           defaultValue={word.base.translation}
-        ></input>
+        ></InputField>
 
         <label htmlFor="queryLanguage1" name="queryLanguage1">
-          <select
+          <Dropdown
             defaultValue={word.query1.flag + "-" + word.query1.language}
             name="queryLanguage"
             id="queryLanguage"
@@ -76,19 +83,18 @@ export default function EditVocabForm({
                 </option>
               );
             })}
-          </select>
+          </Dropdown>
         </label>
-        <input
+        <InputField
           id="queryLanguage1"
           name="queryLanguage1"
           type="text"
           maxLength={50}
           defaultValue={word.query1.translation}
-        ></input>
+        ></InputField>
 
         <label htmlFor="gender" name="gender">
-          <select defaultValue={word.query1.gender} name="gender" id="gender">
-            <option hidden={true}>gender</option>
+          <Dropdown defaultValue={word.query1.gender} name="gender" id="gender">
             <option value="" name="none">
               none
             </option>
@@ -101,14 +107,14 @@ export default function EditVocabForm({
             <option value="n" name="neuter">
               n
             </option>
-          </select>
+          </Dropdown>
         </label>
 
-        <label htmlFor="category" name="category">
+        <Label htmlFor="category" name="category">
           category:
-        </label>
+        </Label>
 
-        <input
+        <InputField
           id="newCategory"
           name="category"
           type="text"
@@ -131,8 +137,16 @@ export default function EditVocabForm({
           })}
         </datalist>
 
-        <button onClick={onReturnFromEditMode}>back</button>
-        <button type="submit">edit word</button>
+        <BackButton
+          type="button"
+          aria-label="go back"
+          onClick={onReturnFromEditMode}
+        >
+          back
+        </BackButton>
+        <ActionButton type="submit" aria-label="edit flashcard">
+          edit
+        </ActionButton>
       </StyledEditForm>
     </>
   );
@@ -141,4 +155,7 @@ export default function EditVocabForm({
 const StyledEditForm = styled(StyledForm)`
   display: flex;
   flex-flow: row wrap;
+  label {
+    margin: 0.1rem;
+  }
 `;

@@ -15,8 +15,8 @@ export default function SingleWordHeading({ base, query1 }) {
 
 const StyledHeadingWrapper = styled.section`
   margin: 0.625rem 0.625rem 1.25rem 0.625rem;
-  background-color: White;
-  color: darkmagenta;
+  background-color: var(--white);
+  color: var(--darkmagenta);
   text-align: center;
   padding: 0.43rem;
   cursor: default;

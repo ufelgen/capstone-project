@@ -67,7 +67,10 @@ export default function Home({
             />
           ) : (
             <Fragment key={item.id}>
-              <StyledLink href={`/${item.categoryName}`}>
+              <StyledLink
+                aria-label={`open ${item.categoryName} category`}
+                href={`/${item.categoryName}`}
+              >
                 <StyledCategory>
                   <h3>{item.categoryName}</h3>
                   <p>
@@ -110,10 +113,10 @@ const StyledCategory = styled.section`
   position: relative;
   padding: 0.625rem;
   margin: 0.625rem 0.75rem;
-  background-color: white;
+  background-color: var(--white);
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   color: black;
   height: auto;
-  border: 1px solid darkmagenta;
+  border: 1px solid var(--darkmagenta);
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
 `;
