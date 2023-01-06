@@ -8,6 +8,7 @@ import {
   BackButton,
   InputField,
   Dropdown,
+  Label,
 } from "../StyledForm";
 
 export default function EditVocabForm({
@@ -54,9 +55,9 @@ export default function EditVocabForm({
   return (
     <>
       <StyledEditForm onSubmit={handleEditVocab}>
-        <label htmlFor="english" name="english">
+        <Label htmlFor="english" name="english">
           🇬🇧 english
-        </label>
+        </Label>
         <InputField
           id="english"
           name="english"
@@ -94,7 +95,6 @@ export default function EditVocabForm({
 
         <label htmlFor="gender" name="gender">
           <Dropdown defaultValue={word.query1.gender} name="gender" id="gender">
-            <option hidden={true}>gender</option>
             <option value="" name="none">
               none
             </option>
@@ -110,9 +110,9 @@ export default function EditVocabForm({
           </Dropdown>
         </label>
 
-        <label htmlFor="category" name="category">
+        <Label htmlFor="category" name="category">
           category:
-        </label>
+        </Label>
 
         <InputField
           id="newCategory"

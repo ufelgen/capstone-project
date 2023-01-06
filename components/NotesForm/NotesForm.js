@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledForm, ActionButton, BackButton } from "../StyledForm";
+import { StyledForm, BiggerActionButton, BackButton } from "../StyledForm";
 
 export default function NotesForm({
   currentWord,
@@ -33,7 +33,7 @@ export default function NotesForm({
               back
             </BackButton>
           )}
-          <ActionButton type="submit">{buttonLabel}</ActionButton>
+          <BiggerActionButton type="submit">{buttonLabel}</BiggerActionButton>
         </div>
       </StyledNotesForm>
     </>

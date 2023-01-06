@@ -51,3 +51,7 @@ export const Dropdown = styled.select`
   height: 4vh;
   margin: 0.25rem 0;
 `;
+
+export const Label = styled.label`
+  padding: 0.25rem;
+`;

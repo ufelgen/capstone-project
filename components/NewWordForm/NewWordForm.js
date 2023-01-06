@@ -49,8 +49,10 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       ></InputEng>
 
       <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
-        <Dropdown name="queryLanguage" id="queryLanguage">
-          <option hidden={true}>language</option>
+        <Dropdown name="queryLanguage" id="queryLanguage" required>
+          <option hidden={true} value="">
+            language
+          </option>
           {languages.map((language) => {
             return (
               <option
@@ -74,8 +76,10 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       ></InputQuery>
 
       <LabelGender htmlFor="gender" name="gender">
-        <Dropdown name="gender" id="gender">
-          <option hidden={true}>gender</option>
+        <Dropdown name="gender" id="gender" required>
+          <option hidden={true} value="">
+            gender
+          </option>
           <option value="" name="none">
             none
           </option>
