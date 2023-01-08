@@ -11,7 +11,6 @@ test("does not submit conjugation form with missing input", async () => {
   );
   const presentInput = screen.getByLabelText("on/ona");
   const participleMascInput = screen.getByLabelText("on je");
-  const participleFemInput = screen.getByLabelText("ona je");
   const submitButton = screen.getByRole("button", { name: "add conjugation" });
 
   await user.type(presentInput, "kupi");
