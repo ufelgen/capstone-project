@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import VocabCard from "./VocabCard";
 import { useRouter } from "next/router";
 import "@testing-library/jest-dom";
+import { useState } from "react";
 
 const word = {
   id: 77,
@@ -66,25 +67,31 @@ test("popup menu button function is called on click", async () => {
   expect(handlePopupClick).toHaveBeenCalled();
 });
 
-// below I tried to test for the popup menu being rendered
-// but I haven't found a way to do this yet.
-// However, I'd like to leave the code here
-// in case someone comes up with a solution.
+function MyTestComponent() {
+  const [popup, setPopup] = useState(false);
 
-// jest.mock("../PopupMenu/PopupMenu", () => () => (
-//   <div data-testid="popup">Hello World</div>
-// ));
+  return (
+    <>
+      <VocabCard
+        word={word}
+        popup={popup}
+        onPopupClick={() => {
+          setPopup(word.id);
+        }}
+      />
+      <p data-testid="popup">{popup}</p>
+    </>
+  );
+}
 
-// test("renders popup menu upon popup menu button click", async () => {
-//   const user = userEvent.setup();
-//   const handlePopupClick = jest.fn();
+test("sets 'popup' state to word-id upon button click so that popup will open", async () => {
+  const user = userEvent.setup();
+  render(<MyTestComponent />);
+  const popup = screen.getByTestId("popup");
 
-//   render(<VocabCard word={word} popup={""} onPopupClick={handlePopupClick} />);
+  const popupButton = screen.getByRole("button", { name: "open popup menu" });
 
-//   const popupButton = screen.getByRole("button", { name: "open popup menu" });
+  await user.click(popupButton);
 
-//   await user.click(popupButton);
-//   const mockPopupMenu = screen.getByTestId("popup");
-
-//   expect(mockPopupMenu).toBeVisible();
-// });
+  expect(popup).toHaveTextContent(77);
+});
