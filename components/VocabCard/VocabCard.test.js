@@ -71,27 +71,26 @@ function MyTestComponent() {
   const [popup, setPopup] = useState(false);
 
   return (
-    <>
-      <VocabCard
-        word={word}
-        popup={popup}
-        onPopupClick={() => {
-          setPopup(word.id);
-        }}
-      />
-      <p data-testid="popup">{popup}</p>
-    </>
+    <VocabCard
+      word={word}
+      popup={popup}
+      onPopupClick={() => {
+        setPopup(word.id);
+      }}
+    />
   );
 }
 
-test("sets 'popup' state to word-id upon button click so that popup will open", async () => {
+test("opens popup menu upon button click", async () => {
   const user = userEvent.setup();
   render(<MyTestComponent />);
-  const popup = screen.getByTestId("popup");
 
-  const popupButton = screen.getByRole("button", { name: "open popup menu" });
+  const popupButton = screen.getByTestId("openPopup");
 
   await user.click(popupButton);
 
-  expect(popup).toHaveTextContent(77);
+  const popupMenu = screen.getByTestId("popup");
+
+  expect(popupButton).not.toBeInTheDocument();
+  expect(popupMenu).toBeVisible();
 });
