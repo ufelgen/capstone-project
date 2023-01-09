@@ -2,18 +2,11 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
-import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
-import PopupMenu from "../components/PopupMenu/PopupMenu";
 import VocabCard from "../components/VocabCard/VocabCard";
 import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
 import useLocalStorageState from "use-local-storage-state";
 import { rearrangeData } from "../helpers/rearrangeData";
 import Link from "next/link";
-import {
-  DeclensionIcon,
-  ConjugationIcon,
-  NotesIcon,
-} from "../components/StyledIcons";
 
 export default function Category({
   popup,
