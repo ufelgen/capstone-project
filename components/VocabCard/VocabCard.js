@@ -45,7 +45,7 @@ export default function VocabCard({
       {word.query1.declension && <DeclensionIcon />}
       {word.query1.conjugation && <ConjugationIcon />}
       {word.notes && <NotesIcon />}
-      {word.id === popup ? (
+      {word.id === popup && (
         <PopupMenu
           onClosePopup={onClosePopup}
           id={word.id}
@@ -54,7 +54,8 @@ export default function VocabCard({
           onAddTranslation={(event) => onAddTranslation(event, word.id)}
           prop={word}
         />
-      ) : (
+      )}
+      {word.id === addTranslation ? null : (
         <PopupMenuButton id={word.id} onPopupClick={onPopupClick} />
       )}
     </StyledCard>

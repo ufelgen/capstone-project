@@ -25,7 +25,7 @@ export default function AddTranslationForm({
   }
 
   return (
-    <form onSubmit={handleAddedTranslation}>
+    <StyledForm onSubmit={handleAddedTranslation}>
       <label htmlFor="queryLanguage1" name="queryLanguage1">
         <Dropdown name="queryLanguage2" id="queryLanguage2" required>
           {languages.map((language) => {
@@ -68,12 +68,27 @@ export default function AddTranslationForm({
           </option>
         </Dropdown>
       </label>
-      <BackButton type="button" aria-label="go back">
-        back
-      </BackButton>
-      <ActionButton type="submit" aria-label="save new translation">
-        save
-      </ActionButton>
-    </form>
+      <section>
+        <BackButton
+          type="button"
+          aria-label="go back"
+          onClick={onReturnFromEditMode}
+        >
+          back
+        </BackButton>
+        <ActionButton type="submit" aria-label="save new translation">
+          save
+        </ActionButton>
+      </section>
+    </StyledForm>
   );
 }
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  section {
+    flex-flow: row wrap;
+  }
+`;

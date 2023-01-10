@@ -57,13 +57,15 @@ export default function PopupMenu({
               {prop.notes ? "notes" : "+ notes"}
             </StyledMenuButton>
           </Link>
-          <StyledMenuButton
-            type="button"
-            aria-label="add translation"
-            onClick={(event) => onAddTranslation(event, id)}
-          >
-            + translation
-          </StyledMenuButton>
+          {prop.query2 ? null : (
+            <StyledMenuButton
+              type="button"
+              aria-label="add translation"
+              onClick={(event) => onAddTranslation(event, id)}
+            >
+              + translation
+            </StyledMenuButton>
+          )}
         </>
       )}
 

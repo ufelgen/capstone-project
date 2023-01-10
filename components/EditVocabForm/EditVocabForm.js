@@ -1,7 +1,6 @@
 import { languages } from "../../lib/languages";
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
-import { nanoid } from "nanoid";
 import {
   StyledForm,
   ActionButton,

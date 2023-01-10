@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { StyledForm, ActionButton, Dropdown, InputField } from "../StyledForm";
-import { nanoid } from "nanoid";
 import { languages } from "../../lib/languages";
 
 export default function NewWordForm({ onCreateNew, allWords }) {
@@ -20,7 +19,6 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         translation: fields.english.value,
       },
       query1: {
-        //id: nanoid(),
         language: language[1],
         flag: language[0],
         translation: fields.queryLanguage1.value,
