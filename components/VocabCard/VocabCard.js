@@ -27,11 +27,14 @@ export default function VocabCard({
         {word.query1.translation}
         <Gender>{word.query1.gender}</Gender>
       </p>
-      <p>
-        <Flag>{word.query2?.flag}</Flag>
-        {word.query2?.translation}
-        <Gender>{word.query2?.gender}</Gender>
-      </p>
+      {word.query2 && (
+        <p>
+          <Flag>{word.query2.flag}</Flag>
+          {word.query2.translation}
+          <Gender>{word.query2.gender}</Gender>
+        </p>
+      )}
+
       {word.id === addTranslation && (
         <AddTranslationForm
           onReturnFromEditMode={onReturnFromEditMode}

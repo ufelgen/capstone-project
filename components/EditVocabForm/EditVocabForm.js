@@ -29,6 +29,9 @@ export default function EditVocabForm({
     const language = fields.queryLanguage.value.split("-");
     const newGender = fields.gender.value;
     const newCategory = fields.category.value;
+    const newQuery2Translation = fields.queryLanguage2Translation.value;
+    const language2 = fields.queryLanguage2.value.split("-");
+    const newGender2 = fields.gender2.value;
 
     const updatedVocab = {
       id: editId,
@@ -39,11 +42,16 @@ export default function EditVocabForm({
         translation: newBase,
       },
       query1: {
-        id: nanoid(),
         language: language[1],
         flag: language[0],
         translation: newQuery1Translation,
         gender: newGender,
+      },
+      query2: {
+        language: language2[1],
+        flag: language2[0],
+        translation: newQuery2Translation,
+        gender: newGender2,
       },
     };
 
@@ -109,6 +117,57 @@ export default function EditVocabForm({
             </option>
           </Dropdown>
         </label>
+        {word.query2 && (
+          <>
+            <label htmlFor="queryLanguage2" name="queryLanguage2">
+              <Dropdown
+                defaultValue={word.query2.flag + "-" + word.query2.language}
+                name="queryLanguage2"
+                id="queryLanguage2"
+              >
+                {languages.map((language) => {
+                  return (
+                    <option
+                      key={language.name}
+                      value={language.value}
+                      name={language.name}
+                    >
+                      {language.flag}
+                    </option>
+                  );
+                })}
+              </Dropdown>
+            </label>
+            <InputField
+              id="queryLanguage2Translation"
+              name="queryLanguage2Translation"
+              type="text"
+              maxLength={50}
+              defaultValue={word.query2.translation}
+            ></InputField>
+
+            <label htmlFor="gender2" name="gender2">
+              <Dropdown
+                defaultValue={word.query2.gender}
+                name="gender2"
+                id="gender2"
+              >
+                <option value="" name="none">
+                  none
+                </option>
+                <option value="m" name="male">
+                  m
+                </option>
+                <option value="f" name="female">
+                  f
+                </option>
+                <option value="n" name="neuter">
+                  n
+                </option>
+              </Dropdown>
+            </label>
+          </>
+        )}
 
         <Label htmlFor="category" name="category">
           category:
@@ -136,17 +195,18 @@ export default function EditVocabForm({
             );
           })}
         </datalist>
-
-        <BackButton
-          type="button"
-          aria-label="go back"
-          onClick={onReturnFromEditMode}
-        >
-          back
-        </BackButton>
-        <ActionButton type="submit" aria-label="edit flashcard">
-          edit
-        </ActionButton>
+        <section>
+          <BackButton
+            type="button"
+            aria-label="go back"
+            onClick={onReturnFromEditMode}
+          >
+            back
+          </BackButton>
+          <ActionButton type="submit" aria-label="edit flashcard">
+            edit
+          </ActionButton>
+        </section>
       </StyledEditForm>
     </>
   );
@@ -154,7 +214,11 @@ export default function EditVocabForm({
 
 const StyledEditForm = styled(StyledForm)`
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
+  justify-content: center;
+  section {
+    flex-flow: row wrap;
+  }
   label {
     margin: 0.1rem;
   }
