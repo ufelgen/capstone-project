@@ -20,7 +20,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         translation: fields.english.value,
       },
       query1: {
-        id: nanoid(),
+        //id: nanoid(),
         language: language[1],
         flag: language[0],
         translation: fields.queryLanguage1.value,
@@ -49,7 +49,12 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       ></InputEng>
 
       <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
-        <Dropdown name="queryLanguage" id="queryLanguage" required>
+        <Dropdown
+          name="queryLanguage"
+          id="queryLanguage"
+          data-testid="queryLanguage"
+          required
+        >
           <option hidden={true} value="">
             language
           </option>
@@ -72,11 +77,12 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         type="text"
         maxLength={50}
         placeholder="type translation"
+        data-testid="queryLanguage1"
         required
       ></InputQuery>
 
       <LabelGender htmlFor="gender" name="gender">
-        <Dropdown name="gender" id="gender" required>
+        <Dropdown name="gender" id="gender" data-testid="gender" required>
           <option hidden={true} value="">
             gender
           </option>
@@ -107,6 +113,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         maxLength={50}
         placeholder="add a category"
         list="category"
+        data-testid="category"
       />
       <datalist name="category" id="category" className="catinput">
         {uniqueCategories.map((uniqueCategory) => {

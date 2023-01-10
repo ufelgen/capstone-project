@@ -11,7 +11,7 @@ export default function PopupMenu({
 }) {
   const { pathname } = useRouter();
   return (
-    <StyledPopupMenu>
+    <StyledPopupMenu data-testid="popup">
       <StyledMenuButton
         type="button"
         aria-label="delete this flashcard"

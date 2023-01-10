@@ -6,6 +6,7 @@ export default function PopupMenuButton({ id, onPopupClick }) {
     <StyledPopupMenuButton
       type="button"
       aria-label="open popup menu"
+      data-testid="openPopup"
       onClick={(event) => onPopupClick(event, id)}
     >
       <HiDotsVertical size={15} />
