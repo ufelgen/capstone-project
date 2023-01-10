@@ -92,9 +92,7 @@ export default function EditVocabForm({
   return (
     <>
       <StyledEditForm onSubmit={handleEditVocab}>
-        <Label htmlFor="english" name="english">
-          🇬🇧 english
-        </Label>
+        <Label htmlFor="english">🇬🇧 english</Label>
         <InputField
           id="english"
           name="english"
@@ -103,7 +101,7 @@ export default function EditVocabForm({
           defaultValue={word.base.translation}
         ></InputField>
 
-        <label htmlFor="queryLanguage1" name="queryLanguage1">
+        <label htmlFor="queryLanguage1">
           <Dropdown
             defaultValue={word.query1.flag + "-" + word.query1.language}
             name="queryLanguage"
@@ -130,7 +128,7 @@ export default function EditVocabForm({
           defaultValue={word.query1.translation}
         ></InputField>
 
-        <label htmlFor="gender" name="gender">
+        <label>
           <Dropdown defaultValue={word.query1.gender} name="gender" id="gender">
             <option value="" name="none">
               none
@@ -148,7 +146,7 @@ export default function EditVocabForm({
         </label>
         {word.query2 && (
           <>
-            <label htmlFor="queryLanguage2" name="queryLanguage2">
+            <label htmlFor="queryLanguage2Translation">
               <Dropdown
                 defaultValue={word.query2.flag + "-" + word.query2.language}
                 name="queryLanguage2"
@@ -175,7 +173,7 @@ export default function EditVocabForm({
               defaultValue={word.query2.translation}
             ></InputField>
 
-            <label htmlFor="gender2" name="gender2">
+            <label>
               <Dropdown
                 defaultValue={word.query2.gender}
                 name="gender2"
@@ -198,9 +196,7 @@ export default function EditVocabForm({
           </>
         )}
 
-        <Label htmlFor="category" name="category">
-          category:
-        </Label>
+        <Label htmlFor="category">category:</Label>
 
         <InputField
           id="newCategory"

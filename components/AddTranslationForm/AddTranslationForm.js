@@ -26,7 +26,7 @@ export default function AddTranslationForm({
 
   return (
     <StyledForm onSubmit={handleAddedTranslation}>
-      <label htmlFor="queryLanguage1" name="queryLanguage1">
+      <label htmlFor="queryLanguage2Translation">
         <Dropdown name="queryLanguage2" id="queryLanguage2" required>
           {languages.map((language) => {
             return (
@@ -49,7 +49,7 @@ export default function AddTranslationForm({
         placeholder="type translation"
         required
       ></InputField>
-      <label htmlFor="gender2" name="gender2">
+      <label>
         <Dropdown name="gender2" id="gender2" required>
           <option hidden={true} value="">
             gender

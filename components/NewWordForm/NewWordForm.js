@@ -34,9 +34,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
 
   return (
     <StyledNewWordForm onSubmit={handleSubmit}>
-      <LabelEng htmlFor="english" name="english">
-        🇬🇧 english
-      </LabelEng>
+      <LabelEng htmlFor="english">🇬🇧 english</LabelEng>
       <InputEng
         id="english"
         name="english"
@@ -46,7 +44,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         required
       ></InputEng>
 
-      <LabelQuery htmlFor="queryLanguage1" name="queryLanguage1">
+      <LabelQuery htmlFor="queryLanguage1">
         <Dropdown
           name="queryLanguage"
           id="queryLanguage"
@@ -79,7 +77,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         required
       ></InputQuery>
 
-      <LabelGender htmlFor="gender" name="gender">
+      <LabelGender>
         <Dropdown name="gender" id="gender" data-testid="gender" required>
           <option hidden={true} value="">
             gender
@@ -99,9 +97,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         </Dropdown>
       </LabelGender>
 
-      <LabelCat htmlFor="category" name="category">
-        category:
-      </LabelCat>
+      <LabelCat htmlFor="category">category:</LabelCat>
 
       <InputField
         className="catinput"

@@ -55,7 +55,7 @@ export default function VocabCard({
           prop={word}
         />
       )}
-      {word.id === addTranslation ? null : (
+      {word.id !== addTranslation && word.id !== popup && (
         <PopupMenuButton id={word.id} onPopupClick={onPopupClick} />
       )}
     </StyledCard>
