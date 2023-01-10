@@ -55,6 +55,7 @@ export default function DeclensionForm({
           <label htmlFor="specification">declension type:</label>
           <InputField
             type="text"
+            id="specification"
             name="specification"
             defaultValue={query1.declension?.specification}
             required
@@ -71,6 +72,7 @@ export default function DeclensionForm({
                   <StyledInput
                     type="text"
                     name={singleCase.english + "Singular"}
+                    id={singleCase.english + "Singular"}
                     defaultValue={
                       query1.declension.singular[singleCase.english]
                     }
@@ -80,6 +82,7 @@ export default function DeclensionForm({
                   <StyledInput
                     type="text"
                     name={singleCase.english + "Plural"}
+                    id={singleCase.english + "Plural"}
                     defaultValue={query1.declension.plural[singleCase.english]}
                     required
                   />
@@ -92,6 +95,7 @@ export default function DeclensionForm({
                   <StyledInput
                     type="text"
                     name={singleCase.english + "Singular"}
+                    id={singleCase.english + "Singular"}
                     placeholder={singleCase.english}
                     required
                   />
@@ -99,6 +103,7 @@ export default function DeclensionForm({
                   <StyledInput
                     type="text"
                     name={singleCase.english + "Plural"}
+                    id={singleCase.english + "Plural"}
                     placeholder={singleCase.english}
                     required
                   />

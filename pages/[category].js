@@ -15,6 +15,8 @@ export default function Category({
   onPopupClick,
   onClosePopup,
   onEdit,
+  onAddTranslation,
+  addTranslation,
   onReturnFromEditMode,
 }) {
   const router = useRouter();
@@ -31,6 +33,12 @@ export default function Category({
   function handleEditedVocab(editId, updatedVocab) {
     setAllWords(
       allWords.map((word) => (word.id === editId ? updatedVocab : word))
+    );
+  }
+
+  function handleSaveTranslation(id, query2) {
+    setAllWords(
+      allWords.map((word) => (word.id === id ? { ...word, query2 } : word))
     );
   }
 
@@ -77,6 +85,10 @@ export default function Category({
                 onClosePopup={onClosePopup}
                 onDelete={handleDelete}
                 onEdit={onEdit}
+                onReturnFromEditMode={onReturnFromEditMode}
+                onAddTranslation={onAddTranslation}
+                addTranslation={addTranslation}
+                onSaveTranslation={handleSaveTranslation}
                 onPopupClick={onPopupClick}
               />
             </Fragment>
