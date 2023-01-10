@@ -20,40 +20,70 @@ export default function EditVocabForm({
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
-  function handleEditVocab(event) {
+  function updateVocab(event) {
     event.preventDefault();
     const fields = event.target.elements;
-    const newBase = fields.english.value;
-    const newQuery1Translation = fields.queryLanguage1.value;
-    const language = fields.queryLanguage.value.split("-");
-    const newGender = fields.gender.value;
-    const newCategory = fields.category.value;
-    const newQuery2Translation = fields.queryLanguage2Translation.value;
-    const language2 = fields.queryLanguage2.value.split("-");
-    const newGender2 = fields.gender2.value;
+    if (word.query2) {
+      const newBase = fields.english.value;
+      const newQuery1Translation = fields.queryLanguage1.value;
+      const language = fields.queryLanguage.value.split("-");
+      const newGender = fields.gender.value;
+      const newCategory = fields.category.value;
+      const newQuery2Translation = fields.queryLanguage2Translation.value;
+      const language2 = fields.queryLanguage2.value.split("-");
+      const newGender2 = fields.gender2.value;
 
-    const updatedVocab = {
-      id: editId,
-      category: newCategory,
-      base: {
-        language: "english",
-        flag: "🇬🇧",
-        translation: newBase,
-      },
-      query1: {
-        language: language[1],
-        flag: language[0],
-        translation: newQuery1Translation,
-        gender: newGender,
-      },
-      query2: {
-        language: language2[1],
-        flag: language2[0],
-        translation: newQuery2Translation,
-        gender: newGender2,
-      },
-    };
+      const updatedVocab = {
+        id: editId,
+        category: newCategory,
+        base: {
+          language: "english",
+          flag: "🇬🇧",
+          translation: newBase,
+        },
+        query1: {
+          language: language[1],
+          flag: language[0],
+          translation: newQuery1Translation,
+          gender: newGender,
+        },
+        query2: {
+          language: language2[1],
+          flag: language2[0],
+          translation: newQuery2Translation,
+          gender: newGender2,
+        },
+      };
+      return updatedVocab;
+    } else {
+      const newBase = fields.english.value;
+      const newQuery1Translation = fields.queryLanguage1.value;
+      const language = fields.queryLanguage.value.split("-");
+      const newGender = fields.gender.value;
+      const newCategory = fields.category.value;
 
+      const updatedVocab = {
+        id: editId,
+        category: newCategory,
+        base: {
+          language: "english",
+          flag: "🇬🇧",
+          translation: newBase,
+        },
+        query1: {
+          language: language[1],
+          flag: language[0],
+          translation: newQuery1Translation,
+          gender: newGender,
+        },
+      };
+      return updatedVocab;
+    }
+  }
+
+  function handleEditVocab(event) {
+    event.preventDefault();
+    const updatedVocab = updateVocab(event);
     onSaveEdited(editId, updatedVocab);
 
     onReturnFromEditMode();
