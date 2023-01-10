@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PopupMenu from "../PopupMenu/PopupMenu";
 import PopupMenuButton from "../PopupMenuButton/PopupMenuButton";
+import AddTranslationForm from "../AddTranslationForm/AddTranslationForm";
 import { DeclensionIcon, ConjugationIcon, NotesIcon } from "../StyledIcons";
 
 export default function VocabCard({
@@ -9,6 +10,10 @@ export default function VocabCard({
   onClosePopup,
   onDelete,
   onEdit,
+  onReturnFromEditMode,
+  onAddTranslation,
+  addTranslation,
+  onSaveTranslation,
   onPopupClick,
 }) {
   return (
@@ -22,6 +27,18 @@ export default function VocabCard({
         {word.query1.translation}
         <Gender>{word.query1.gender}</Gender>
       </p>
+      <p>
+        <Flag>{word.query2?.flag}</Flag>
+        {word.query2?.translation}
+        <Gender>{word.query2?.gender}</Gender>
+      </p>
+      {word.id === addTranslation && (
+        <AddTranslationForm
+          onReturnFromEditMode={onReturnFromEditMode}
+          onSaveTranslation={onSaveTranslation}
+          id={word.id}
+        />
+      )}
       {word.query1.declension && <DeclensionIcon />}
       {word.query1.conjugation && <ConjugationIcon />}
       {word.notes && <NotesIcon />}
@@ -31,6 +48,7 @@ export default function VocabCard({
           id={word.id}
           onDelete={onDelete}
           onEdit={onEdit}
+          onAddTranslation={(event) => onAddTranslation(event, word.id)}
           prop={word}
         />
       ) : (

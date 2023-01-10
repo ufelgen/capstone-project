@@ -7,6 +7,14 @@ function MyApp({ Component, pageProps }) {
   const [editing, setEditing] = useState(false);
   const [editId, setEditId] = useState();
   const [tense, setTense] = useState("present");
+  const [addTranslation, setAddTranslation] = useState("");
+
+  function handleAddTranslation(event, id) {
+    event.preventDefault();
+    event.stopPropagation();
+    setAddTranslation(id);
+    setPopup(false);
+  }
 
   function changeTense(tense) {
     setTense(tense);
@@ -34,6 +42,7 @@ function MyApp({ Component, pageProps }) {
   function handleReturnFromEditMode() {
     setEditing(false);
     setPopup(false);
+    setAddTranslation(false);
   }
 
   return (
@@ -53,6 +62,8 @@ function MyApp({ Component, pageProps }) {
         onReturnFromEditMode={handleReturnFromEditMode}
         tense={tense}
         onChangeTense={changeTense}
+        onAddTranslation={handleAddTranslation}
+        addTranslation={addTranslation}
       />
     </>
   );

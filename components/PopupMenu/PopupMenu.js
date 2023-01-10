@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 export default function PopupMenu({
   onDelete,
   onEdit,
+  onAddTranslation,
   id,
   onClosePopup,
   prop,
@@ -56,6 +57,13 @@ export default function PopupMenu({
               {prop.notes ? "notes" : "+ notes"}
             </StyledMenuButton>
           </Link>
+          <StyledMenuButton
+            type="button"
+            aria-label="add translation"
+            onClick={(event) => onAddTranslation(event, id)}
+          >
+            + translation
+          </StyledMenuButton>
         </>
       )}
 
