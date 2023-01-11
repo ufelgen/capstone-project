@@ -1,6 +1,7 @@
 import GlobalStyles from "../components/GlobalStyles";
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import fetchData from "../helpers/fetchData";
 
 function MyApp({ Component, pageProps }) {
   const [allWords, setAllWords] = useState();
@@ -9,18 +10,12 @@ function MyApp({ Component, pageProps }) {
     setAllWords(words);
   }
 
-  async function fetchData() {
-    try {
-      const response = await fetch("/api/words");
-      const data = await response.json();
-      handleAllWords(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
-    fetchData("/api/words");
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData("/api/words");
+      handleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }, []);
 
   const [popup, setPopup] = useState("");

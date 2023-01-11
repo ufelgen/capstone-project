@@ -4,11 +4,13 @@ import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
 import VocabCard from "../components/VocabCard/VocabCard";
 import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
-import useLocalStorageState from "use-local-storage-state";
 import { rearrangeData } from "../helpers/rearrangeData";
 import Link from "next/link";
+import fetchData from "../helpers/fetchData";
 
 export default function Category({
+  allWords,
+  onHandleAllWords,
   popup,
   editing,
   editId,
@@ -23,15 +25,27 @@ export default function Category({
   const { category } = router.query;
 
   // words were taken from local storage
-  const [allWords, setAllWords] = useLocalStorageState("allWords");
-
-  // GET REQUEST HERE, maybe query for category
+  //const [allWords, setAllWords] = useLocalStorageState("allWords");
+  // this is replaced by a database fetch in the _app.js, allWords is passed down
 
   // delete vocab card - will be DELETE by ID
-  function handleDelete(event, id) {
+  // function handleDelete(event, id) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   setAllWords(allWords.filter((word) => word.id !== id));
+  // }
+
+  async function handleDelete(event, id) {
     event.preventDefault();
     event.stopPropagation();
-    setAllWords(allWords.filter((word) => word.id !== id));
+    await fetch("/api/words/" + id, {
+      method: "DELETE",
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData("/api/words");
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   // edit vocab card - will be PUT by ID

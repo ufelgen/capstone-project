@@ -2,12 +2,12 @@ import Header from "../components/Header/Header";
 import NewWordForm from "../components/NewWordForm/NewWordForm";
 import Link from "next/link";
 import { Fragment } from "react";
-import { nanoid } from "nanoid";
 import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import PopupMenu from "../components/PopupMenu/PopupMenu";
 import EditCategory from "../components/EditCategory/EditCategory";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
+import fetchData from "../helpers/fetchData";
 
 export default function Home({
   allWords,
@@ -32,8 +32,22 @@ export default function Home({
   const wordsInCategories = rearrangeData(allWords);
 
   // save new word - will be POST
+  // async function pushNewWord(newWord) {
+  //   setAllWords([...allWords, { id: nanoid(), ...newWord }]);
+  // }
   async function pushNewWord(newWord) {
-    setAllWords([...allWords, { id: nanoid(), ...newWord }]);
+    await fetch("/api/words", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData("/api/words");
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   // delete category - will be DELETE but not by ID
