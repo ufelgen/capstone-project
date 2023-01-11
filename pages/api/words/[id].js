@@ -29,6 +29,15 @@ export default async function handler(req, res) {
     } else {
       res.status(404).json({ message: "not found" });
     }
+  } else if (req.method === "PATCH") {
+    const update = await Word.findByIdAndUpdate(id, req.body, {
+      returnDocument: "after",
+    });
+    if (update) {
+      res.status(200).json({ message: "word updated" }, update);
+    } else {
+      res.status(404).json({ message: "not found" });
+    }
   } else {
     res.status(405).json({ message: "method not allowed" });
   }

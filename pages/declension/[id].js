@@ -54,7 +54,7 @@ export default function Declension({
       ...currentWord,
       query1: { ...currentWord.query1, ...declension },
     };
-    await fetch("/api/words/" + id, {
+    await fetch("/api/words/" + declensionId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,6 +67,22 @@ export default function Declension({
     }
     performFetch();
   }
+
+  // TRIED WITH PATCH
+  // async function handleAddDeclensionForm(declensionId, declension) {
+  //   await fetch("/api/words/" + declensionId, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(declension),
+  //   });
+  //   async function performFetch() {
+  //     const allWordsFromDatabase = await fetchData("/api/words");
+  //     onHandleAllWords(allWordsFromDatabase);
+  //   }
+  //   performFetch();
+  // }
 
   return (
     <>

@@ -56,12 +56,17 @@ export default function Category({
   // }
 
   async function handleEditedVocab(editId, updatedVocab) {
+    const currentWord = allWords.filter((word) => word.id === editId);
+    const updatedWord = {
+      ...currentWord,
+      ...updatedVocab,
+    };
     await fetch("/api/words/" + editId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedVocab),
+      body: JSON.stringify(updatedWord),
     });
     async function performFetch() {
       const allWordsFromDatabase = await fetchData("/api/words");

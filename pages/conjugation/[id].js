@@ -60,7 +60,7 @@ export default function Conjugation({
         ...newConjugation,
       },
     };
-    await fetch("/api/words/" + id, {
+    await fetch("/api/words/" + conjugationId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
