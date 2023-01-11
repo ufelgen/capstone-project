@@ -1,10 +1,8 @@
 import Header from "../components/Header/Header";
 import NewWordForm from "../components/NewWordForm/NewWordForm";
 import Link from "next/link";
-import { words } from "../lib/words";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
-import useLocalStorageState from "use-local-storage-state";
 import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import PopupMenu from "../components/PopupMenu/PopupMenu";
 import EditCategory from "../components/EditCategory/EditCategory";
@@ -12,6 +10,8 @@ import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 
 export default function Home({
+  allWords,
+  onHandleAllWords,
   popup,
   editing,
   editId,
@@ -20,19 +20,23 @@ export default function Home({
   onEdit,
   onReturnFromEditMode,
 }) {
-  const [allWords, setAllWords] = useLocalStorageState("allWords", {
-    defaultValue: words,
-  });
+  // words are saved in local storage (before database)
+  // const [allWords, setAllWords] = useLocalStorageState("allWords", {
+  //   defaultValue: words,
+  // });
 
   if (!allWords) {
     return null;
   }
+
   const wordsInCategories = rearrangeData(allWords);
 
+  // save new word - will be POST
   async function pushNewWord(newWord) {
     setAllWords([...allWords, { id: nanoid(), ...newWord }]);
   }
 
+  // delete category - will be DELETE but not by ID
   function handleDeleteCategory(event, category) {
     event.preventDefault();
     event.stopPropagation();
@@ -44,6 +48,7 @@ export default function Home({
     }
   }
 
+  // edit category name - will be PUT but not by ID
   function handleEditedCategory(editId, updatedCategory) {
     setAllWords(
       allWords.map((word) =>

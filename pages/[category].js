@@ -22,20 +22,26 @@ export default function Category({
   const router = useRouter();
   const { category } = router.query;
 
+  // words were taken from local storage
   const [allWords, setAllWords] = useLocalStorageState("allWords");
 
+  // GET REQUEST HERE, maybe query for category
+
+  // delete vocab card - will be DELETE by ID
   function handleDelete(event, id) {
     event.preventDefault();
     event.stopPropagation();
     setAllWords(allWords.filter((word) => word.id !== id));
   }
 
+  // edit vocab card - will be PUT by ID
   function handleEditedVocab(editId, updatedVocab) {
     setAllWords(
       allWords.map((word) => (word.id === editId ? updatedVocab : word))
     );
   }
 
+  // add translation - will be PUT by ID
   function handleSaveTranslation(id, query2) {
     setAllWords(
       allWords.map((word) => (word.id === id ? { ...word, query2 } : word))

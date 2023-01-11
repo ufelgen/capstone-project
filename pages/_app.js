@@ -1,8 +1,28 @@
 import GlobalStyles from "../components/GlobalStyles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
+  const [allWords, setAllWords] = useState();
+
+  function handleAllWords(words) {
+    setAllWords(words);
+  }
+
+  async function fetchData() {
+    try {
+      const response = await fetch("/api/words");
+      const data = await response.json();
+      handleAllWords(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData("/api/words");
+  }, []);
+
   const [popup, setPopup] = useState("");
   const [editing, setEditing] = useState(false);
   const [editId, setEditId] = useState();
@@ -53,6 +73,8 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyles />
       <Component
         {...pageProps}
+        allWords={allWords}
+        onHandleAllWords={handleAllWords}
         popup={popup}
         editing={editing}
         editId={editId}
