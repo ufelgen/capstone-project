@@ -49,17 +49,49 @@ export default function Category({
   }
 
   // edit vocab card - will be PUT by ID
-  function handleEditedVocab(editId, updatedVocab) {
-    setAllWords(
-      allWords.map((word) => (word.id === editId ? updatedVocab : word))
-    );
+  // function handleEditedVocab(editId, updatedVocab) {
+  //   setAllWords(
+  //     allWords.map((word) => (word.id === editId ? updatedVocab : word))
+  //   );
+  // }
+
+  async function handleEditedVocab(editId, updatedVocab) {
+    await fetch("/api/words/" + editId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedVocab),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData("/api/words");
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   // add translation - will be PUT by ID
-  function handleSaveTranslation(id, query2) {
-    setAllWords(
-      allWords.map((word) => (word.id === id ? { ...word, query2 } : word))
-    );
+  // function handleSaveTranslation(id, query2) {
+  //   setAllWords(
+  //     allWords.map((word) => (word.id === id ? { ...word, query2 } : word))
+  //   );
+  // }
+
+  async function handleSaveTranslation(id, query2) {
+    const currentWord = allWords.filter((word) => word.id === id);
+    const updatedWord = { ...currentWord, query2 };
+    await fetch("/api/words/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData("/api/words");
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   if (!allWords) {
@@ -83,6 +115,8 @@ export default function Category({
 
   const { categoryName, categoryWords } = currentCategory;
 
+  console.log(allWords);
+
   return (
     <Fragment>
       <StyledHeading>{categoryName}</StyledHeading>
@@ -91,6 +125,7 @@ export default function Category({
           editing && editId === word.id ? (
             <Fragment key={word.id}>
               <EditVocabForm
+                allWords={allWords}
                 word={word}
                 onReturnFromEditMode={onReturnFromEditMode}
                 onSaveEdited={handleEditedVocab}

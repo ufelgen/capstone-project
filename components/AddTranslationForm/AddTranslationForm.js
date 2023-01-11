@@ -20,6 +20,7 @@ export default function AddTranslationForm({
       translation: translation2,
       gender: gender2,
     };
+
     onSaveTranslation(id, query2);
     onReturnFromEditMode();
   }
@@ -51,9 +52,9 @@ export default function AddTranslationForm({
       ></InputField>
       <label>
         <Dropdown name="gender2" id="gender2" required>
-          <option hidden={true} value="">
+          {/* <option hidden={true} value="">
             gender
-          </option>
+          </option> */}
           <option value="" name="none">
             none
           </option>

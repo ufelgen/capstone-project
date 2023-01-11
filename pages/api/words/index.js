@@ -23,22 +23,22 @@ export default async function handler(req, res) {
           flag: word.query1.flag,
           translation: word.query1.translation,
           declension: {
-            specification: word.declension?.specification,
+            specification: word.query1.declension?.specification,
             singular: {
-              nominative: word.declension?.singular.nominative,
-              genitive: word.declension?.singular.genitive,
-              dative: word.declension?.singular.dative,
-              accusative: word.declension?.singular.accusative,
-              locative: word.declension?.singular.locative,
-              instrumental: word.declension?.singular.instrumental,
+              nominative: word.query1.declension?.singular.nominative,
+              genitive: word.query1.declension?.singular.genitive,
+              dative: word.query1.declension?.singular.dative,
+              accusative: word.query1.declension?.singular.accusative,
+              locative: word.query1.declension?.singular.locative,
+              instrumental: word.query1.declension?.singular.instrumental,
             },
             plural: {
-              nominative: word.declension?.plural.nominative,
-              genitive: word.declension?.plural.genitive,
-              dative: word.declension?.plural.dative,
-              accusative: word.declension?.plural.accusative,
-              locative: word.declension?.plural.locative,
-              instrumental: word.declension?.plural.instrumental,
+              nominative: word.query1.declension?.plural.nominative,
+              genitive: word.query1.declension?.plural.genitive,
+              dative: word.query1.declension?.plural.dative,
+              accusative: word.query1.declension?.plural.accusative,
+              locative: word.query1.declension?.plural.locative,
+              instrumental: word.query1.declension?.plural.instrumental,
             },
           },
           conjugation: {
@@ -260,6 +260,7 @@ export default async function handler(req, res) {
           language: word.query2?.language,
           flag: word.query2?.flag,
           translation: word.query2?.translation,
+          gender: word.query2?.gender,
         },
       };
     });

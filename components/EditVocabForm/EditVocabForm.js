@@ -1,6 +1,5 @@
 import { languages } from "../../lib/languages";
 import styled from "styled-components";
-import useLocalStorageState from "use-local-storage-state";
 import {
   StyledForm,
   ActionButton,
@@ -11,19 +10,22 @@ import {
 } from "../StyledForm";
 
 export default function EditVocabForm({
+  allWords,
   word,
   editId,
   onSaveEdited,
   onReturnFromEditMode,
 }) {
-  const [allWords] = useLocalStorageState("allWords");
+  // words from local storage - replace by handing down words from database
+  //const [allWords] = useLocalStorageState("allWords");
+
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
   function updateVocab(event) {
     event.preventDefault();
     const fields = event.target.elements;
-    if (word.query2) {
+    if (word.query2.translation) {
       const newBase = fields.english.value;
       const newQuery1Translation = fields.queryLanguage1.value;
       const language = fields.queryLanguage.value.split("-");
@@ -144,7 +146,7 @@ export default function EditVocabForm({
             </option>
           </Dropdown>
         </label>
-        {word.query2 && (
+        {word.query2.translation && (
           <>
             <label htmlFor="queryLanguage2Translation">
               <Dropdown
