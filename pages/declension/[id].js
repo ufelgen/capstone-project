@@ -60,7 +60,7 @@ export default function Declension({
       body: JSON.stringify(updatedWord),
     });
     async function performFetch() {
-      const allWordsFromDatabase = await fetchData("/api/words");
+      const allWordsFromDatabase = await fetchData();
       onHandleAllWords(allWordsFromDatabase);
     }
     performFetch();

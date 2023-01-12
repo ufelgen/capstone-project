@@ -42,7 +42,7 @@ export default function Category({
       method: "DELETE",
     });
     async function performFetch() {
-      const allWordsFromDatabase = await fetchData("/api/words");
+      const allWordsFromDatabase = await fetchData();
       onHandleAllWords(allWordsFromDatabase);
     }
     performFetch();
@@ -71,7 +71,7 @@ export default function Category({
       body: JSON.stringify(updatedWord),
     });
     async function performFetch() {
-      const allWordsFromDatabase = await fetchData("/api/words");
+      const allWordsFromDatabase = await fetchData();
       onHandleAllWords(allWordsFromDatabase);
     }
     performFetch();
@@ -95,7 +95,7 @@ export default function Category({
       body: JSON.stringify(updatedWord),
     });
     async function performFetch() {
-      const allWordsFromDatabase = await fetchData("/api/words");
+      const allWordsFromDatabase = await fetchData();
       onHandleAllWords(allWordsFromDatabase);
     }
     performFetch();
@@ -121,8 +121,6 @@ export default function Category({
   }
 
   const { categoryName, categoryWords } = currentCategory;
-
-  console.log(allWords);
 
   return (
     <Fragment>

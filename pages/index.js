@@ -44,7 +44,7 @@ export default function Home({
       body: JSON.stringify(newWord),
     });
     async function performFetch() {
-      const allWordsFromDatabase = await fetchData("/api/words");
+      const allWordsFromDatabase = await fetchData();
       onHandleAllWords(allWordsFromDatabase);
     }
     performFetch();

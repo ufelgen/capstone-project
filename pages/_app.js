@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     async function performFetch() {
-      const allWordsFromDatabase = await fetchData("/api/words");
+      const allWordsFromDatabase = await fetchData();
       handleAllWords(allWordsFromDatabase);
     }
     performFetch();

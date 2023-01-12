@@ -1,4 +1,4 @@
-export default async function fetchData(path) {
+export default async function fetchData() {
   try {
     const response = await fetch("/api/words");
     const data = await response.json();
