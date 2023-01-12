@@ -48,11 +48,8 @@ export default function Conjugation({
   //   );
   // }
 
-  // FOR SOME REASON THIS FUNCTION EATS THE REST OF QUERY1
-  //////////////////////////////////////////////////
-  // UPDATING A WORD EATS THE CONJUGATION!!!!
   async function handleAddConjugationForm(conjugationId, newConjugation) {
-    const currentWord = allWords.filter((word) => word.id === conjugationId);
+    const currentWord = allWords.find((word) => word.id === conjugationId);
     const updatedWord = {
       ...currentWord,
       query1: {

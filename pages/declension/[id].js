@@ -49,7 +49,8 @@ export default function Declension({
   //////////////////////////////////////////////////
   // UPDATING A WORD EATS THE DECLENSION!!!!
   async function handleAddDeclensionForm(declensionId, declension) {
-    const currentWord = allWords.filter((word) => word.id === declensionId);
+    const currentWord = allWords.find((word) => word.id === declensionId);
+    debugger;
     const updatedWord = {
       ...currentWord,
       query1: { ...currentWord.query1, ...declension },
