@@ -126,7 +126,65 @@ export default function Conjugation({
   //   }
   // }
 
-  function handleEditConjugation(conjugationId, updatedConjugation) {}
+  function createEditedConjugation(conjugationId, updatedConjugation) {
+    const currentWord = allWords.find((word) => word.id === conjugationId);
+    if (tense === "present") {
+      const updatedWord = {
+        ...currentWord,
+        query1: {
+          ...currentWord.query1,
+          conjugation: {
+            ...currentWord.query1.conjugation,
+            present: updatedConjugation,
+          },
+        },
+      };
+      return updatedWord;
+    } else if (tense === "past") {
+      const updatedWord = {
+        ...currentWord,
+        query1: {
+          ...currentWord.query1,
+          conjugation: {
+            ...currentWord.query1.conjugation,
+            past: updatedConjugation,
+          },
+        },
+      };
+      return updatedWord;
+    } else if (tense === "future") {
+      const updatedWord = {
+        ...currentWord,
+        query1: {
+          ...currentWord.query1,
+          conjugation: {
+            ...currentWord.query1.conjugation,
+            future: updatedConjugation,
+          },
+        },
+      };
+      return updatedWord;
+    }
+  }
+
+  async function handleEditConjugation(conjugationId, updatedConjugation) {
+    const updatedWord = createEditedConjugation(
+      conjugationId,
+      updatedConjugation
+    );
+    await fetch("/api/words/" + conjugationId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
+  }
 
   return (
     <>
