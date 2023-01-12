@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import {
   HiHome,
   HiOutlineInformationCircle,
@@ -14,15 +15,19 @@ export default function Footer({ path, onReturnFromEditMode }) {
 
   const [showInfo, setShowInfo] = useState(false);
 
-  function handleReturn() {
+  function handleReturn(link) {
     onReturnFromEditMode();
+    Router.push(link);
   }
 
   return (
     <StyledFooter>
-      <Link aria-label="return to home page" href={`/`} onClick={handleReturn}>
+      <button
+        aria-label="return to home page"
+        onClick={() => handleReturn("/")}
+      >
         <HiHome size="7.7vh" color="darkmagenta" />
-      </Link>{" "}
+      </button>{" "}
       {pathname === "/declension/[id]" && (
         <HiOutlineInformationCircle
           size="7.7vh"
@@ -35,9 +40,9 @@ export default function Footer({ path, onReturnFromEditMode }) {
         pathname === "/notes/[id]" ||
         pathname === "/conjugation/[id]") && (
         <>
-          <Link aria-label="go back" href={`/${path}`} onClick={handleReturn}>
+          <button aria-label="go back" onClick={() => handleReturn(`/${path}`)}>
             <HiOutlineArrowCircleLeft size="7.7vh" color="darkmagenta" />
-          </Link>
+          </button>
         </>
       )}
       {showInfo && <CaseInfo />}
@@ -55,6 +60,10 @@ const StyledFooter = styled.footer`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  button {
+    background-color: transparent;
+    border: none;
+  }
   ul {
     list-style: none;
   }

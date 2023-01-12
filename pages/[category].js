@@ -155,7 +155,7 @@ export default function Category({
           )
         )}
       </CardWrapper>
-      <Footer />
+      <Footer onReturnFromEditMode={onReturnFromEditMode} />
     </Fragment>
   );
 }

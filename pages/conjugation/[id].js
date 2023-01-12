@@ -147,7 +147,10 @@ export default function Conjugation({
           conjugationId={currentWord.id}
         />
       )}
-      <Footer path={currentWord.category} />
+      <Footer
+        path={currentWord.category}
+        onReturnFromEditMode={onReturnFromEditMode}
+      />
     </>
   );
 }

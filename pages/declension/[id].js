@@ -47,7 +47,6 @@ export default function Declension({
 
   async function handleAddDeclensionForm(declensionId, declension) {
     const currentWord = allWords.find((word) => word.id === declensionId);
-    debugger;
     const updatedWord = {
       ...currentWord,
       query1: { ...currentWord.query1, ...declension },
@@ -83,7 +82,10 @@ export default function Declension({
           onAddDeclensionForm={handleAddDeclensionForm}
         />
       )}
-      <Footer path={currentWord.category} />
+      <Footer
+        path={currentWord.category}
+        onReturnFromEditMode={onReturnFromEditMode}
+      />
     </>
   );
 }
