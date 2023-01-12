@@ -18,9 +18,6 @@ export default function Conjugation({
   const router = useRouter();
   const { id } = router.query;
 
-  // words from local storage, replace by allWords from database by handing down
-  //const [allWords, setAllWords] = useLocalStorageState("allWords");
-
   if (!allWords) {
     return null;
   }
@@ -35,17 +32,6 @@ export default function Conjugation({
       </>
     );
   }
-
-  // add conjugation - replace by PUT
-  // function handleAddConjugationForm(conjugationId, newConjugation) {
-  //   setAllWords(
-  //     allWords.map((word) =>
-  //       word.id === conjugationId
-  //         ? { ...word, query1: { ...word.query1, conjugation: newConjugation } }
-  //         : word
-  //     )
-  //   );
-  // }
 
   async function handleAddConjugationForm(conjugationId, newConjugation) {
     const currentWord = allWords.find((word) => word.id === conjugationId);
@@ -69,62 +55,6 @@ export default function Conjugation({
     }
     performFetch();
   }
-
-  // edit conjugation - replace by PUT
-  // function handleEditConjugation(conjugationId, updatedConjugation) {
-  //   if (tense === "present") {
-  //     setAllWords(
-  //       allWords.map((word) =>
-  //         word.id === conjugationId
-  //           ? {
-  //               ...word,
-  //               query1: {
-  //                 ...word.query1,
-  //                 conjugation: {
-  //                   ...word.query1.conjugation,
-  //                   present: updatedConjugation,
-  //                 },
-  //               },
-  //             }
-  //           : word
-  //       )
-  //     );
-  //   } else if (tense === "past") {
-  //     setAllWords(
-  //       allWords.map((word) =>
-  //         word.id === conjugationId
-  //           ? {
-  //               ...word,
-  //               query1: {
-  //                 ...word.query1,
-  //                 conjugation: {
-  //                   ...word.query1.conjugation,
-  //                   past: updatedConjugation,
-  //                 },
-  //               },
-  //             }
-  //           : word
-  //       )
-  //     );
-  //   } else if (tense === "future") {
-  //     setAllWords(
-  //       allWords.map((word) =>
-  //         word.id === conjugationId
-  //           ? {
-  //               ...word,
-  //               query1: {
-  //                 ...word.query1,
-  //                 conjugation: {
-  //                   ...word.query1.conjugation,
-  //                   future: updatedConjugation,
-  //                 },
-  //               },
-  //             }
-  //           : word
-  //       )
-  //     );
-  //   }
-  // }
 
   function createEditedConjugation(conjugationId, updatedConjugation) {
     const currentWord = allWords.find((word) => word.id === conjugationId);
