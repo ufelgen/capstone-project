@@ -24,17 +24,6 @@ export default function Category({
   const router = useRouter();
   const { category } = router.query;
 
-  // words were taken from local storage
-  //const [allWords, setAllWords] = useLocalStorageState("allWords");
-  // this is replaced by a database fetch in the _app.js, allWords is passed down
-
-  // delete vocab card - will be DELETE by ID
-  // function handleDelete(event, id) {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   setAllWords(allWords.filter((word) => word.id !== id));
-  // }
-
   async function handleDelete(event, id) {
     event.preventDefault();
     event.stopPropagation();
@@ -47,13 +36,6 @@ export default function Category({
     }
     performFetch();
   }
-
-  // edit vocab card - will be PUT by ID
-  // function handleEditedVocab(editId, updatedVocab) {
-  //   setAllWords(
-  //     allWords.map((word) => (word.id === editId ? updatedVocab : word))
-  //   );
-  // }
 
   async function handleEditedVocab(editId, updatedVocab) {
     const currentWord = allWords.find((word) => word.id === editId);
@@ -76,13 +58,6 @@ export default function Category({
     }
     performFetch();
   }
-
-  // add translation - will be PUT by ID
-  // function handleSaveTranslation(id, query2) {
-  //   setAllWords(
-  //     allWords.map((word) => (word.id === id ? { ...word, query2 } : word))
-  //   );
-  // }
 
   async function handleSaveTranslation(id, query2) {
     const currentWord = allWords.find((word) => word.id === id);

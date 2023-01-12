@@ -275,5 +275,14 @@ export default async function handler(req, res) {
     } catch (error) {
       res.status(400).json("Data could not be processed", { error });
     }
+  } else if (req.method === "DELETE") {
+    const categoryToDelete = req.body;
+    console.log("req.body", categoryToDelete);
+    const result = await Word.deleteMany({ category: categoryToDelete });
+    if (result) {
+      res.status(200).json({ message: "category deleted" });
+    } else {
+      res.status(404).json({ message: "not found" });
+    }
   }
 }
