@@ -284,5 +284,19 @@ export default async function handler(req, res) {
     } else {
       res.status(404).json({ message: "not found" });
     }
+  } else if (req.method === "PUT") {
+    const array = req.body.split(",");
+    const [oldCategory, newCategory] = array;
+    const updatedCategories = await Word.updateMany(
+      { category: oldCategory },
+      { category: newCategory }
+    );
+    if (updatedCategories) {
+      res.status(200).json({ message: "category name updated" });
+    } else {
+      res.status(404).json({ message: "not found" });
+    }
+  } else {
+    res.status(405).json({ message: "method not allowed" });
   }
 }

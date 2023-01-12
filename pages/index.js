@@ -73,12 +73,24 @@ export default function Home({
   }
 
   // edit category name - will be PUT but not by ID
-  function handleEditedCategory(editId, updatedCategory) {
-    setAllWords(
-      allWords.map((word) =>
-        word.category === editId ? { ...word, category: updatedCategory } : word
-      )
-    );
+  // function handleEditedCategory(editId, updatedCategory) {
+  //   setAllWords(
+  //     allWords.map((word) =>
+  //       word.category === editId ? { ...word, category: updatedCategory } : word
+  //     )
+  //   );
+  // }
+
+  async function handleEditedCategory(editId, updatedCategory) {
+    await fetch("/api/words", {
+      method: "PUT",
+      body: [editId, updatedCategory],
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   return (
@@ -88,12 +100,14 @@ export default function Home({
         <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
         {wordsInCategories.map((item) =>
           editing && editId === item.categoryName ? (
-            <EditCategory
-              item={item}
-              onReturnFromEditMode={onReturnFromEditMode}
-              onSaveEdited={handleEditedCategory}
-              editId={editId}
-            />
+            <Fragment key={item.id}>
+              <EditCategory
+                item={item}
+                onReturnFromEditMode={onReturnFromEditMode}
+                onSaveEdited={handleEditedCategory}
+                editId={editId}
+              />
+            </Fragment>
           ) : (
             <Fragment key={item.id}>
               <StyledLink
