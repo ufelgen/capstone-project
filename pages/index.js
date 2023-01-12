@@ -41,18 +41,6 @@ export default function Home({
     performFetch();
   }
 
-  // delete category - will be DELETE but not by ID
-  // function handleDeleteCategory(event, category) {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   const confirmation = confirm(
-  //     "do you wish to delete all words saved in this category?"
-  //   );
-  //   if (confirmation) {
-  //     setAllWords(allWords.filter((word) => word.category !== category));
-  //   }
-  // }
-
   async function handleDeleteCategory(event, category) {
     event.preventDefault();
     event.stopPropagation();
@@ -71,15 +59,6 @@ export default function Home({
       performFetch();
     }
   }
-
-  // edit category name - will be PUT but not by ID
-  // function handleEditedCategory(editId, updatedCategory) {
-  //   setAllWords(
-  //     allWords.map((word) =>
-  //       word.category === editId ? { ...word, category: updatedCategory } : word
-  //     )
-  //   );
-  // }
 
   async function handleEditedCategory(editId, updatedCategory) {
     await fetch("/api/words", {

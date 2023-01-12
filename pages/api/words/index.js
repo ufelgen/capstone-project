@@ -277,7 +277,6 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "DELETE") {
     const categoryToDelete = req.body;
-    console.log("req.body", categoryToDelete);
     const result = await Word.deleteMany({ category: categoryToDelete });
     if (result) {
       res.status(200).json({ message: "category deleted" });
