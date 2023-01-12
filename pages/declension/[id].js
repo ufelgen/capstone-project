@@ -45,9 +45,6 @@ export default function Declension({
   //   );
   // }
 
-  // FOR SOME REASON THIS FUNCTION EATS THE REST OF QUERY1
-  //////////////////////////////////////////////////
-  // UPDATING A WORD EATS THE DECLENSION!!!!
   async function handleAddDeclensionForm(declensionId, declension) {
     const currentWord = allWords.find((word) => word.id === declensionId);
     debugger;
@@ -68,22 +65,6 @@ export default function Declension({
     }
     performFetch();
   }
-
-  // TRIED WITH PATCH
-  // async function handleAddDeclensionForm(declensionId, declension) {
-  //   await fetch("/api/words/" + declensionId, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(declension),
-  //   });
-  //   async function performFetch() {
-  //     const allWordsFromDatabase = await fetchData("/api/words");
-  //     onHandleAllWords(allWordsFromDatabase);
-  //   }
-  //   performFetch();
-  // }
 
   return (
     <>

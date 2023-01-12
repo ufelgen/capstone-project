@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import ConjugationPage from "../../components/ConjugationPage/ConjugationPage";
 import ConjugationForm from "../../components/ConjugationForm/ConjugationForm";
 import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
-import useLocalStorageState from "use-local-storage-state";
 import Footer from "../../components/Footer/Footer";
 import fetchData from "../../helpers/fetchData";
 

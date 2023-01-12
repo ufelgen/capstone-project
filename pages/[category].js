@@ -56,10 +56,12 @@ export default function Category({
   // }
 
   async function handleEditedVocab(editId, updatedVocab) {
-    const currentWord = allWords.filter((word) => word.id === editId);
+    const currentWord = allWords.find((word) => word.id === editId);
     const updatedWord = {
       ...currentWord,
-      ...updatedVocab,
+      base: { ...currentWord.base, ...updatedVocab.base },
+      query1: { ...currentWord.query1, ...updatedVocab.query1 },
+      query2: { ...currentWord.query2, ...updatedVocab.query2 },
     };
     await fetch("/api/words/" + editId, {
       method: "PUT",
@@ -83,7 +85,7 @@ export default function Category({
   // }
 
   async function handleSaveTranslation(id, query2) {
-    const currentWord = allWords.filter((word) => word.id === id);
+    const currentWord = allWords.find((word) => word.id === id);
     const updatedWord = { ...currentWord, query2 };
     await fetch("/api/words/" + id, {
       method: "PUT",
