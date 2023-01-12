@@ -33,20 +33,28 @@ export default function PopupMenu({
             <StyledMenuButton
               type="button"
               aria-label={
-                prop.query1?.declension ? "see declension" : "add declension"
+                prop.query1?.declension.singular.nominative
+                  ? "see declension"
+                  : "add declension"
               }
             >
-              {prop.query1?.declension ? "declension" : "+ declension"}
+              {prop.query1?.declension.singular.nominative
+                ? "declension"
+                : "+ declension"}
             </StyledMenuButton>
           </Link>
           <Link href={`/conjugation/${id}`}>
             <StyledMenuButton
               type="button"
               aria-label={
-                prop.query1?.conjugation ? "see conjugation" : "add conjugation"
+                prop.query1?.conjugation.present[0].person
+                  ? "see conjugation"
+                  : "add conjugation"
               }
             >
-              {prop.query1?.conjugation ? "conjugation" : "+ conjugation"}
+              {prop.query1?.conjugation.present[0].person
+                ? "conjugation"
+                : "+ conjugation"}
             </StyledMenuButton>
           </Link>
           <Link href={`/notes/${id}`}>
@@ -57,7 +65,7 @@ export default function PopupMenu({
               {prop.notes ? "notes" : "+ notes"}
             </StyledMenuButton>
           </Link>
-          {!prop.query2 && (
+          {!prop.query2.translation && (
             <StyledMenuButton
               type="button"
               aria-label="add translation"

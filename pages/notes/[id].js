@@ -15,6 +15,7 @@ export default function Notes({
   const router = useRouter();
   const { id } = router.query;
 
+  //get words from local storage - will be replaced by handing down from _app.js from database
   const [allWords, setAllWords] = useLocalStorageState("allWords");
 
   if (!allWords) {
@@ -32,6 +33,7 @@ export default function Notes({
     );
   }
 
+  // save notes - will be PUT
   function handleSaveNotes(notesId, wordNotes) {
     setAllWords(
       allWords.map((word) =>

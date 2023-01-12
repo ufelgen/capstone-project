@@ -17,8 +17,10 @@ export default function ConjugationForm({
       participleMasc,
       participleFem
     );
-
-    onAddConjugationForm(id, newConjugation);
+    const newConjugationObject = {
+      conjugation: newConjugation,
+    };
+    onAddConjugationForm(id, newConjugationObject);
   }
   return (
     <StyledConjugationForm

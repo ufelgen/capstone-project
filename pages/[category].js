@@ -4,11 +4,13 @@ import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
 import VocabCard from "../components/VocabCard/VocabCard";
 import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
-import useLocalStorageState from "use-local-storage-state";
 import { rearrangeData } from "../helpers/rearrangeData";
 import Link from "next/link";
+import fetchData from "../helpers/fetchData";
 
 export default function Category({
+  allWords,
+  onHandleAllWords,
   popup,
   editing,
   editId,
@@ -22,24 +24,81 @@ export default function Category({
   const router = useRouter();
   const { category } = router.query;
 
-  const [allWords, setAllWords] = useLocalStorageState("allWords");
+  // words were taken from local storage
+  //const [allWords, setAllWords] = useLocalStorageState("allWords");
+  // this is replaced by a database fetch in the _app.js, allWords is passed down
 
-  function handleDelete(event, id) {
+  // delete vocab card - will be DELETE by ID
+  // function handleDelete(event, id) {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   setAllWords(allWords.filter((word) => word.id !== id));
+  // }
+
+  async function handleDelete(event, id) {
     event.preventDefault();
     event.stopPropagation();
-    setAllWords(allWords.filter((word) => word.id !== id));
+    await fetch("/api/words/" + id, {
+      method: "DELETE",
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
-  function handleEditedVocab(editId, updatedVocab) {
-    setAllWords(
-      allWords.map((word) => (word.id === editId ? updatedVocab : word))
-    );
+  // edit vocab card - will be PUT by ID
+  // function handleEditedVocab(editId, updatedVocab) {
+  //   setAllWords(
+  //     allWords.map((word) => (word.id === editId ? updatedVocab : word))
+  //   );
+  // }
+
+  async function handleEditedVocab(editId, updatedVocab) {
+    const currentWord = allWords.find((word) => word.id === editId);
+    const updatedWord = {
+      ...currentWord,
+      base: { ...currentWord.base, ...updatedVocab.base },
+      query1: { ...currentWord.query1, ...updatedVocab.query1 },
+      query2: { ...currentWord.query2, ...updatedVocab.query2 },
+    };
+    await fetch("/api/words/" + editId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
-  function handleSaveTranslation(id, query2) {
-    setAllWords(
-      allWords.map((word) => (word.id === id ? { ...word, query2 } : word))
-    );
+  // add translation - will be PUT by ID
+  // function handleSaveTranslation(id, query2) {
+  //   setAllWords(
+  //     allWords.map((word) => (word.id === id ? { ...word, query2 } : word))
+  //   );
+  // }
+
+  async function handleSaveTranslation(id, query2) {
+    const currentWord = allWords.find((word) => word.id === id);
+    const updatedWord = { ...currentWord, query2 };
+    await fetch("/api/words/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   if (!allWords) {
@@ -71,6 +130,7 @@ export default function Category({
           editing && editId === word.id ? (
             <Fragment key={word.id}>
               <EditVocabForm
+                allWords={allWords}
                 word={word}
                 onReturnFromEditMode={onReturnFromEditMode}
                 onSaveEdited={handleEditedVocab}
@@ -95,7 +155,7 @@ export default function Category({
           )
         )}
       </CardWrapper>
-      <Footer />
+      <Footer onReturnFromEditMode={onReturnFromEditMode} />
     </Fragment>
   );
 }

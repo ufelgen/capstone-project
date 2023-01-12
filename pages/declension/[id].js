@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 import DeclensionPage from "../../components/DeclensionPage/DeclensionPage";
 import DeclensionForm from "../../components/DeclensionForm/DeclensionForm";
 import Footer from "../../components/Footer/Footer";
-import useLocalStorageState from "use-local-storage-state";
+import fetchData from "../../helpers/fetchData";
 
 export default function Declension({
+  allWords,
+  onHandleAllWords,
   editing,
   editId,
   onEdit,
@@ -14,7 +16,8 @@ export default function Declension({
   const router = useRouter();
   const { id } = router.query;
 
-  const [allWords, setAllWords] = useLocalStorageState("allWords");
+  // words from local storage - replace by handing down allWords from database
+  //const [allWords, setAllWords] = useLocalStorageState("allWords");
 
   if (!allWords) {
     return null;
@@ -31,19 +34,40 @@ export default function Declension({
     );
   }
 
-  function handleAddDeclensionForm(declensionId, declension) {
-    setAllWords(
-      allWords.map((word) =>
-        word.id === declensionId
-          ? { ...word, query1: { ...word.query1, ...declension } }
-          : word
-      )
-    );
+  // add declension form - replace by PUT
+  // function handleAddDeclensionForm(declensionId, declension) {
+  //   setAllWords(
+  //     allWords.map((word) =>
+  //       word.id === declensionId
+  //         ? { ...word, query1: { ...word.query1, ...declension } }
+  //         : word
+  //     )
+  //   );
+  // }
+
+  async function handleAddDeclensionForm(declensionId, declension) {
+    const currentWord = allWords.find((word) => word.id === declensionId);
+    const updatedWord = {
+      ...currentWord,
+      query1: { ...currentWord.query1, ...declension },
+    };
+    await fetch("/api/words/" + declensionId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   return (
     <>
-      {currentWord.query1.declension ? (
+      {currentWord.query1.declension.singular.nominative ? (
         <DeclensionPage
           currentWord={currentWord}
           editing={editing}
@@ -58,7 +82,10 @@ export default function Declension({
           onAddDeclensionForm={handleAddDeclensionForm}
         />
       )}
-      <Footer path={currentWord.category} />
+      <Footer
+        path={currentWord.category}
+        onReturnFromEditMode={onReturnFromEditMode}
+      />
     </>
   );
 }
