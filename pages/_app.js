@@ -6,6 +6,7 @@ import fetchData from "../helpers/fetchData";
 function MyApp({ Component, pageProps }) {
   const [allWords, setAllWords] = useState();
 
+  //huhu testi
   function handleAllWords(words) {
     setAllWords(words);
   }
