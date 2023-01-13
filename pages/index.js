@@ -20,21 +20,12 @@ export default function Home({
   onEdit,
   onReturnFromEditMode,
 }) {
-  // words are saved in local storage (before database)
-  // const [allWords, setAllWords] = useLocalStorageState("allWords", {
-  //   defaultValue: words,
-  // });
-
   if (!allWords) {
     return null;
   }
 
   const wordsInCategories = rearrangeData(allWords);
 
-  // save new word - will be POST
-  // async function pushNewWord(newWord) {
-  //   setAllWords([...allWords, { id: nanoid(), ...newWord }]);
-  // }
   async function pushNewWord(newWord) {
     await fetch("/api/words", {
       method: "POST",
@@ -50,25 +41,35 @@ export default function Home({
     performFetch();
   }
 
-  // delete category - will be DELETE but not by ID
-  function handleDeleteCategory(event, category) {
+  async function handleDeleteCategory(event, category) {
     event.preventDefault();
     event.stopPropagation();
     const confirmation = confirm(
       "do you wish to delete all words saved in this category?"
     );
     if (confirmation) {
-      setAllWords(allWords.filter((word) => word.category !== category));
+      await fetch("/api/words", {
+        method: "DELETE",
+        body: category,
+      });
+      async function performFetch() {
+        const allWordsFromDatabase = await fetchData();
+        onHandleAllWords(allWordsFromDatabase);
+      }
+      performFetch();
     }
   }
 
-  // edit category name - will be PUT but not by ID
-  function handleEditedCategory(editId, updatedCategory) {
-    setAllWords(
-      allWords.map((word) =>
-        word.category === editId ? { ...word, category: updatedCategory } : word
-      )
-    );
+  async function handleEditedCategory(editId, updatedCategory) {
+    await fetch("/api/words", {
+      method: "PUT",
+      body: [editId, updatedCategory],
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   return (
@@ -78,12 +79,14 @@ export default function Home({
         <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
         {wordsInCategories.map((item) =>
           editing && editId === item.categoryName ? (
-            <EditCategory
-              item={item}
-              onReturnFromEditMode={onReturnFromEditMode}
-              onSaveEdited={handleEditedCategory}
-              editId={editId}
-            />
+            <Fragment key={item.id}>
+              <EditCategory
+                item={item}
+                onReturnFromEditMode={onReturnFromEditMode}
+                onSaveEdited={handleEditedCategory}
+                editId={editId}
+              />
+            </Fragment>
           ) : (
             <Fragment key={item.id}>
               <StyledLink

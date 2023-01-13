@@ -16,9 +16,6 @@ export default function Declension({
   const router = useRouter();
   const { id } = router.query;
 
-  // words from local storage - replace by handing down allWords from database
-  //const [allWords, setAllWords] = useLocalStorageState("allWords");
-
   if (!allWords) {
     return null;
   }
@@ -33,17 +30,6 @@ export default function Declension({
       </>
     );
   }
-
-  // add declension form - replace by PUT
-  // function handleAddDeclensionForm(declensionId, declension) {
-  //   setAllWords(
-  //     allWords.map((word) =>
-  //       word.id === declensionId
-  //         ? { ...word, query1: { ...word.query1, ...declension } }
-  //         : word
-  //     )
-  //   );
-  // }
 
   async function handleAddDeclensionForm(declensionId, declension) {
     const currentWord = allWords.find((word) => word.id === declensionId);

@@ -52,6 +52,9 @@ export default function AddTranslationForm({
       ></InputField>
       <label>
         <Dropdown name="gender2" id="gender2" required>
+          <option hidden={true} value="">
+            gender
+          </option>
           <option value="" name="none">
             none
           </option>

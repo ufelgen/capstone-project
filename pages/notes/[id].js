@@ -4,9 +4,11 @@ import NotesForm from "../../components/NotesForm/NotesForm";
 import NotesPage from "../../components/NotesPage/NotesPage";
 import Footer from "../../components/Footer/Footer";
 import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
-import useLocalStorageState from "use-local-storage-state";
+import fetchData from "../../helpers/fetchData";
 
 export default function Notes({
+  allWords,
+  onHandleAllWords,
   onEdit,
   editId,
   editing,
@@ -14,9 +16,6 @@ export default function Notes({
 }) {
   const router = useRouter();
   const { id } = router.query;
-
-  //get words from local storage - will be replaced by handing down from _app.js from database
-  const [allWords, setAllWords] = useLocalStorageState("allWords");
 
   if (!allWords) {
     return null;
@@ -33,13 +32,21 @@ export default function Notes({
     );
   }
 
-  // save notes - will be PUT
-  function handleSaveNotes(notesId, wordNotes) {
-    setAllWords(
-      allWords.map((word) =>
-        word.id === notesId ? { ...word, notes: wordNotes } : word
-      )
-    );
+  async function handleSaveNotes(notesId, wordNotes) {
+    const currentWord = allWords.find((word) => word.id === notesId);
+    const updatedWord = { ...currentWord, notes: wordNotes };
+    await fetch("/api/words/" + notesId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      onHandleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   return (
