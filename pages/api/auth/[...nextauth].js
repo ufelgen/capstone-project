@@ -37,5 +37,6 @@ if (process.env.VERCEL_ENV === "preview") {
 
 export const authOptions = {
   providers,
+  secret: process.env.NEXT_PUBLIC_SECRET,
 };
 export default NextAuth(authOptions);
