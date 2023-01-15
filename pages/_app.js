@@ -2,8 +2,9 @@ import GlobalStyles from "../components/GlobalStyles";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import fetchData from "../helpers/fetchData";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [allWords, setAllWords] = useState();
 
   function handleAllWords(words) {
@@ -65,23 +66,25 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>flashcards extreme</title>
       </Head>
-      <GlobalStyles />
-      <Component
-        {...pageProps}
-        allWords={allWords}
-        onHandleAllWords={handleAllWords}
-        popup={popup}
-        editing={editing}
-        editId={editId}
-        onPopupClick={handlePopupClick}
-        onClosePopup={handleClosePopup}
-        onEdit={handleEdit}
-        onReturnFromEditMode={handleReturnFromEditMode}
-        tense={tense}
-        onChangeTense={changeTense}
-        onAddTranslation={handleAddTranslation}
-        addTranslation={addTranslation}
-      />
+      <SessionProvider session={session}>
+        <GlobalStyles />
+        <Component
+          {...pageProps}
+          allWords={allWords}
+          onHandleAllWords={handleAllWords}
+          popup={popup}
+          editing={editing}
+          editId={editId}
+          onPopupClick={handlePopupClick}
+          onClosePopup={handleClosePopup}
+          onEdit={handleEdit}
+          onReturnFromEditMode={handleReturnFromEditMode}
+          tense={tense}
+          onChangeTense={changeTense}
+          onAddTranslation={handleAddTranslation}
+          addTranslation={addTranslation}
+        />
+      </SessionProvider>
     </>
   );
 }

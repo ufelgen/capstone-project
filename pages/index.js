@@ -8,6 +8,8 @@ import EditCategory from "../components/EditCategory/EditCategory";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 import fetchData from "../helpers/fetchData";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { ActionButton, BiggerActionButton } from "../components/StyledForm";
 
 export default function Home({
   allWords,
@@ -23,6 +25,9 @@ export default function Home({
   if (!allWords) {
     return null;
   }
+
+  const { data: session } = useSession();
+  console.log("session: ", session);
 
   const wordsInCategories = rearrangeData(allWords);
 
@@ -75,6 +80,19 @@ export default function Home({
   return (
     <>
       <Header />
+      <LoginSection>
+        {session ? (
+          <>
+            <div>
+              <p>you are signed in as </p>
+              <p>{session?.user?.name}</p>
+            </div>
+            <BiggerActionButton onClick={signOut}>SIGN OUT</BiggerActionButton>
+          </>
+        ) : (
+          <ActionButton onClick={() => signIn()}>SIGN IN</ActionButton>
+        )}
+      </LoginSection>
       <StyledMain>
         <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
         {wordsInCategories.map((item) =>
@@ -141,4 +159,18 @@ const StyledCategory = styled.section`
   height: auto;
   border: 1px solid var(--darkmagenta);
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
+`;
+
+const LoginSection = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    align-items: center;
+  }
 `;
