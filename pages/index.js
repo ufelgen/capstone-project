@@ -27,7 +27,6 @@ export default function Home({
   }
 
   const { data: session } = useSession();
-  console.log("session: ", session);
 
   const wordsInCategories = rearrangeData(allWords);
 
