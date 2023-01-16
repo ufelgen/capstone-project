@@ -8,6 +8,8 @@ import EditCategory from "../components/EditCategory/EditCategory";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 import fetchData from "../helpers/fetchData";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { BiggerActionButton } from "../components/StyledForm";
 
 export default function Home({
   allWords,
@@ -20,6 +22,8 @@ export default function Home({
   onEdit,
   onReturnFromEditMode,
 }) {
+  const { data: session } = useSession();
+
   if (!allWords) {
     return null;
   }
@@ -75,50 +79,68 @@ export default function Home({
   return (
     <>
       <Header />
-      <StyledMain>
-        <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
-        {wordsInCategories.map((item) =>
-          editing && editId === item.categoryName ? (
-            <Fragment key={item.id}>
-              <EditCategory
-                item={item}
-                onReturnFromEditMode={onReturnFromEditMode}
-                onSaveEdited={handleEditedCategory}
-                editId={editId}
-              />
-            </Fragment>
-          ) : (
-            <Fragment key={item.id}>
-              <StyledLink
-                aria-label={`open ${item.categoryName} category`}
-                href={`/${item.categoryName}`}
-              >
-                <StyledCategory>
-                  <h3>{item.categoryName}</h3>
-                  <p>
-                    {item.categoryWords.length}{" "}
-                    {item.number === 1 ? "word" : "words"}
-                  </p>
-                  {item.categoryName === popup ? (
-                    <PopupMenu
-                      onClosePopup={onClosePopup}
-                      id={item.categoryName}
-                      onDelete={handleDeleteCategory}
-                      onEdit={onEdit}
-                      prop={item}
-                    />
-                  ) : (
-                    <PopupMenuButton
-                      id={item.categoryName}
-                      onPopupClick={onPopupClick}
-                    />
-                  )}
-                </StyledCategory>
-              </StyledLink>
-            </Fragment>
-          )
+      <LoginSection>
+        {session ? (
+          <>
+            <div>
+              <p>you are signed in as </p>
+              <p>{session?.user?.name}</p>
+            </div>
+            <BiggerActionButton onClick={signOut}>SIGN OUT</BiggerActionButton>
+          </>
+        ) : (
+          // remove argument "github" if more than one provider
+          <BiggerActionButton onClick={() => signIn("github")}>
+            SIGN IN
+          </BiggerActionButton>
         )}
-      </StyledMain>
+      </LoginSection>
+      {session && (
+        <StyledMain>
+          <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
+          {wordsInCategories.map((item) =>
+            editing && editId === item.categoryName ? (
+              <Fragment key={item.id}>
+                <EditCategory
+                  item={item}
+                  onReturnFromEditMode={onReturnFromEditMode}
+                  onSaveEdited={handleEditedCategory}
+                  editId={editId}
+                />
+              </Fragment>
+            ) : (
+              <Fragment key={item.id}>
+                <StyledLink
+                  aria-label={`open ${item.categoryName} category`}
+                  href={`/${item.categoryName}`}
+                >
+                  <StyledCategory>
+                    <h3>{item.categoryName}</h3>
+                    <p>
+                      {item.categoryWords.length}{" "}
+                      {item.number === 1 ? "word" : "words"}
+                    </p>
+                    {item.categoryName === popup ? (
+                      <PopupMenu
+                        onClosePopup={onClosePopup}
+                        id={item.categoryName}
+                        onDelete={handleDeleteCategory}
+                        onEdit={onEdit}
+                        prop={item}
+                      />
+                    ) : (
+                      <PopupMenuButton
+                        id={item.categoryName}
+                        onPopupClick={onPopupClick}
+                      />
+                    )}
+                  </StyledCategory>
+                </StyledLink>
+              </Fragment>
+            )
+          )}
+        </StyledMain>
+      )}
     </>
   );
 }
@@ -141,4 +163,18 @@ const StyledCategory = styled.section`
   height: auto;
   border: 1px solid var(--darkmagenta);
   box-shadow: 4px 4px 4px 0.7px rgba(130, 8, 130, 0.43);
+`;
+
+const LoginSection = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    align-items: center;
+  }
 `;
