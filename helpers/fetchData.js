@@ -5,8 +5,7 @@ export default async function fetchData() {
       const data = await response.json();
       return data;
     } else {
-      const data = [];
-      return data;
+      return [];
     }
   } catch (error) {
     console.error(error);
