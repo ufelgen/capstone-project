@@ -22,11 +22,11 @@ export default function Home({
   onEdit,
   onReturnFromEditMode,
 }) {
+  const { data: session } = useSession();
+
   if (!allWords) {
     return null;
   }
-
-  const { data: session } = useSession();
 
   const wordsInCategories = rearrangeData(allWords);
 

@@ -62,30 +62,29 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   }
 
   return (
-    <>
+    <SessionProvider session={session}>
       <Head>
         <title>flashcards extreme</title>
       </Head>
-      <SessionProvider session={session}>
-        <GlobalStyles />
-        <Component
-          {...pageProps}
-          allWords={allWords}
-          onHandleAllWords={handleAllWords}
-          popup={popup}
-          editing={editing}
-          editId={editId}
-          onPopupClick={handlePopupClick}
-          onClosePopup={handleClosePopup}
-          onEdit={handleEdit}
-          onReturnFromEditMode={handleReturnFromEditMode}
-          tense={tense}
-          onChangeTense={changeTense}
-          onAddTranslation={handleAddTranslation}
-          addTranslation={addTranslation}
-        />
-      </SessionProvider>
-    </>
+
+      <GlobalStyles />
+      <Component
+        {...pageProps}
+        allWords={allWords}
+        onHandleAllWords={handleAllWords}
+        popup={popup}
+        editing={editing}
+        editId={editId}
+        onPopupClick={handlePopupClick}
+        onClosePopup={handleClosePopup}
+        onEdit={handleEdit}
+        onReturnFromEditMode={handleReturnFromEditMode}
+        tense={tense}
+        onChangeTense={changeTense}
+        onAddTranslation={handleAddTranslation}
+        addTranslation={addTranslation}
+      />
+    </SessionProvider>
   );
 }
 
