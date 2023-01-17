@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import NotesForm from "../../components/NotesForm/NotesForm";
 import NotesPage from "../../components/NotesPage/NotesPage";
 import Footer from "../../components/Footer/Footer";
@@ -49,6 +49,28 @@ export default function Notes({
     performFetch();
   }
 
+  async function handleDeleteNotes(notesId) {
+    const currentWord = allWords.find((word) => word.id === notesId);
+    const updatedWord = { ...currentWord, notes: "" };
+    const confirmation = confirm("do you wish to delete these notes");
+    if (confirmation) {
+      await fetch("/api/words/" + notesId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedWord),
+      });
+      async function performFetch() {
+        const allWordsFromDatabase = await fetchData();
+        onHandleAllWords(allWordsFromDatabase);
+      }
+      performFetch();
+    }
+    Router.push(`/${currentWord.category}`);
+    onReturnFromEditMode();
+  }
+
   return (
     <>
       <SingleWordHeading base={currentWord.base} query1={currentWord.query1} />
@@ -60,6 +82,7 @@ export default function Notes({
           editId={editId}
           onReturnFromEditMode={onReturnFromEditMode}
           onSaveNotes={handleSaveNotes}
+          onDeleteNotes={handleDeleteNotes}
         />
       ) : (
         <NotesForm

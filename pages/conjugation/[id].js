@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import ConjugationPage from "../../components/ConjugationPage/ConjugationPage";
 import ConjugationForm from "../../components/ConjugationForm/ConjugationForm";
 import SingleWordHeading from "../../components/SingleWordHeading/SingleWordHeading";
@@ -54,6 +54,34 @@ export default function Conjugation({
       onHandleAllWords(allWordsFromDatabase);
     }
     performFetch();
+  }
+
+  async function handleDeleteConjugation(conjugationId) {
+    const currentWord = allWords.find((word) => word.id === conjugationId);
+    const updatedWord = {
+      ...currentWord,
+      query1: {
+        ...currentWord.query1,
+        conjugation: {},
+      },
+    };
+    const confirmation = confirm("do you wish to delete this conjugation?");
+    if (confirmation) {
+      await fetch("/api/words/" + conjugationId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedWord),
+      });
+      async function performFetch() {
+        const allWordsFromDatabase = await fetchData();
+        onHandleAllWords(allWordsFromDatabase);
+      }
+      performFetch();
+    }
+    Router.push(`/${currentWord.category}`);
+    onReturnFromEditMode();
   }
 
   function createEditedConjugation(conjugationId, updatedConjugation) {
@@ -128,6 +156,7 @@ export default function Conjugation({
           onEditConjugation={handleEditConjugation}
           tense={tense}
           onChangeTense={onChangeTense}
+          onDeleteConjugation={handleDeleteConjugation}
         />
       ) : (
         <ConjugationForm

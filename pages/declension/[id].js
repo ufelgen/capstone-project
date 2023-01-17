@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import DeclensionPage from "../../components/DeclensionPage/DeclensionPage";
 import DeclensionForm from "../../components/DeclensionForm/DeclensionForm";
 import Footer from "../../components/Footer/Footer";
@@ -51,6 +51,31 @@ export default function Declension({
     performFetch();
   }
 
+  async function handleDeleteDeclension(declensionId) {
+    const currentWord = allWords.find((word) => word.id === declensionId);
+    const updatedWord = {
+      ...currentWord,
+      query1: { ...currentWord.query1, declension: {} },
+    };
+    const confirmation = confirm("do you wish to delete this declension?");
+    if (confirmation) {
+      await fetch("/api/words/" + declensionId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedWord),
+      });
+      async function performFetch() {
+        const allWordsFromDatabase = await fetchData();
+        onHandleAllWords(allWordsFromDatabase);
+      }
+      performFetch();
+    }
+    Router.push(`/${currentWord.category}`);
+    onReturnFromEditMode();
+  }
+
   return (
     <>
       {currentWord.query1.declension.singular.nominative ? (
@@ -61,6 +86,7 @@ export default function Declension({
           onEdit={onEdit}
           onReturnFromEditMode={onReturnFromEditMode}
           onAddDeclensionForm={handleAddDeclensionForm}
+          onDeleteDeclension={handleDeleteDeclension}
         />
       ) : (
         <DeclensionForm

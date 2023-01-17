@@ -10,6 +10,7 @@ export default function DeclensionPage({
   onEdit,
   onReturnFromEditMode,
   onAddDeclensionForm,
+  onDeleteDeclension,
 }) {
   const { base, query1 } = currentWord;
 
@@ -54,6 +55,12 @@ export default function DeclensionPage({
               <p>{query1.declension?.plural.instrumental}</p>
             </StyledDeclensionWrapper>
             <div>
+              <ActionButton
+                aria-label="delete declension"
+                onClick={() => onDeleteDeclension(currentWord.id)}
+              >
+                delete
+              </ActionButton>
               <ActionButton
                 aria-label="edit declension"
                 onClick={(event) => onEdit(event, currentWord.id)}

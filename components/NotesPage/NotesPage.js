@@ -9,6 +9,7 @@ export default function NotesPage({
   editing,
   onSaveNotes,
   onReturnFromEditMode,
+  onDeleteNotes,
 }) {
   return (
     <>
@@ -26,6 +27,13 @@ export default function NotesPage({
         <StyledNotes>
           <p>{currentWord.notes}</p>
           <div>
+            <ActionButton
+              type="button"
+              aria-label="delete notes"
+              onClick={() => onDeleteNotes(currentWord.id)}
+            >
+              delete
+            </ActionButton>
             <ActionButton
               type="button"
               aria-label="edit notes"
@@ -55,8 +63,8 @@ const StyledNotes = styled.section`
 
   div {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    justify-content: flex-end;
   }
 
   p {
