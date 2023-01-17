@@ -118,7 +118,7 @@ export default function Home({
                     <h3>{item.categoryName}</h3>
                     <p>
                       {item.categoryWords.length}{" "}
-                      {item.number === 1 ? "word" : "words"}
+                      {item.categoryWords.length === 1 ? "word" : "words"}
                     </p>
                     {item.categoryName === popup ? (
                       <PopupMenu

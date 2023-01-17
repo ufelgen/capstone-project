@@ -1,11 +1,18 @@
 import dbConnect from "../../../db/dbConnect";
 import Word from "../../../db/models/Word";
+import { getSession } from "next-auth/react";
 
 export default async function handler(req, res) {
   await dbConnect();
 
+  const session = await getSession({ req });
+  const email = session?.user.email;
+  if (!email) {
+    res.status(401).json({ message: "not authorized. please log in." });
+  }
+
   if (req.method === "GET") {
-    const words = await Word.find();
+    const words = await Word.find({ user: email });
 
     const allWords = words.map((word) => {
       return {
@@ -267,7 +274,7 @@ export default async function handler(req, res) {
 
     res.status(200).json(allWords);
   } else if (req.method === "POST") {
-    const data = req.body;
+    const data = { ...req.body, user: email };
 
     try {
       const newWord = await Word.create(data);
