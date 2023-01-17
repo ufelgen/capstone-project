@@ -137,13 +137,16 @@ export default function ConjugationPage({
                 </>
               ) : (
                 <div>
-                  <ActionButton
-                    type="button"
-                    aria-label="delete conjugation"
-                    onClick={() => onDeleteConjugation(currentWord.id)}
-                  >
-                    delete
-                  </ActionButton>
+                  {tense === "present" && (
+                    <ActionButton
+                      type="button"
+                      aria-label="delete conjugation"
+                      onClick={() => onDeleteConjugation(currentWord.id)}
+                    >
+                      delete
+                    </ActionButton>
+                  )}
+
                   <ActionButton
                     type="button"
                     aria-label="edit conjugation"
