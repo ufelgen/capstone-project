@@ -10,6 +10,7 @@ export default function ConjugationPage({
   onEditConjugation,
   tense,
   onChangeTense,
+  onDeleteConjugation,
 }) {
   const present = currentWord.query1.conjugation.present;
   const past = currentWord.query1.conjugation.past;
@@ -135,13 +136,25 @@ export default function ConjugationPage({
                   </ActionButton>
                 </>
               ) : (
-                <ActionButton
-                  type="button"
-                  aria-label="edit conjugation"
-                  onClick={(event) => onEdit(event, currentWord.id)}
-                >
-                  edit
-                </ActionButton>
+                <div>
+                  {tense === "present" && (
+                    <ActionButton
+                      type="button"
+                      aria-label="delete conjugation"
+                      onClick={() => onDeleteConjugation(currentWord.id)}
+                    >
+                      delete
+                    </ActionButton>
+                  )}
+
+                  <ActionButton
+                    type="button"
+                    aria-label="edit conjugation"
+                    onClick={(event) => onEdit(event, currentWord.id)}
+                  >
+                    edit
+                  </ActionButton>
+                </div>
               )}
             </StyledButtonContainer>
           </form>
