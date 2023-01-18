@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Footer from "../components/Footer/Footer";
 import VocabCard from "../components/VocabCard/VocabCard";
 import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
+import NothingHere from "../components/NothingHere/NothingHere";
 import { rearrangeData } from "../helpers/rearrangeData";
 import Link from "next/link";
 import fetchData from "../helpers/fetchData";
@@ -87,12 +88,7 @@ export default function Category({
   );
 
   if (!currentCategory) {
-    return (
-      <>
-        <h2>there are currently no words saved in this category!</h2>
-        <Link href={"/"}>back to main page</Link>
-      </>
-    );
+    return <NothingHere />;
   }
 
   const { categoryName, categoryWords } = currentCategory;

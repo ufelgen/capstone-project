@@ -1,13 +1,15 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { StyledHeading } from "../[category]";
+import { StyledHeading } from "../../pages/[category]";
 import Lottie from "lottie-react";
 import astronautMusic from "../../public/Lottie/astronautMusic.json";
 
-export default function NotesHome() {
+export default function NothingHere() {
   return (
     <>
-      <StyledHeading>there's nothing here</StyledHeading>
+      <StyledHeading>
+        there are currently no words saved in this category!
+      </StyledHeading>
       <Main>
         <Lottie animationData={astronautMusic} loop={true} />
         <StyledLink href={"/"}>
