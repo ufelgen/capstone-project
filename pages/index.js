@@ -10,6 +10,8 @@ import styled from "styled-components";
 import fetchData from "../helpers/fetchData";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { BiggerActionButton } from "../components/StyledForm";
+import Lottie from "lottie-react";
+import greeting from "../public/Lottie/greeting.json";
 
 export default function Home({
   allWords,
@@ -90,9 +92,12 @@ export default function Home({
           </>
         ) : (
           // remove argument "github" if more than one provider
-          <BiggerActionButton onClick={() => signIn("github")}>
-            SIGN IN
-          </BiggerActionButton>
+          <div>
+            <Lottie animationData={greeting} loop={true} />
+            <BiggerActionButton onClick={() => signIn("github")}>
+              SIGN IN
+            </BiggerActionButton>
+          </div>
         )}
       </LoginSection>
       {session && (

@@ -1,22 +1,5 @@
-import Link from "next/link";
-import styled from "styled-components";
-import { StyledHeading } from "../[category]";
+import NothingHere from "../../components/NothingHere/NothingHere";
 
 export default function ConjugationHome() {
-  return (
-    <>
-      <StyledHeading>there's nothing here</StyledHeading>
-      <Main>
-        <Link href={"/"}>
-          <p>back to main page</p>
-        </Link>
-      </Main>
-    </>
-  );
+  return <NothingHere />;
 }
-
-const Main = styled.section`
-  display: flex;
-  justify-content: center;
-  align-self: center;
-`;
