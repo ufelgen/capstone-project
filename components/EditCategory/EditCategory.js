@@ -14,7 +14,7 @@ export default function EditCategory({
 }) {
   function handleEditCategoryName(event) {
     event.preventDefault();
-    const newCategoryName = event.target.elements.updatedCategory.value;
+    const newCategoryName = event.target.elements.updatedCategory.value.trim();
     onSaveEdited(editId, newCategoryName);
     onReturnFromEditMode();
   }

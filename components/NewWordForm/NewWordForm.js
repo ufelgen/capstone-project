@@ -12,7 +12,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
 
     const language = fields.queryLanguage.value.split("-");
     const newWord = {
-      category: fields.category.value,
+      category: fields.category.value.trim(),
       base: {
         language: "english",
         flag: "🇬🇧",
