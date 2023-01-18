@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const session = await getSession({ req });
   const email = session?.user.email;
   if (!email) {
-    res.status(401).json({ message: "not authorized. please log in." });
+    return res.status(401).json({ message: "not authorized. please log in." });
   }
 
   if (req.method === "GET") {
