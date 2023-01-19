@@ -91,10 +91,9 @@ export default function Home({
             <BiggerActionButton onClick={signOut}>SIGN OUT</BiggerActionButton>
           </>
         ) : (
-          // remove argument "github" if more than one provider
           <div>
             <Lottie animationData={greeting} loop={true} />
-            <BiggerActionButton onClick={() => signIn("github")}>
+            <BiggerActionButton onClick={() => signIn()}>
               SIGN IN
             </BiggerActionButton>
           </div>

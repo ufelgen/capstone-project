@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Hello and welcome to **flashcards extreme**
 
-## Getting Started
+---
 
-First, run the development server:
+You are learning a language but don't want to carry books around? You are already using a flashcards app but are struggling with grammar? Look no further, flashcards extreme is here to help you learn more efficiently!
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+**With this app you can**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- create basic vocabulary cards and
+- extend this information with
+  - noun and adjective declensions
+  - verb conjugations
+  - notes for each word
+  - and as a bonus: a second translation in another language!
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Always accessible on your phone in your pocket!
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+![flashcards-extreme](/public/flashcards-extreme.PNG)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### about me
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+My name is Ulli and I'm a virologist who's always seeking to learn new things. I attended a three-month web development bootcamp at [neue fische](https://www.neuefische.de/) to broaden my horizon and nourish my passion for logical thinking and creativity.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### about flashcards extreme
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+I created flashcards extreme as my capstone project at _neue fische_ to help me learn languages more efficiently. Currently I am learning Slovenian, therefore the conjugation function and declension info is targeted at this language. But I'm sure it will be useful for other languages as well.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### technical details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+| techstack         |          |         |         |
+| ----------------- | -------- | ------- | ------- |
+| styled components | react    | next.js | node.js |
+| mongoDB atlas     | mongoose | jest    |
+
+| how to use                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------- |
+| You can sign into the app using your github account. That way, only you can access and edit your vocab cards. |
+| The app is optimized for mobile usage, so please switch your browser to responsive mode (_e.g._ iPhone SE).   |
+
+## Project Setup
+
+1. Clone this repository
+2. Use `.env.example` to create your own `.env.local` inside the root folder
+3. Inside root folder install all dependencies via `npm install`
+4. Run app in development mode via `npm run dev`
+5. Run tests via `npm run test`
