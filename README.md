@@ -2,7 +2,7 @@
 
 ---
 
-You are learning a language but don't want to carry books around? You are using a flashcards app but are struggling with grammar? Look no further, flashcards extreme is here to help you learn more efficiently!
+You are learning a language but don't want to carry books around? You are already using a flashcards app but are struggling with grammar? Look no further, flashcards extreme is here to help you learn more efficiently!
 
 **With this app you can**
 
@@ -42,11 +42,10 @@ I created flashcards extreme as my capstone project at _neue fische_ to help me 
 
 #### how to use
 
-|     |
-| --- |
-
-| You can sign into the app using your github account. That way, only you can access and edit your vocab cards.
-This app is optimized for mobile usage, so please switch your browser to responsive mode (_e.g._ iPhone SE).|
+|                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------- |
+| You can sign into the app using your github account. That way, only you can access and edit your vocab cards. |
+| The app is optimized for mobile usage, so please switch your browser to responsive mode (_e.g._ iPhone SE).   |
 
 ## Project Setup
 
