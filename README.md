@@ -33,16 +33,12 @@ I created flashcards extreme as my capstone project at _neue fische_ to help me 
 
 ---
 
-#### techstack
-
-|                   |          |         |         |
+| #### techstack    |          |         |         |
 | ----------------- | -------- | ------- | ------- |
 | styled components | react    | next.js | node.js |
 | mongoDB atlas     | mongoose | jest    |
 
-#### how to use
-
-|                                                                                                               |
+| #### how to use                                                                                               |
 | ------------------------------------------------------------------------------------------------------------- |
 | You can sign into the app using your github account. That way, only you can access and edit your vocab cards. |
 | The app is optimized for mobile usage, so please switch your browser to responsive mode (_e.g._ iPhone SE).   |
