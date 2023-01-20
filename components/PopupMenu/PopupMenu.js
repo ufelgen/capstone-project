@@ -113,6 +113,7 @@ const StyledMenuButton = styled.button`
   background-color: transparent;
   color: var(--lightgrey);
   width: 100%;
+  cursor: pointer;
 `;
 
 const StyledDivider = styled.hr`

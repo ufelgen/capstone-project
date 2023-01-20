@@ -28,12 +28,14 @@ export default function Footer({ path, onReturnFromEditMode }) {
         <HiHome size="7.7vh" color="darkmagenta" />
       </button>{" "}
       {pathname === "/declension/[id]" && (
-        <HiOutlineInformationCircle
-          size="7.7vh"
-          color="darkmagenta"
-          aria-label="show more info"
-          onClick={() => setShowInfo(!showInfo)}
-        />
+        <button>
+          <HiOutlineInformationCircle
+            size="7.7vh"
+            color="darkmagenta"
+            aria-label="show more info"
+            onClick={() => setShowInfo(!showInfo)}
+          />
+        </button>
       )}
       {(pathname === "/declension/[id]" ||
         pathname === "/notes/[id]" ||
@@ -62,6 +64,7 @@ const StyledFooter = styled.footer`
   button {
     background-color: transparent;
     border: none;
+    cursor: pointer;
   }
   ul {
     list-style: none;
