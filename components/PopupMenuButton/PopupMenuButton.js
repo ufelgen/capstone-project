@@ -20,4 +20,5 @@ const StyledPopupMenuButton = styled.button`
   bottom: 5%;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;

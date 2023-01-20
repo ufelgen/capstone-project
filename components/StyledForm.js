@@ -23,6 +23,7 @@ export const ActionButton = styled.button`
   width: 15vw;
   background-color: var(--darkmagenta);
   color: var(--white);
+  cursor: pointer;
 `;
 
 export const BiggerActionButton = styled(ActionButton)`
