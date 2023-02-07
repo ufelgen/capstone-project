@@ -112,29 +112,6 @@ export default function NewWordForm({
         </DropdownContent>
       </DropdownWrapper>
 
-      {/* <LabelQuery htmlFor="queryLanguage1">
-        <Dropdown
-          name="queryLanguage"
-          id="queryLanguage"
-          data-testid="queryLanguage"
-          required
-        >
-          <option hidden={true} value="">
-            language
-          </option>
-          {languages.map((language) => {
-            return (
-              <option
-                key={language.name}
-                value={language.value}
-                name={language.name}
-              >
-                {language.flag}
-              </option>
-            );
-          })}
-        </Dropdown>
-      </LabelQuery> */}
       <InputQuery
         id="queryLanguage1"
         name="queryLanguage1"

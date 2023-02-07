@@ -83,21 +83,6 @@ export default function AddTranslationForm({
         </DropdownContent>
       </DropdownWrapper>
 
-      {/*  <label htmlFor="queryLanguage2Translation">
-        <Dropdown name="queryLanguage2" id="queryLanguage2" required>
-          {languages.map((language) => {
-            return (
-              <option
-                key={language.name}
-                value={language.value}
-                name={language.name}
-              >
-                {language.flag}
-              </option>
-            );
-          })}
-        </Dropdown>
-      </label> */}
       <InputField
         id="queryLanguage2Translation"
         name="queryLanguage2Translation"
