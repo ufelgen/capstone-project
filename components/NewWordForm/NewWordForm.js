@@ -16,7 +16,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       category: fields.category.value.trim(),
       base: {
         language: "english",
-        flag: "🇬🇧",
+        flag: "gb",
         translation: fields.english.value,
       },
       query1: {
@@ -65,7 +65,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
                 value={language.value}
                 name={language.name}
               >
-                {language.flag}
+                {language.flag} {language.name}
               </option>
             );
           })}

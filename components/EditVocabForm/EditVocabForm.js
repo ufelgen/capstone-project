@@ -16,9 +16,6 @@ export default function EditVocabForm({
   onSaveEdited,
   onReturnFromEditMode,
 }) {
-  // words from local storage - replace by handing down words from database
-  //const [allWords] = useLocalStorageState("allWords");
-
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
@@ -69,7 +66,7 @@ export default function EditVocabForm({
         category: newCategory,
         base: {
           language: "english",
-          flag: "🇬🇧",
+          flag: "gb",
           translation: newBase,
         },
         query1: {
@@ -116,7 +113,7 @@ export default function EditVocabForm({
                   value={language.value}
                   name={language.name}
                 >
-                  {language.flag}
+                  {language.flag} {language.name}
                 </option>
               );
             })}
