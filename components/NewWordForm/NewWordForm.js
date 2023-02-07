@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { StyledForm, ActionButton, Dropdown, InputField } from "../StyledForm";
 import { languages } from "../../lib/languages";
+import Image from "next/image";
 
 export default function NewWordForm({ onCreateNew, allWords }) {
   const allCategories = allWords.map((word) => word.category);
@@ -34,7 +35,10 @@ export default function NewWordForm({ onCreateNew, allWords }) {
 
   return (
     <StyledNewWordForm onSubmit={handleSubmit}>
-      <LabelEng htmlFor="english">🇬🇧 english</LabelEng>
+      <LabelEng htmlFor="english">
+        <Image src={"/flags/gb.svg"} width={16} height={12} alt={"GB flag"} />{" "}
+        english
+      </LabelEng>
       <InputEng
         id="english"
         name="english"
