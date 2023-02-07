@@ -23,6 +23,10 @@ export default function Home({
   onClosePopup,
   onEdit,
   onReturnFromEditMode,
+  isDropdown,
+  onToggleDropdown,
+  selectedFlag,
+  onSelectFlag,
 }) {
   const { data: session } = useSession();
 
@@ -101,7 +105,14 @@ export default function Home({
       </LoginSection>
       {session && (
         <StyledMain>
-          <NewWordForm onCreateNew={pushNewWord} allWords={allWords} />
+          <NewWordForm
+            onCreateNew={pushNewWord}
+            allWords={allWords}
+            isDropdown={isDropdown}
+            onToggleDropdown={onToggleDropdown}
+            selectedFlag={selectedFlag}
+            onSelectFlag={onSelectFlag}
+          />
           {wordsInCategories.map((item) =>
             editing && editId === item.categoryName ? (
               <Fragment key={item.id}>

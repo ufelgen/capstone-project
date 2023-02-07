@@ -2,22 +2,18 @@ import styled from "styled-components";
 import { StyledForm, ActionButton, Dropdown, InputField } from "../StyledForm";
 import { languages } from "../../lib/languages";
 import Image from "next/image";
-import { useState } from "react";
 import { Fragment } from "react";
-import { set } from "mongoose";
 
-export default function NewWordForm({ onCreateNew, allWords }) {
+export default function NewWordForm({
+  onCreateNew,
+  allWords,
+  isDropdown,
+  onToggleDropdown,
+  selectedFlag,
+  onSelectFlag,
+}) {
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
-
-  const [isDropdown, setIsDropdown] = useState(false);
-  const [selectedFlag, setSelectedFlag] = useState("");
-  console.log(selectedFlag);
-
-  function selectFlag(value) {
-    setIsDropdown(false);
-    setSelectedFlag(value);
-  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -67,7 +63,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       ></InputEng>
 
       <DropdownWrapper>
-        <Language onClick={() => setIsDropdown(!isDropdown)}>
+        <Language onClick={onToggleDropdown}>
           {selectedFlag === "" ? (
             `language` + "\u25BC"
           ) : (
@@ -89,7 +85,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
                   name="queryLanguage"
                   value={language.value}
                   data-testid="queryLanguage"
-                  onChange={() => selectFlag(language.value)}
+                  onChange={() => onSelectFlag(language.value)}
                   required
                 />
                 <Select htmlFor={language.name}>

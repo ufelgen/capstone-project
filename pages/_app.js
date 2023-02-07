@@ -24,6 +24,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [editId, setEditId] = useState();
   const [tense, setTense] = useState("present");
   const [addTranslation, setAddTranslation] = useState("");
+  const [isDropdown, setIsDropdown] = useState(false);
+  const [selectedFlag, setSelectedFlag] = useState("");
 
   function handleAddTranslation(event, id) {
     event.preventDefault();
@@ -61,6 +63,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setAddTranslation(false);
   }
 
+  function selectFlag(value) {
+    setIsDropdown(false);
+    setSelectedFlag(value);
+  }
+
+  function toggleDropdown() {
+    setIsDropdown(!isDropdown);
+  }
+
   return (
     <SessionProvider session={session}>
       <Head>
@@ -83,6 +94,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         onChangeTense={changeTense}
         onAddTranslation={handleAddTranslation}
         addTranslation={addTranslation}
+        isDropdown={isDropdown}
+        onToggleDropdown={toggleDropdown}
+        selectedFlag={selectedFlag}
+        onSelectFlag={selectFlag}
       />
     </SessionProvider>
   );
