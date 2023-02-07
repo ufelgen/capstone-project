@@ -4,12 +4,20 @@ import { languages } from "../../lib/languages";
 import Image from "next/image";
 import { useState } from "react";
 import { Fragment } from "react";
+import { set } from "mongoose";
 
 export default function NewWordForm({ onCreateNew, allWords }) {
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
   const [isDropdown, setIsDropdown] = useState(false);
+  const [selectedFlag, setSelectedFlag] = useState("");
+  console.log(selectedFlag);
+
+  function selectFlag(value) {
+    setIsDropdown(false);
+    setSelectedFlag(value);
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -35,6 +43,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
 
     event.target.reset();
     fields.english.focus();
+    setSelectedFlag("");
   }
 
   return (
@@ -59,18 +68,28 @@ export default function NewWordForm({ onCreateNew, allWords }) {
 
       <DropdownWrapper>
         <Language onClick={() => setIsDropdown(!isDropdown)}>
-          language &#x25BC;
+          {selectedFlag === "" ? (
+            `language` + "\u25BC"
+          ) : (
+            <Image
+              src={`/flags/${selectedFlag.split("-")[0]}.svg`}
+              width={20}
+              height={15}
+              alt={`${selectedFlag.split("-")[1]} flag`}
+            />
+          )}
         </Language>
         <DropdownContent className={isDropdown && "show"}>
           {languages.map((language) => {
             return (
               <Fragment key={language.name}>
-                <input
+                <InvisibleRadioButton
                   type="radio"
                   id={language.name}
                   name="queryLanguage"
                   value={language.value}
                   data-testid="queryLanguage"
+                  onChange={() => selectFlag(language.value)}
                   required
                 />
                 <Select htmlFor={language.name}>
@@ -227,6 +246,7 @@ const Language = styled.button`
   margin: 0.25rem;
   border-radius: 5px;
   height: 4vh;
+  width: 77px;
   margin: 0.25rem 0;
   background-color: white;
 `;
