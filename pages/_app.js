@@ -79,10 +79,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setIsDropdownTwo(false);
     if (querylanguage === "one") {
       setSelectedFlag([value, selectedFlag[1]]);
+      console.log("selectedFlag", selectedFlag);
     } else if (querylanguage === "two") {
       setSelectedFlag([selectedFlag[0], value]);
+      console.log("selectedFlag", selectedFlag);
     } else if (!querylanguage) {
       setSelectedFlag(value);
+      console.log("selectedFlag", selectedFlag);
     }
   }
 

@@ -132,6 +132,10 @@ export default function Category({
                 addTranslation={addTranslation}
                 onSaveTranslation={handleSaveTranslation}
                 onPopupClick={onPopupClick}
+                isDropdownTwo={isDropdownTwo}
+                onToggleDropdownTwo={onToggleDropdownTwo}
+                selectedFlag={selectedFlag}
+                onSelectFlag={onSelectFlag}
               />
             </Fragment>
           )

@@ -16,6 +16,10 @@ export default function VocabCard({
   addTranslation,
   onSaveTranslation,
   onPopupClick,
+  isDropdownTwo,
+  onToggleDropdownTwo,
+  selectedFlag,
+  onSelectFlag,
 }) {
   return (
     <StyledCard>
@@ -63,6 +67,10 @@ export default function VocabCard({
           onReturnFromEditMode={onReturnFromEditMode}
           onSaveTranslation={onSaveTranslation}
           id={word.id}
+          isDropdownTwo={isDropdownTwo}
+          onToggleDropdownTwo={onToggleDropdownTwo}
+          selectedFlag={selectedFlag}
+          onSelectFlag={onSelectFlag}
         />
       )}
       {word.query1.declension.singular.nominative && <DeclensionIcon />}

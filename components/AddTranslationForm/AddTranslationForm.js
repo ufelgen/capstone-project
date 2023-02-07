@@ -1,11 +1,27 @@
 import styled from "styled-components";
-import { InputField, Dropdown, BackButton, ActionButton } from "../StyledForm";
+import {
+  InputField,
+  Dropdown,
+  BackButton,
+  ActionButton,
+  DropdownWrapper,
+  DropdownContent,
+  Language,
+  Select,
+  InvisibleRadioButton,
+} from "../StyledForm";
 import { languages } from "../../lib/languages";
+import Image from "next/image";
+import { Fragment } from "react";
 
 export default function AddTranslationForm({
   onReturnFromEditMode,
   onSaveTranslation,
   id,
+  isDropdownTwo,
+  onToggleDropdownTwo,
+  selectedFlag,
+  onSelectFlag,
 }) {
   function handleAddedTranslation(event) {
     event.preventDefault();
@@ -27,7 +43,47 @@ export default function AddTranslationForm({
 
   return (
     <StyledForm onSubmit={handleAddedTranslation}>
-      <label htmlFor="queryLanguage2Translation">
+      <DropdownWrapper>
+        <Language onClick={onToggleDropdownTwo}>
+          {selectedFlag === "" ? (
+            `language` + "\u25BC"
+          ) : (
+            <Image
+              src={`/flags/${selectedFlag.split("-")[0]}.svg`}
+              width={20}
+              height={15}
+              alt={`${selectedFlag.split("-")[1]} flag`}
+            />
+          )}
+        </Language>
+        <DropdownContent className={isDropdownTwo && "show"}>
+          {languages.map((language) => {
+            return (
+              <Fragment key={language.name}>
+                <InvisibleRadioButton
+                  type="radio"
+                  id={`${language.name}2`}
+                  name="queryLanguage2"
+                  value={language.value}
+                  data-testid="queryLanguage2"
+                  onChange={() => onSelectFlag(language.value)}
+                  required
+                />
+                <Select htmlFor={`${language.name}2`}>
+                  <Image
+                    src={`/flags/${language.value.split("-")[0]}.svg`}
+                    width={20}
+                    height={15}
+                    alt={`${language.name} flag`}
+                  />
+                </Select>
+              </Fragment>
+            );
+          })}
+        </DropdownContent>
+      </DropdownWrapper>
+
+      {/*  <label htmlFor="queryLanguage2Translation">
         <Dropdown name="queryLanguage2" id="queryLanguage2" required>
           {languages.map((language) => {
             return (
@@ -41,7 +97,7 @@ export default function AddTranslationForm({
             );
           })}
         </Dropdown>
-      </label>
+      </label> */}
       <InputField
         id="queryLanguage2Translation"
         name="queryLanguage2Translation"

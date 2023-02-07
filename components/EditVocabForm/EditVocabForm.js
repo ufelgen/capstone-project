@@ -123,10 +123,10 @@ export default function EditVocabForm({
         <DropdownWrapper>
           <Language onClick={onToggleDropdown}>
             <Image
-              src={`/flags/${selectedFlag[0].split("-")[0]}.svg`}
+              src={`/flags/${selectedFlag[0]}.svg`}
               width={20}
               height={15}
-              alt={`${selectedFlag[0].split("-")[1]}`}
+              alt={`${selectedFlag[0]} flag`}
             />
           </Language>
           <DropdownContent className={isDropdown && "show"}>
@@ -139,8 +139,10 @@ export default function EditVocabForm({
                     name="queryLanguage"
                     value={language.value}
                     data-testid="queryLanguage"
-                    onChange={() => onSelectFlag(language.value, "one")}
-                    required
+                    onChange={() =>
+                      onSelectFlag(language.value.split("-")[0], "one")
+                    }
+                    checked={language.value.split("-")[0] === selectedFlag[0]}
                   />
                   <Select htmlFor={language.name}>
                     <Image
@@ -156,25 +158,6 @@ export default function EditVocabForm({
           </DropdownContent>
         </DropdownWrapper>
 
-        {/*         <label htmlFor="queryLanguage1">
-          <Dropdown
-            defaultValue={word.query1.flag + "-" + word.query1.language}
-            name="queryLanguage"
-            id="queryLanguage"
-          >
-            {languages.map((language) => {
-              return (
-                <option
-                  key={language.name}
-                  value={language.value}
-                  name={language.name}
-                >
-                  {language.flag} {language.name}
-                </option>
-              );
-            })}
-          </Dropdown>
-        </label> */}
         <InputField
           id="queryLanguage1"
           name="queryLanguage1"
@@ -204,10 +187,10 @@ export default function EditVocabForm({
             <DropdownWrapper>
               <Language onClick={onToggleDropdownTwo}>
                 <Image
-                  src={`/flags/${selectedFlag[1].split("-")[0]}.svg`}
+                  src={`/flags/${selectedFlag[1]}.svg`}
                   width={20}
                   height={15}
-                  alt={`${selectedFlag[1].split("-")[1]}`}
+                  alt={`${selectedFlag[1]} flag`}
                 />
               </Language>
               <DropdownContent className={isDropdownTwo && "show"}>
@@ -220,8 +203,12 @@ export default function EditVocabForm({
                         name="queryLanguage2"
                         value={language.value}
                         data-testid="queryLanguage2"
-                        onChange={() => onSelectFlag(language.value, "two")}
-                        required
+                        onChange={() =>
+                          onSelectFlag(language.value.split("-")[0], "two")
+                        }
+                        checked={
+                          language.value.split("-")[0] === selectedFlag[1]
+                        }
                       />
                       <Select htmlFor={`${language.name}2`}>
                         <Image
