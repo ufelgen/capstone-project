@@ -23,7 +23,7 @@ export default function PopupMenu({
       <StyledMenuButton
         type="button"
         aria-label="edit this flashcard"
-        onClick={(event) => onEdit(event, id)}
+        onClick={(event) => onEdit(event, id, prop)}
       >
         edit
       </StyledMenuButton>

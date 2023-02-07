@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [tense, setTense] = useState("present");
   const [addTranslation, setAddTranslation] = useState("");
   const [isDropdown, setIsDropdown] = useState(false);
+  const [isDropdownTwo, setIsDropdownTwo] = useState(false);
   const [selectedFlag, setSelectedFlag] = useState("");
 
   function handleAddTranslation(event, id) {
@@ -50,26 +51,47 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setPopup(false);
   }
 
-  function handleEdit(event, id) {
+  function handleEdit(event, id, word) {
     event.preventDefault();
     event.stopPropagation();
     setEditing(true);
     setEditId(id);
+    if (word) {
+      if (word.query2.translation) {
+        setSelectedFlag([word.query1.flag, word.query2.flag]);
+      } else {
+        setSelectedFlag([word.query1.flag, ""]);
+      }
+    }
   }
 
   function handleReturnFromEditMode() {
     setEditing(false);
     setPopup(false);
     setAddTranslation(false);
+    setIsDropdown(false);
+    setIsDropdownTwo(false);
+    setSelectedFlag("");
   }
 
-  function selectFlag(value) {
+  function selectFlag(value, querylanguage) {
     setIsDropdown(false);
-    setSelectedFlag(value);
+    setIsDropdownTwo(false);
+    if (querylanguage === "one") {
+      setSelectedFlag([value, selectedFlag[1]]);
+    } else if (querylanguage === "two") {
+      setSelectedFlag([selectedFlag[0], value]);
+    } else if (!querylanguage) {
+      setSelectedFlag(value);
+    }
   }
 
   function toggleDropdown() {
     setIsDropdown(!isDropdown);
+  }
+
+  function toggleDropdownTwo() {
+    setIsDropdownTwo(!isDropdownTwo);
   }
 
   return (
@@ -95,7 +117,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         onAddTranslation={handleAddTranslation}
         addTranslation={addTranslation}
         isDropdown={isDropdown}
+        isDropdownTwo={isDropdownTwo}
         onToggleDropdown={toggleDropdown}
+        onToggleDropdownTwo={toggleDropdownTwo}
         selectedFlag={selectedFlag}
         onSelectFlag={selectFlag}
       />

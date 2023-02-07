@@ -1,5 +1,7 @@
 import { languages } from "../../lib/languages";
 import styled from "styled-components";
+import { Fragment } from "react";
+import Image from "next/image";
 import {
   StyledForm,
   ActionButton,
@@ -7,6 +9,11 @@ import {
   InputField,
   Dropdown,
   Label,
+  DropdownWrapper,
+  DropdownContent,
+  Language,
+  Select,
+  InvisibleRadioButton,
 } from "../StyledForm";
 
 export default function EditVocabForm({
@@ -15,6 +22,12 @@ export default function EditVocabForm({
   editId,
   onSaveEdited,
   onReturnFromEditMode,
+  isDropdown,
+  isDropdownTwo,
+  onToggleDropdown,
+  onToggleDropdownTwo,
+  selectedFlag,
+  onSelectFlag,
 }) {
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
@@ -37,7 +50,7 @@ export default function EditVocabForm({
         category: newCategory,
         base: {
           language: "english",
-          flag: "🇬🇧",
+          flag: "gb",
           translation: newBase,
         },
         query1: {
@@ -91,7 +104,15 @@ export default function EditVocabForm({
   return (
     <>
       <StyledEditForm onSubmit={handleEditVocab}>
-        <Label htmlFor="english">🇬🇧 english</Label>
+        <label htmlFor="english">
+          <Image
+            src={"/flags/gb.svg"}
+            width={16}
+            height={12}
+            alt={"english flag"}
+          />{" "}
+          english
+        </label>
         <InputField
           id="english"
           name="english"
@@ -99,8 +120,43 @@ export default function EditVocabForm({
           maxLength={50}
           defaultValue={word.base.translation}
         ></InputField>
+        <DropdownWrapper>
+          <Language onClick={onToggleDropdown}>
+            <Image
+              src={`/flags/${selectedFlag[0].split("-")[0]}.svg`}
+              width={20}
+              height={15}
+              alt={`${selectedFlag[0].split("-")[1]}`}
+            />
+          </Language>
+          <DropdownContent className={isDropdown && "show"}>
+            {languages.map((language) => {
+              return (
+                <Fragment key={language.name}>
+                  <InvisibleRadioButton
+                    type="radio"
+                    id={language.name}
+                    name="queryLanguage"
+                    value={language.value}
+                    data-testid="queryLanguage"
+                    onChange={() => onSelectFlag(language.value, "one")}
+                    required
+                  />
+                  <Select htmlFor={language.name}>
+                    <Image
+                      src={`/flags/${language.value.split("-")[0]}.svg`}
+                      width={20}
+                      height={15}
+                      alt={`${language.name} flag`}
+                    />
+                  </Select>
+                </Fragment>
+              );
+            })}
+          </DropdownContent>
+        </DropdownWrapper>
 
-        <label htmlFor="queryLanguage1">
+        {/*         <label htmlFor="queryLanguage1">
           <Dropdown
             defaultValue={word.query1.flag + "-" + word.query1.language}
             name="queryLanguage"
@@ -118,7 +174,7 @@ export default function EditVocabForm({
               );
             })}
           </Dropdown>
-        </label>
+        </label> */}
         <InputField
           id="queryLanguage1"
           name="queryLanguage1"
@@ -145,25 +201,41 @@ export default function EditVocabForm({
         </label>
         {word.query2.translation && (
           <>
-            <label htmlFor="queryLanguage2Translation">
-              <Dropdown
-                defaultValue={word.query2.flag + "-" + word.query2.language}
-                name="queryLanguage2"
-                id="queryLanguage2"
-              >
+            <DropdownWrapper>
+              <Language onClick={onToggleDropdownTwo}>
+                <Image
+                  src={`/flags/${selectedFlag[1].split("-")[0]}.svg`}
+                  width={20}
+                  height={15}
+                  alt={`${selectedFlag[1].split("-")[1]}`}
+                />
+              </Language>
+              <DropdownContent className={isDropdownTwo && "show"}>
                 {languages.map((language) => {
                   return (
-                    <option
-                      key={language.name}
-                      value={language.value}
-                      name={language.name}
-                    >
-                      {language.flag}
-                    </option>
+                    <Fragment key={language.name}>
+                      <InvisibleRadioButton
+                        type="radio"
+                        id={`${language.name}2`}
+                        name="queryLanguage2"
+                        value={language.value}
+                        data-testid="queryLanguage2"
+                        onChange={() => onSelectFlag(language.value, "two")}
+                        required
+                      />
+                      <Select htmlFor={`${language.name}2`}>
+                        <Image
+                          src={`/flags/${language.value.split("-")[0]}.svg`}
+                          width={20}
+                          height={15}
+                          alt={`${language.name} flag`}
+                        />
+                      </Select>
+                    </Fragment>
                   );
                 })}
-              </Dropdown>
-            </label>
+              </DropdownContent>
+            </DropdownWrapper>
             <InputField
               id="queryLanguage2Translation"
               name="queryLanguage2Translation"

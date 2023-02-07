@@ -1,5 +1,15 @@
 import styled from "styled-components";
-import { StyledForm, ActionButton, Dropdown, InputField } from "../StyledForm";
+import {
+  StyledForm,
+  ActionButton,
+  Dropdown,
+  InputField,
+  DropdownWrapper,
+  DropdownContent,
+  Language,
+  Select,
+  InvisibleRadioButton,
+} from "../StyledForm";
 import { languages } from "../../lib/languages";
 import Image from "next/image";
 import { Fragment } from "react";
@@ -39,7 +49,7 @@ export default function NewWordForm({
 
     event.target.reset();
     fields.english.focus();
-    setSelectedFlag("");
+    onSelectFlag("");
   }
 
   return (
@@ -229,45 +239,4 @@ const LabelGender = styled.label`
 
 const LabelCat = styled.label`
   grid-area: cat;
-`;
-
-const DropdownWrapper = styled.div`
-  display: inline-block;
-  position: relative;
-`;
-
-const Language = styled.button`
-  padding: 0.25rem;
-  border: 1px solid var(--darkmagenta);
-  margin: 0.25rem;
-  border-radius: 5px;
-  height: 4vh;
-  width: 77px;
-  margin: 0.25rem 0;
-  background-color: white;
-`;
-
-const DropdownContent = styled.div`
-  display: none;
-  position: absolute;
-  width: 100%;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-
-  &.show {
-    display: block;
-    z-index: 1;
-    background-color: white;
-  }
-`;
-
-const Select = styled.label`
-  display: block;
-  padding: 5px;
-  border: none;
-  background-color: white;
-`;
-
-const InvisibleRadioButton = styled.input`
-  display: none;
 `;

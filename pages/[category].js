@@ -20,6 +20,12 @@ export default function Category({
   onAddTranslation,
   addTranslation,
   onReturnFromEditMode,
+  isDropdown,
+  isDropdownTwo,
+  onToggleDropdown,
+  onToggleDropdownTwo,
+  selectedFlag,
+  onSelectFlag,
 }) {
   const router = useRouter();
   const { category } = router.query;
@@ -105,6 +111,12 @@ export default function Category({
                 onReturnFromEditMode={onReturnFromEditMode}
                 onSaveEdited={handleEditedVocab}
                 editId={editId}
+                isDropdown={isDropdown}
+                isDropdownTwo={isDropdownTwo}
+                onToggleDropdown={onToggleDropdown}
+                onToggleDropdownTwo={onToggleDropdownTwo}
+                selectedFlag={selectedFlag}
+                onSelectFlag={onSelectFlag}
               />
             </Fragment>
           ) : (
