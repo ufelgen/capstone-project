@@ -46,7 +46,7 @@ export default function VocabCard({
         {word.query1.translation}
         <Gender>{word.query1.gender}</Gender>
       </p>
-      {word.query2.translation && (
+      {word.query2?.translation && (
         <p>
           <Flag>
             {" "}
@@ -73,8 +73,8 @@ export default function VocabCard({
           onSelectFlag={onSelectFlag}
         />
       )}
-      {word.query1.declension.singular.nominative && <DeclensionIcon />}
-      {word.query1.conjugation.present[0].person && <ConjugationIcon />}
+      {word.query1.declension?.singular.nominative && <DeclensionIcon />}
+      {word.query1.conjugation?.present[0].person && <ConjugationIcon />}
       {word.notes && <NotesIcon />}
       {word.id === popup && (
         <PopupMenu

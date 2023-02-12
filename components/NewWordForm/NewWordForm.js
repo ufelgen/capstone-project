@@ -78,10 +78,10 @@ export default function NewWordForm({
             `language` + "\u25BC"
           ) : (
             <Image
-              src={`/flags/${selectedFlag.split("-")[0]}.svg`}
+              src={`/flags/${selectedFlag?.split("-")[0]}.svg`}
               width={20}
               height={15}
-              alt={`${selectedFlag.split("-")[1]} flag`}
+              alt={`${selectedFlag?.split("-")[1]} flag`}
             />
           )}
         </Language>
@@ -98,7 +98,10 @@ export default function NewWordForm({
                   onChange={() => onSelectFlag(language.value)}
                   required
                 />
-                <Select htmlFor={language.name}>
+                <Select
+                  htmlFor={language.name}
+                  data-testid={`Radio-${language.name}`}
+                >
                   <Image
                     src={`/flags/${language.value.split("-")[0]}.svg`}
                     width={20}
