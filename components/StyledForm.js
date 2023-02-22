@@ -56,3 +56,45 @@ export const Dropdown = styled.select`
 export const Label = styled.label`
   padding: 0.25rem;
 `;
+
+export const DropdownWrapper = styled.div`
+  display: inline-block;
+  position: relative;
+`;
+
+export const Language = styled.button`
+  padding: 0.25rem;
+  border: 1px solid var(--darkmagenta);
+  margin: 0.25rem;
+  border-radius: 5px;
+  height: 4vh;
+  width: 77px;
+  margin: 0.25rem 0;
+  background-color: white;
+`;
+
+export const DropdownContent = styled.div`
+  opacity: 0;
+  position: absolute;
+  width: 77px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 0.1fr 1fr;
+
+  &.show {
+    opacity: 1;
+    z-index: 1;
+    background-color: white;
+  }
+`;
+
+export const Select = styled.label`
+  padding: 5px;
+  border: none;
+  background-color: white;
+`;
+
+export const InvisibleRadioButton = styled.input`
+  opacity: 0;
+`;

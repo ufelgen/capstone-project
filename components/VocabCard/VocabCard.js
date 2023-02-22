@@ -3,6 +3,7 @@ import PopupMenu from "../PopupMenu/PopupMenu";
 import PopupMenuButton from "../PopupMenuButton/PopupMenuButton";
 import AddTranslationForm from "../AddTranslationForm/AddTranslationForm";
 import { DeclensionIcon, ConjugationIcon, NotesIcon } from "../StyledIcons";
+import Image from "next/image";
 
 export default function VocabCard({
   word,
@@ -15,21 +16,47 @@ export default function VocabCard({
   addTranslation,
   onSaveTranslation,
   onPopupClick,
+  isDropdownTwo,
+  onToggleDropdownTwo,
+  selectedFlag,
+  onSelectFlag,
 }) {
   return (
     <StyledCard>
       <p>
-        <Flag>{word.base.flag}</Flag>
+        <Flag>
+          <Image
+            src={`/flags/${word.base.flag}.svg`}
+            width={16}
+            height={12}
+            alt={`${word.base.language} flag`}
+          />
+        </Flag>
         {word.base.translation}
       </p>
       <p>
-        <Flag>{word.query1.flag}</Flag>
+        <Flag>
+          <Image
+            src={`/flags/${word.query1.flag}.svg`}
+            width={16}
+            height={12}
+            alt={`${word.query1.language} flag`}
+          />
+        </Flag>
         {word.query1.translation}
         <Gender>{word.query1.gender}</Gender>
       </p>
-      {word.query2.translation && (
+      {word.query2?.translation && (
         <p>
-          <Flag>{word.query2.flag}</Flag>
+          <Flag>
+            {" "}
+            <Image
+              src={`/flags/${word.query2.flag}.svg`}
+              width={16}
+              height={12}
+              alt={`${word.query2.language} flag`}
+            />
+          </Flag>
           {word.query2.translation}
           <Gender>{word.query2.gender}</Gender>
         </p>
@@ -40,10 +67,14 @@ export default function VocabCard({
           onReturnFromEditMode={onReturnFromEditMode}
           onSaveTranslation={onSaveTranslation}
           id={word.id}
+          isDropdownTwo={isDropdownTwo}
+          onToggleDropdownTwo={onToggleDropdownTwo}
+          selectedFlag={selectedFlag}
+          onSelectFlag={onSelectFlag}
         />
       )}
-      {word.query1.declension.singular.nominative && <DeclensionIcon />}
-      {word.query1.conjugation.present[0].person && <ConjugationIcon />}
+      {word.query1.declension?.singular.nominative && <DeclensionIcon />}
+      {word.query1.conjugation?.present[0].person && <ConjugationIcon />}
       {word.notes && <NotesIcon />}
       {word.id === popup && (
         <PopupMenu

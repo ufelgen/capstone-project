@@ -21,13 +21,19 @@ test("does not submit the form without filling out all input fields", async () =
 test("calls the onCreateNew handler with inputs on submit", async () => {
   const user = userEvent.setup();
   const handleCreateNew = jest.fn();
+  const handleSelectFlag = jest.fn();
   jest.mock("nanoid", () => {
     return { nanoid: () => "1234" };
   });
 
-  render(<NewWordForm onCreateNew={handleCreateNew} allWords={[]} />);
-  const englishInput = screen.getByLabelText("🇬🇧 english");
-  const query1Language = screen.getByTestId("queryLanguage");
+  render(
+    <NewWordForm
+      onCreateNew={handleCreateNew}
+      onSelectFlag={handleSelectFlag}
+      allWords={[]}
+    />
+  );
+  const englishInput = screen.getByLabelText("english");
   const query1Input = screen.getByTestId("queryLanguage1");
   const gender = screen.getByTestId("gender");
   const category = screen.getByTestId("category");
@@ -36,8 +42,9 @@ test("calls the onCreateNew handler with inputs on submit", async () => {
     name: "add new flashcard",
   });
 
+  const RadioSlovenian = screen.getByTestId("Radio-slovenian");
   await user.type(englishInput, "beaver");
-  await user.selectOptions(query1Language, "🇸🇮-slovenian");
+  await user.click(RadioSlovenian);
   await user.type(query1Input, "bober");
   await user.selectOptions(gender, "m");
   await user.type(category, "animals");
@@ -47,12 +54,12 @@ test("calls the onCreateNew handler with inputs on submit", async () => {
     category: "animals",
     base: {
       language: "english",
-      flag: "🇬🇧",
+      flag: "gb",
       translation: "beaver",
     },
     query1: {
       language: "slovenian",
-      flag: "🇸🇮",
+      flag: "si",
       translation: "bober",
       gender: "m",
     },

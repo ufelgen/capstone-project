@@ -6,7 +6,6 @@ import VocabCard from "../components/VocabCard/VocabCard";
 import EditVocabForm from "../components/EditVocabForm/EditVocabForm";
 import NothingHere from "../components/NothingHere/NothingHere";
 import { rearrangeData } from "../helpers/rearrangeData";
-import Link from "next/link";
 import fetchData from "../helpers/fetchData";
 
 export default function Category({
@@ -21,6 +20,12 @@ export default function Category({
   onAddTranslation,
   addTranslation,
   onReturnFromEditMode,
+  isDropdown,
+  isDropdownTwo,
+  onToggleDropdown,
+  onToggleDropdownTwo,
+  selectedFlag,
+  onSelectFlag,
 }) {
   const router = useRouter();
   const { category } = router.query;
@@ -106,6 +111,12 @@ export default function Category({
                 onReturnFromEditMode={onReturnFromEditMode}
                 onSaveEdited={handleEditedVocab}
                 editId={editId}
+                isDropdown={isDropdown}
+                isDropdownTwo={isDropdownTwo}
+                onToggleDropdown={onToggleDropdown}
+                onToggleDropdownTwo={onToggleDropdownTwo}
+                selectedFlag={selectedFlag}
+                onSelectFlag={onSelectFlag}
               />
             </Fragment>
           ) : (
@@ -121,6 +132,10 @@ export default function Category({
                 addTranslation={addTranslation}
                 onSaveTranslation={handleSaveTranslation}
                 onPopupClick={onPopupClick}
+                isDropdownTwo={isDropdownTwo}
+                onToggleDropdownTwo={onToggleDropdownTwo}
+                selectedFlag={selectedFlag}
+                onSelectFlag={onSelectFlag}
               />
             </Fragment>
           )

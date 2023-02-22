@@ -1,8 +1,27 @@
 import styled from "styled-components";
-import { StyledForm, ActionButton, Dropdown, InputField } from "../StyledForm";
+import {
+  StyledForm,
+  ActionButton,
+  Dropdown,
+  InputField,
+  DropdownWrapper,
+  DropdownContent,
+  Language,
+  Select,
+  InvisibleRadioButton,
+} from "../StyledForm";
 import { languages } from "../../lib/languages";
+import Image from "next/image";
+import { Fragment } from "react";
 
-export default function NewWordForm({ onCreateNew, allWords }) {
+export default function NewWordForm({
+  onCreateNew,
+  allWords,
+  isDropdown,
+  onToggleDropdown,
+  selectedFlag,
+  onSelectFlag,
+}) {
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
@@ -15,7 +34,7 @@ export default function NewWordForm({ onCreateNew, allWords }) {
       category: fields.category.value.trim(),
       base: {
         language: "english",
-        flag: "🇬🇧",
+        flag: "gb",
         translation: fields.english.value,
       },
       query1: {
@@ -30,11 +49,20 @@ export default function NewWordForm({ onCreateNew, allWords }) {
 
     event.target.reset();
     fields.english.focus();
+    onSelectFlag("");
   }
 
   return (
     <StyledNewWordForm onSubmit={handleSubmit}>
-      <LabelEng htmlFor="english">🇬🇧 english</LabelEng>
+      <LabelEng htmlFor="english">
+        <Image
+          src={"/flags/gb.svg"}
+          width={16}
+          height={12}
+          alt="english flag"
+        />{" "}
+        english
+      </LabelEng>
       <InputEng
         id="english"
         name="english"
@@ -44,29 +72,50 @@ export default function NewWordForm({ onCreateNew, allWords }) {
         required
       ></InputEng>
 
-      <LabelQuery htmlFor="queryLanguage1">
-        <Dropdown
-          name="queryLanguage"
-          id="queryLanguage"
-          data-testid="queryLanguage"
-          required
-        >
-          <option hidden={true} value="">
-            language
-          </option>
+      <DropdownWrapper>
+        <QueryLanguage onClick={onToggleDropdown}>
+          {selectedFlag === "" ? (
+            `language` + "\u25BC"
+          ) : (
+            <Image
+              src={`/flags/${selectedFlag?.split("-")[0]}.svg`}
+              width={20}
+              height={15}
+              alt={`${selectedFlag?.split("-")[1]} flag`}
+            />
+          )}
+        </QueryLanguage>
+        <DropdownContent className={isDropdown && "show"}>
           {languages.map((language) => {
             return (
-              <option
-                key={language.name}
-                value={language.value}
-                name={language.name}
-              >
-                {language.flag}
-              </option>
+              <Fragment key={language.name}>
+                <InvisibleRadioButton
+                  type="radio"
+                  id={language.name}
+                  name="queryLanguage"
+                  value={language.value}
+                  data-testid="queryLanguage"
+                  onChange={() => onSelectFlag(language.value)}
+                  required
+                />
+
+                <Select
+                  htmlFor={language.name}
+                  data-testid={`Radio-${language.name}`}
+                >
+                  <Image
+                    src={`/flags/${language.value.split("-")[0]}.svg`}
+                    width={20}
+                    height={15}
+                    alt={`${language.name} flag`}
+                  />
+                </Select>
+              </Fragment>
             );
           })}
-        </Dropdown>
-      </LabelQuery>
+        </DropdownContent>
+      </DropdownWrapper>
+
       <InputQuery
         id="queryLanguage1"
         name="queryLanguage1"
@@ -156,7 +205,7 @@ const InputEng = styled(InputField)`
   grid-area: enginput;
 `;
 
-const LabelQuery = styled.label`
+const QueryLanguage = styled(Language)`
   grid-area: query;
 `;
 
