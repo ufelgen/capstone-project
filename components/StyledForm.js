@@ -74,26 +74,27 @@ export const Language = styled.button`
 `;
 
 export const DropdownContent = styled.div`
-  display: none;
+  opacity: 0;
   position: absolute;
-  width: 100%;
+  width: 77px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 0.1fr 1fr;
 
   &.show {
-    display: block;
+    opacity: 1;
     z-index: 1;
     background-color: white;
   }
 `;
 
 export const Select = styled.label`
-  display: block;
   padding: 5px;
   border: none;
   background-color: white;
 `;
 
 export const InvisibleRadioButton = styled.input`
-  display: none;
+  opacity: 0;
 `;

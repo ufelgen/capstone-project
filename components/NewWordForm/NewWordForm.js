@@ -59,7 +59,7 @@ export default function NewWordForm({
           src={"/flags/gb.svg"}
           width={16}
           height={12}
-          alt={"english flag"}
+          alt="english flag"
         />{" "}
         english
       </LabelEng>
@@ -73,7 +73,7 @@ export default function NewWordForm({
       ></InputEng>
 
       <DropdownWrapper>
-        <Language onClick={onToggleDropdown}>
+        <QueryLanguage onClick={onToggleDropdown}>
           {selectedFlag === "" ? (
             `language` + "\u25BC"
           ) : (
@@ -84,7 +84,7 @@ export default function NewWordForm({
               alt={`${selectedFlag?.split("-")[1]} flag`}
             />
           )}
-        </Language>
+        </QueryLanguage>
         <DropdownContent className={isDropdown && "show"}>
           {languages.map((language) => {
             return (
@@ -98,6 +98,7 @@ export default function NewWordForm({
                   onChange={() => onSelectFlag(language.value)}
                   required
                 />
+
                 <Select
                   htmlFor={language.name}
                   data-testid={`Radio-${language.name}`}
@@ -204,7 +205,7 @@ const InputEng = styled(InputField)`
   grid-area: enginput;
 `;
 
-const LabelQuery = styled.label`
+const QueryLanguage = styled(Language)`
   grid-area: query;
 `;
 
