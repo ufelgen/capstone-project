@@ -6,6 +6,7 @@ import {
   HiHome,
   HiOutlineInformationCircle,
   HiOutlineArrowCircleLeft,
+  HiTranslate,
 } from "react-icons/hi";
 import CaseInfo from "../CaseInfo/CaseInfo";
 
@@ -21,12 +22,22 @@ export default function Footer({ path, onReturnFromEditMode }) {
 
   return (
     <StyledFooter>
-      <button
-        aria-label="return to home page"
-        onClick={() => handleReturn("/")}
-      >
-        <HiHome size="7.7vh" color="darkmagenta" />
-      </button>{" "}
+      {pathname !== "/" && (
+        <button
+          aria-label="return to home page"
+          onClick={() => handleReturn("/")}
+        >
+          <HiHome size="7.7vh" color="darkmagenta" />
+        </button>
+      )}
+      {pathname === "/" && (
+        <button
+          aria-label="go to translation page"
+          onClick={() => handleReturn("/dictionary")}
+        >
+          <HiTranslate size="7.7vh" color="darkmagenta" />
+        </button>
+      )}
       {pathname === "/declension/[id]" && (
         <button>
           <HiOutlineInformationCircle

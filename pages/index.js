@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import PopupMenu from "../components/PopupMenu/PopupMenu";
 import EditCategory from "../components/EditCategory/EditCategory";
+import Footer from "../components/Footer/Footer";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 import fetchData from "../helpers/fetchData";
@@ -154,6 +155,7 @@ export default function Home({
               </Fragment>
             )
           )}
+          <Footer onReturnFromEditMode={onReturnFromEditMode} />
         </StyledMain>
       )}
     </>
