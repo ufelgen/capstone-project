@@ -6,36 +6,14 @@ import {
   InputField,
   Label,
 } from "../components/StyledForm";
+import fetchDictionaryData from "../helpers/fetchDictionaryData";
 
 export default function Dictionary({ onReturnFromEditMode }) {
   async function handleSearch(event) {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
-
-    try {
-      const response = await fetch(
-        //`https://api.pons.com/v1/dictionary?q=${searchTerm}&l=ende`,
-        `/dict-api/v1/dictionary`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            /*         "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, X-Secret",
-            "Access-Control-Allow-Credentials": "true",
-            withCredentials: "true",
-            crossorigin: "true", */
-            "X-Secret":
-              "4b154aa9be6e86c71f9ecc559f88cdd261eb992656f09b6f5fc80fc10dd22bc8",
-          },
-        }
-      );
-      const translation = await response.json();
-      console.log(translation);
-    } catch (error) {
-      console.error("du kannst gar nichts", error);
-    }
+    const translation = await fetchDictionaryData(searchTerm);
+    console.log("translation in frontend", translation);
   }
   return (
     <>
