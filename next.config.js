@@ -13,11 +13,6 @@ const nextConfig = {
       // },
     ],
   },
-  server: {
-    proxy: {
-      "/dict-api": "https://api.pons.com",
-    },
-  },
 };
 
 module.exports = {
