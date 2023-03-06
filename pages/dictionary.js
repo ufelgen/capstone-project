@@ -8,7 +8,9 @@ import {
 } from "../components/StyledForm";
 import fetchDictionaryData from "../helpers/fetchDictionaryData";
 import parse from "html-react-parser";
-
+import { Fragment } from "react";
+import { nanoid } from "nanoid";
+import Head from "next/head";
 export default function Dictionary({
   onReturnFromEditMode,
   dictionaryResult,
@@ -20,51 +22,66 @@ export default function Dictionary({
     const translation = await fetchDictionaryData(searchTerm);
     console.log("translation in frontend", translation);
     onUpdateDictionaryResult(translation);
+    event.target.reset();
   }
-
-  //const parse = require("html-react-parser");
 
   return (
     <>
-      <StyledForm onSubmit={() => handleSearch(event)}>
-        <Label htmlFor="searchTerm"></Label>
-        <SearchField name="searchTerm" id="searchTerm" />
-        <ActionButton type="submit" aria-label="submit search">
-          search
-        </ActionButton>
-      </StyledForm>
-      <ResultSection>
-        {dictionaryResult[0] &&
-          dictionaryResult.map((result) =>
-            result.hits.map((hit) =>
-              hit.roms.map((rom) => {
-                return (
-                  <>
-                    {parse(rom.headword_full)}
-                    {rom.arabs.map((arab) => {
-                      return (
-                        <>
-                          {parse(arab.header)}{" "}
-                          {arab.translations.map((translation) => {
-                            return (
-                              <>
-                                {parse(translation.source)} {translation.target}
-                              </>
-                            );
-                          })}
-                        </>
-                      );
-                    })}
-                  </>
-                );
-              })
-            )
-          )}
-      </ResultSection>
+      <Head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      </Head>
+      <Main>
+        <StyledForm onSubmit={() => handleSearch(event)}>
+          <Label htmlFor="searchTerm"></Label>
+          <SearchField name="searchTerm" id="searchTerm" />
+          <ActionButton type="submit" aria-label="submit search">
+            search
+          </ActionButton>
+        </StyledForm>
+        <>
+          {dictionaryResult[0] &&
+            dictionaryResult.map((result) =>
+              result.hits.map((hit) =>
+                hit.roms.map((rom) => {
+                  return (
+                    <Fragment key={nanoid()}>
+                      <ResultSection>{parse(rom.headword_full)}</ResultSection>
+                      {rom.arabs.map((arab) => {
+                        return (
+                          <ResultSection key={nanoid()}>
+                            <h4>{parse(arab.header)}</h4>
+                            {arab.translations.map((translation) => {
+                              return (
+                                <article key={nanoid()}>
+                                  <SourceP>
+                                    {parse(
+                                      translation.source.replace(/&#39;/g, "'")
+                                    )}
+                                  </SourceP>
+                                  <TranslationP>
+                                    {translation.target.replace(/&#39;/g, "'")}
+                                  </TranslationP>
+                                </article>
+                              );
+                            })}
+                          </ResultSection>
+                        );
+                      })}
+                    </Fragment>
+                  );
+                })
+              )
+            )}
+        </>
+      </Main>
       <Footer onReturnFromEditMode={onReturnFromEditMode} />
     </>
   );
 }
+
+const Main = styled.main`
+  margin-bottom: 11vh;
+`;
 
 const SearchField = styled(InputField)`
   width: 77%;
@@ -86,11 +103,37 @@ const ResultSection = styled.section`
 
   span {
     &.headword_attributes {
-      color: hotpink;
+      color: var(--darkmagenta);
+      font-weight: bold;
     }
 
+    &.full_collocation {
+      //color: var(--darkgrey);
+    }
+
+    &.rhetoric,
     &.topic {
-      color: hotpink;
+      color: var(--middlegrey);
+    }
+
+    &.example {
+      font-style: italic;
+    }
+  }
+
+  article {
+    margin: 0 2.5rem;
+  }
+`;
+
+const TranslationP = styled.p`
+  margin-bottom: 0.5rem;
+`;
+
+const SourceP = styled.p`
+  strong {
+    &.headword {
+      color: var(--darkmagenta);
     }
   }
 `;
