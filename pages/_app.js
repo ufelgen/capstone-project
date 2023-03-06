@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [isDropdown, setIsDropdown] = useState(false);
   const [isDropdownTwo, setIsDropdownTwo] = useState(false);
   const [selectedFlag, setSelectedFlag] = useState("");
+  const [dictionaryResult, setDictionaryResult] = useState({});
 
   function handleAddTranslation(event, id) {
     event.preventDefault();
@@ -94,6 +95,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setIsDropdownTwo(!isDropdownTwo);
   }
 
+  function handleUpdateDictionaryResult(translation) {
+    setDictionaryResult(translation);
+  }
+
   return (
     <SessionProvider session={session}>
       <Head>
@@ -122,6 +127,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         onToggleDropdownTwo={toggleDropdownTwo}
         selectedFlag={selectedFlag}
         onSelectFlag={selectFlag}
+        dictionaryResult={dictionaryResult}
+        onUpdateDictionaryResult={handleUpdateDictionaryResult}
       />
     </SessionProvider>
   );
