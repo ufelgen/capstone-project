@@ -10,7 +10,8 @@ import fetchDictionaryData from "../helpers/fetchDictionaryData";
 import parse from "html-react-parser";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
-import Head from "next/head";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+
 export default function Dictionary({
   onReturnFromEditMode,
   dictionaryResult,
@@ -25,11 +26,20 @@ export default function Dictionary({
     event.target.reset();
   }
 
+  function handleAddFlashcard(query, translation) {
+    const cleanQuery = query.replace(/<\/?[^>]+(>|$)/g, "");
+    const cleanTranslation = translation.replace(/<\/?[^>]+(>|$)/g, "");
+    const translationWithGender = cleanTranslation.replace(" ", "-");
+    const translationArray = translationWithGender.split("-");
+    const finalTranslation = translationArray[0];
+    const finalGender = translationArray[1];
+    console.log("query", cleanQuery);
+    console.log("translation", finalTranslation);
+    console.log("gender", finalGender);
+  }
+
   return (
     <>
-      <Head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      </Head>
       <Main>
         <StyledForm onSubmit={() => handleSearch(event)}>
           <Label htmlFor="searchTerm"></Label>
@@ -45,7 +55,9 @@ export default function Dictionary({
                 hit.roms.map((rom) => {
                   return (
                     <Fragment key={nanoid()}>
-                      <ResultSection>{parse(rom.headword_full)}</ResultSection>
+                      <ResultSection>
+                        <Headword>{parse(rom.headword_full)}</Headword>
+                      </ResultSection>
                       {rom.arabs.map((arab) => {
                         return (
                           <ResultSection key={nanoid()}>
@@ -59,8 +71,23 @@ export default function Dictionary({
                                     )}
                                   </SourceP>
                                   <TranslationP>
-                                    {translation.target.replace(/&#39;/g, "'")}
+                                    {parse(
+                                      translation.target.replace(/&#39;/g, "'")
+                                    )}
                                   </TranslationP>
+                                  <button
+                                    onClick={() =>
+                                      handleAddFlashcard(
+                                        translation.source,
+                                        translation.target
+                                      )
+                                    }
+                                  >
+                                    <AiOutlinePlusCircle
+                                      color="darkmagenta"
+                                      size="4vh"
+                                    />
+                                  </button>
                                 </article>
                               );
                             })}
@@ -103,7 +130,7 @@ const ResultSection = styled.section`
 
   span {
     &.headword_attributes {
-      color: var(--darkmagenta);
+      //color: var(--darkmagenta);
       font-weight: bold;
     }
 
@@ -112,17 +139,36 @@ const ResultSection = styled.section`
     }
 
     &.rhetoric,
+    &.style,
+    &.region,
     &.topic {
       color: var(--middlegrey);
     }
 
-    &.example {
+    &.example,
+    &.genus {
       font-style: italic;
+    }
+
+    &.phonetics {
+      color: var(--darkgrey);
     }
   }
 
   article {
     margin: 0 2.5rem;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    p {
+      grid-column: 1;
+    }
+    button {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      //margin: 0.5rem;
+      border: none;
+      background-color: transparent;
+    }
   }
 `;
 
@@ -133,7 +179,11 @@ const TranslationP = styled.p`
 const SourceP = styled.p`
   strong {
     &.headword {
-      color: var(--darkmagenta);
+      //color: var(--darkmagenta);
     }
   }
+`;
+
+const Headword = styled.h4`
+  color: var(--darkmagenta);
 `;
