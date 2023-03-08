@@ -1,22 +1,26 @@
 import styled from "styled-components";
+import Image from "next/image";
 import Footer from "../components/Footer/Footer";
-import {
-  StyledForm,
-  ActionButton,
-  InputField,
-  Label,
-} from "../components/StyledForm";
+import SearchForm from "../components/SearchForm/SearchForm";
 import fetchDictionaryData from "../helpers/fetchDictionaryData";
 import parse from "html-react-parser";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { ActionButton, BackButton } from "../components/StyledForm";
+import { useState } from "react";
 
 export default function Dictionary({
   onReturnFromEditMode,
   dictionaryResult,
   onUpdateDictionaryResult,
+  onPopupClick,
+  onClosePopup,
+  popup,
 }) {
+  const [queryToAdd, setQueryToAdd] = useState("");
+  const [translationToAdd, setTranslationToAdd] = useState("");
+
   async function handleSearch(event) {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
@@ -26,10 +30,24 @@ export default function Dictionary({
     event.target.reset();
   }
 
-  function handleAddFlashcard(query, translation) {
+  function handleAddFlashcard(event, query, translation) {
+    event.preventDefault();
+
     const cleanQuery = query.replace(/<\/?[^>]+(>|$)/g, "");
     const cleanTranslation = translation.replace(/<\/?[^>]+(>|$)/g, "");
-    const translationWithGender = cleanTranslation.replace(" ", "-");
+
+    setQueryToAdd(cleanQuery);
+    setTranslationToAdd(cleanTranslation);
+
+    onPopupClick(event, "first");
+  }
+
+  function handleFlashcardEntry(event) {
+    event.preventDefault();
+    const type = event.target.elements.type.value;
+    const language = event.target.elements.language.value;
+
+    const translationWithGender = translationToAdd.replace(" ", "-");
     const translationArray = translationWithGender.split("-");
     const finalTranslation = translationArray[0];
     const finalGender = translationArray[1];
@@ -41,13 +59,8 @@ export default function Dictionary({
   return (
     <>
       <Main>
-        <StyledForm onSubmit={() => handleSearch(event)}>
-          <Label htmlFor="searchTerm"></Label>
-          <SearchField name="searchTerm" id="searchTerm" />
-          <ActionButton type="submit" aria-label="submit search">
-            search
-          </ActionButton>
-        </StyledForm>
+        <SearchForm onSearch={handleSearch} />
+
         <>
           {dictionaryResult[0] &&
             dictionaryResult.map((result) =>
@@ -76,8 +89,9 @@ export default function Dictionary({
                                     )}
                                   </TranslationP>
                                   <button
-                                    onClick={() =>
+                                    onClick={(event) =>
                                       handleAddFlashcard(
+                                        event,
                                         translation.source,
                                         translation.target
                                       )
@@ -100,6 +114,62 @@ export default function Dictionary({
               )
             )}
         </>
+        {popup === "first" && (
+          <Popup>
+            <form>
+              <p>please specify:</p>
+              <h4>do you wish to add a word or a phrase?</h4>
+              <input type="radio" id="word" name="type" value="word" required />
+              <label htmlFor="type">word</label>
+              <input
+                type="radio"
+                id="phrase"
+                name="type"
+                value="phrase"
+                required
+              />
+              <label htmlFor="type">phrase</label>
+              <h4>which language was your search query?</h4>
+              <input
+                type="radio"
+                id="english"
+                name="language"
+                value="english"
+                required
+              />
+              <label htmlFor="language">
+                <Image
+                  src="/flags/gb.svg"
+                  width={20}
+                  height={15}
+                  alt="great britain flag"
+                />
+              </label>
+              <input
+                type="radio"
+                id="slovenian"
+                name="language"
+                value="slovenian"
+                required
+              />
+              <label htmlFor="language">
+                <Image
+                  src="/flags/si.svg"
+                  width={20}
+                  height={15}
+                  alt="slovenian flag"
+                />
+              </label>
+              <BackButton onClick={onClosePopup}>back</BackButton>
+              <ActionButton
+                type="submit"
+                onClick={(event) => handleFlashcardEntry(event)}
+              >
+                continue
+              </ActionButton>
+            </form>
+          </Popup>
+        )}
       </Main>
       <Footer onReturnFromEditMode={onReturnFromEditMode} />
     </>
@@ -110,11 +180,14 @@ const Main = styled.main`
   margin-bottom: 11vh;
 `;
 
-const SearchField = styled(InputField)`
-  width: 77%;
-  margin: 0;
+const Popup = styled.section`
+  position: fixed;
+  height: 50vh;
+  width: 70vw;
+  bottom: 25vh;
+  left: 15vw;
+  background-color: var(--lightgrey);
 `;
-
 const ResultSection = styled.section`
   padding: 0.625rem;
   margin: 0.625rem 0.75rem;
