@@ -76,8 +76,6 @@ export default function Dictionary({
       setInfoForNewFlashcard([translationWithGender, translationToAdd[0], ""]);
     }
 
-    console.log("infoForNewFlashcard", infoForNewFlashcard);
-
     onPopupClick(event, "second");
   }
 
