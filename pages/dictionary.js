@@ -7,7 +7,13 @@ import parse from "html-react-parser";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { ActionButton, BackButton } from "../components/StyledForm";
+import {
+  ActionButton,
+  BackButton,
+  InputField,
+  Dropdown,
+  Label,
+} from "../components/StyledForm";
 import { useState } from "react";
 
 export default function Dictionary({
@@ -17,9 +23,14 @@ export default function Dictionary({
   onPopupClick,
   onClosePopup,
   popup,
+  allWords,
+  onCreateNew,
 }) {
-  const [queryToAdd, setQueryToAdd] = useState("");
-  const [translationToAdd, setTranslationToAdd] = useState("");
+  const allCategories = allWords.map((word) => word.category);
+  const uniqueCategories = Array.from(new Set(allCategories));
+
+  const [translationToAdd, setTranslationToAdd] = useState([]);
+  const [infoForNewFlashcard, setInfoForNewFlashcard] = useState([]);
 
   async function handleSearch(event) {
     event.preventDefault();
@@ -36,24 +47,61 @@ export default function Dictionary({
     const cleanQuery = query.replace(/<\/?[^>]+(>|$)/g, "");
     const cleanTranslation = translation.replace(/<\/?[^>]+(>|$)/g, "");
 
-    setQueryToAdd(cleanQuery);
-    setTranslationToAdd(cleanTranslation);
+    setTranslationToAdd([cleanQuery, cleanTranslation]);
 
     onPopupClick(event, "first");
   }
 
   function handleFlashcardEntry(event) {
     event.preventDefault();
-    const type = event.target.elements.type.value;
+    const type = event.target.elements.specification.value;
     const language = event.target.elements.language.value;
 
-    const translationWithGender = translationToAdd.replace(" ", "-");
+    const translationWithGender = translationToAdd[1].replace(" ", "-");
     const translationArray = translationWithGender.split("-");
     const finalTranslation = translationArray[0];
     const finalGender = translationArray[1];
-    console.log("query", cleanQuery);
-    console.log("translation", finalTranslation);
-    console.log("gender", finalGender);
+
+    if (type === "word" && language === "english") {
+      setInfoForNewFlashcard([
+        translationToAdd[0],
+        finalTranslation,
+        finalGender,
+      ]);
+    } else if (type === "word" && language === "slovenian") {
+      setInfoForNewFlashcard([finalTranslation, translationToAdd[0], ""]);
+    } else if (type === "phrase" && language === "english") {
+      setInfoForNewFlashcard([translationToAdd[0], translationWithGender, ""]);
+    } else if (type === "phrase" && language === "slovenian") {
+      setInfoForNewFlashcard([translationWithGender, translationToAdd[0], ""]);
+    }
+
+    console.log("infoForNewFlashcard", infoForNewFlashcard);
+
+    onPopupClick(event, "second");
+  }
+
+  function handleNewFlashcard(event) {
+    event.preventDefault();
+    const fields = event.target.elements;
+
+    const newWord = {
+      category: fields.category.value.trim(),
+      base: {
+        language: "english",
+        flag: "gb",
+        translation: fields.english.value,
+      },
+      query1: {
+        language: "slovenian",
+        flag: "si",
+        translation: fields.queryLanguage1.value,
+        gender: fields.gender.value,
+      },
+    };
+
+    onCreateNew(newWord);
+    onPopupClick(event, false);
   }
 
   return (
@@ -115,60 +163,146 @@ export default function Dictionary({
             )}
         </>
         {popup === "first" && (
-          <Popup>
-            <form>
-              <p>please specify:</p>
-              <h4>do you wish to add a word or a phrase?</h4>
-              <input type="radio" id="word" name="type" value="word" required />
-              <label htmlFor="type">word</label>
-              <input
-                type="radio"
-                id="phrase"
-                name="type"
-                value="phrase"
-                required
+          <Popup onSubmit={(event) => handleFlashcardEntry(event)}>
+            <p>please specify:</p>
+            <h4>do you wish to add a word or a phrase?</h4>
+            <input
+              type="radio"
+              id="specification"
+              name="specification"
+              value="word"
+              required
+            />
+            <label htmlFor="type">word</label>
+            <input
+              type="radio"
+              id="specification"
+              name="specification"
+              value="phrase"
+              required
+            />
+            <label htmlFor="language">phrase</label>
+            <h4>which language was your search query?</h4>
+            <input
+              type="radio"
+              id="language"
+              name="language"
+              value="english"
+              required
+            />
+            <label htmlFor="language">
+              <Image
+                src="/flags/gb.svg"
+                width={20}
+                height={15}
+                alt="great britain flag"
               />
-              <label htmlFor="type">phrase</label>
-              <h4>which language was your search query?</h4>
-              <input
-                type="radio"
-                id="english"
-                name="language"
-                value="english"
-                required
+            </label>
+            <input
+              type="radio"
+              id="slovenian"
+              name="language"
+              value="slovenian"
+              required
+            />
+            <label htmlFor="language">
+              <Image
+                src="/flags/si.svg"
+                width={20}
+                height={15}
+                alt="slovenian flag"
               />
-              <label htmlFor="language">
-                <Image
-                  src="/flags/gb.svg"
-                  width={20}
-                  height={15}
-                  alt="great britain flag"
-                />
-              </label>
-              <input
-                type="radio"
-                id="slovenian"
-                name="language"
-                value="slovenian"
-                required
-              />
-              <label htmlFor="language">
-                <Image
-                  src="/flags/si.svg"
-                  width={20}
-                  height={15}
-                  alt="slovenian flag"
-                />
-              </label>
-              <BackButton onClick={onClosePopup}>back</BackButton>
-              <ActionButton
-                type="submit"
-                onClick={(event) => handleFlashcardEntry(event)}
-              >
-                continue
-              </ActionButton>
-            </form>
+            </label>
+            <BackButton onClick={onClosePopup}>back</BackButton>
+            <ActionButton type="submit">continue</ActionButton>
           </Popup>
+        )}
+        {popup === "second" && (
+          <NewFlashcard onSubmit={(event) => handleNewFlashcard(event)}>
+            <label htmlFor="english">
+              <Image
+                src={"/flags/gb.svg"}
+                width={16}
+                height={12}
+                alt={"english flag"}
+              />{" "}
+            </label>
+            <InputField
+              id="english"
+              name="english"
+              type="text"
+              maxLength={50}
+              defaultValue={infoForNewFlashcard[0]}
+            ></InputField>
+            <label htmlFor="queryLanguage1">
+              <Image
+                src={"/flags/si.svg"}
+                width={16}
+                height={12}
+                alt={"slovenian flag"}
+              />{" "}
+            </label>
+            <InputField
+              id="queryLanguage1"
+              name="queryLanguage1"
+              type="text"
+              maxLength={50}
+              defaultValue={infoForNewFlashcard[1]}
+            ></InputField>
+            <Dropdown
+              defaultValue={infoForNewFlashcard[2]}
+              name="gender"
+              id="gender"
+            >
+              <option value="" name="none">
+                none
+              </option>
+              <option value="m" name="male">
+                m
+              </option>
+              <option value="f" name="female">
+                f
+              </option>
+              <option value="n" name="neuter">
+                n
+              </option>
+            </Dropdown>
+            <Label htmlFor="category">category:</Label>
+
+            <InputField
+              id="newCategory"
+              name="category"
+              type="text"
+              maxLength={50}
+              list="category"
+              required
+            />
+            <datalist name="category" id="category">
+              {uniqueCategories.map((uniqueCategory) => {
+                return (
+                  <option
+                    key={uniqueCategory}
+                    value={uniqueCategory}
+                    name={uniqueCategory}
+                  >
+                    {uniqueCategory}
+                  </option>
+                );
+              })}
+            </datalist>
+            <section>
+              <BackButton
+                type="button"
+                aria-label="go back"
+                onClick={(event) => onPopupClick(event, "false")}
+              >
+                back
+              </BackButton>
+              <ActionButton type="submit" aria-label="add flashcard">
+                add
+              </ActionButton>
+            </section>
+          </NewFlashcard>
         )}
       </Main>
       <Footer onReturnFromEditMode={onReturnFromEditMode} />
@@ -180,7 +314,7 @@ const Main = styled.main`
   margin-bottom: 11vh;
 `;
 
-const Popup = styled.section`
+const Popup = styled.form`
   position: fixed;
   height: 50vh;
   width: 70vw;
@@ -188,6 +322,8 @@ const Popup = styled.section`
   left: 15vw;
   background-color: var(--lightgrey);
 `;
+
+const NewFlashcard = styled(Popup)``;
 const ResultSection = styled.section`
   padding: 0.625rem;
   margin: 0.625rem 0.75rem;

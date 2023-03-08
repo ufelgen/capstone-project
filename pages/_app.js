@@ -73,6 +73,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setIsDropdown(false);
     setIsDropdownTwo(false);
     setSelectedFlag("");
+    setDictionaryResult({});
   }
 
   function selectFlag(value, querylanguage) {
@@ -97,6 +98,21 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   function handleUpdateDictionaryResult(translation) {
     setDictionaryResult(translation);
+  }
+
+  async function pushNewWord(newWord) {
+    await fetch("/api/words", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      handleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   return (
@@ -129,6 +145,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         onSelectFlag={selectFlag}
         dictionaryResult={dictionaryResult}
         onUpdateDictionaryResult={handleUpdateDictionaryResult}
+        onCreateNew={pushNewWord}
       />
     </SessionProvider>
   );
