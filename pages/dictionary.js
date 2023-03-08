@@ -26,6 +26,9 @@ export default function Dictionary({
   allWords,
   onCreateNew,
 }) {
+  if (!allWords) {
+    return null;
+  }
   const allCategories = allWords.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
