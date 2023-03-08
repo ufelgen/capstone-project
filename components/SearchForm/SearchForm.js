@@ -4,7 +4,7 @@ import { StyledForm, ActionButton, InputField, Label } from "../StyledForm";
 
 export default function SearchForm({ onSearch }) {
   return (
-    <StyledSearchForm onSubmit={() => onSearch(event)}>
+    <StyledSearchForm onSubmit={(event) => onSearch(event)}>
       <Label htmlFor="searchTerm"></Label>
       <SearchField name="searchTerm" id="searchTerm" />
       <SearchButton type="submit" aria-label="submit search">

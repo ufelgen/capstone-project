@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { BiggerActionButton, BackButton, Popup } from "../StyledForm";
+import { BiggerActionButton, BackButton, PopupForm } from "../StyledForm";
 
 export default function SpecificationForm({ onFlashcardEntry, onClosePopup }) {
   return (
-    <Popup onSubmit={(event) => onFlashcardEntry(event)}>
+    <PopupForm onSubmit={(event) => onFlashcardEntry(event)}>
       <h4>do you wish to add a word or a phrase?</h4>
       <input
         type="radio"
@@ -56,6 +56,6 @@ export default function SpecificationForm({ onFlashcardEntry, onClosePopup }) {
         <BackButton onClick={onClosePopup}>back</BackButton>
         <BiggerActionButton type="submit">continue</BiggerActionButton>
       </div>
-    </Popup>
+    </PopupForm>
   );
 }

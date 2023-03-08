@@ -5,7 +5,7 @@ import {
   BackButton,
   InputField,
   Dropdown,
-  Popup,
+  PopupForm,
 } from "../StyledForm";
 
 export default function NewFlashcardFromDictionary({
@@ -103,7 +103,7 @@ export default function NewFlashcardFromDictionary({
   );
 }
 
-const NewFlashcard = styled(Popup)`
+const NewFlashcard = styled(PopupForm)`
   display: grid;
   grid-template-columns: 10% 60% 20%;
   padding-left: 0;

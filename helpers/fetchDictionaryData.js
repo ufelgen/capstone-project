@@ -5,7 +5,7 @@ export default async function fetchDictionaryData(searchTerm) {
       const data = await response.json();
       return data;
     } else {
-      return ["search for ", searchTerm, " was unsuccessful"];
+      return {};
     }
   } catch (error) {
     console.error(error);

@@ -99,7 +99,7 @@ export const InvisibleRadioButton = styled.input`
   opacity: 0;
 `;
 
-export const Popup = styled(StyledForm)`
+export const PopupForm = styled(StyledForm)`
   position: fixed;
   height: auto;
   width: 80vw;
