@@ -75,6 +75,7 @@ export const Language = styled.button`
 
 export const DropdownContent = styled.div`
   opacity: 0;
+  z-index: -1;
   position: absolute;
   width: 77px;
   overflow: auto;
