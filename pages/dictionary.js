@@ -1,19 +1,13 @@
 import styled from "styled-components";
-import Image from "next/image";
 import Footer from "../components/Footer/Footer";
 import SearchForm from "../components/SearchForm/SearchForm";
+import SpecificationForm from "../components/SpecificationForm/SpecificationForm";
+import NewFlashcardFromDictionary from "../components/NewFlashcardFromDict/NewFlashcardFromDict";
 import fetchDictionaryData from "../helpers/fetchDictionaryData";
 import parse from "html-react-parser";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import {
-  ActionButton,
-  BackButton,
-  InputField,
-  Dropdown,
-  Label,
-} from "../components/StyledForm";
 import { useState } from "react";
 
 export default function Dictionary({
@@ -26,10 +20,7 @@ export default function Dictionary({
   allWords,
   onCreateNew,
 }) {
-  if (!allWords) {
-    return null;
-  }
-  const allCategories = allWords.map((word) => word.category);
+  const allCategories = allWords?.map((word) => word.category);
   const uniqueCategories = Array.from(new Set(allCategories));
 
   const [translationToAdd, setTranslationToAdd] = useState([]);
@@ -39,19 +30,15 @@ export default function Dictionary({
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
     const translation = await fetchDictionaryData(searchTerm);
-    console.log("translation in frontend", translation);
     onUpdateDictionaryResult(translation);
     event.target.reset();
   }
 
   function handleAddFlashcard(event, query, translation) {
     event.preventDefault();
-
     const cleanQuery = query.replace(/<\/?[^>]+(>|$)/g, "");
     const cleanTranslation = translation.replace(/<\/?[^>]+(>|$)/g, "");
-
     setTranslationToAdd([cleanQuery, cleanTranslation]);
-
     onPopupClick(event, "first");
   }
 
@@ -59,9 +46,8 @@ export default function Dictionary({
     event.preventDefault();
     const type = event.target.elements.specification.value;
     const language = event.target.elements.language.value;
-
-    const translationWithGender = translationToAdd[1].replace(" ", "-");
-    const translationArray = translationWithGender.split("-");
+    const fullTranslation = translationToAdd[1].replace(" ", "-");
+    const translationArray = fullTranslation.split("-");
     const finalTranslation = translationArray[0];
     const finalGender = translationArray[1];
 
@@ -74,9 +60,9 @@ export default function Dictionary({
     } else if (type === "word" && language === "slovenian") {
       setInfoForNewFlashcard([finalTranslation, translationToAdd[0], ""]);
     } else if (type === "phrase" && language === "english") {
-      setInfoForNewFlashcard([translationToAdd[0], translationWithGender, ""]);
+      setInfoForNewFlashcard([translationToAdd[0], fullTranslation, ""]);
     } else if (type === "phrase" && language === "slovenian") {
-      setInfoForNewFlashcard([translationWithGender, translationToAdd[0], ""]);
+      setInfoForNewFlashcard([fullTranslation, translationToAdd[0], ""]);
     }
 
     onPopupClick(event, "second");
@@ -85,7 +71,6 @@ export default function Dictionary({
   function handleNewFlashcard(event) {
     event.preventDefault();
     const fields = event.target.elements;
-
     const newWord = {
       category: fields.category.value.trim(),
       base: {
@@ -164,146 +149,18 @@ export default function Dictionary({
             )}
         </>
         {popup === "first" && (
-          <Popup onSubmit={(event) => handleFlashcardEntry(event)}>
-            <p>please specify:</p>
-            <h4>do you wish to add a word or a phrase?</h4>
-            <input
-              type="radio"
-              id="specification"
-              name="specification"
-              value="word"
-              required
-            />
-            <label htmlFor="type">word</label>
-            <input
-              type="radio"
-              id="specification"
-              name="specification"
-              value="phrase"
-              required
-            />
-            <label htmlFor="language">phrase</label>
-            <h4>which language was your search query?</h4>
-            <input
-              type="radio"
-              id="language"
-              name="language"
-              value="english"
-              required
-            />
-            <label htmlFor="language">
-              <Image
-                src="/flags/gb.svg"
-                width={20}
-                height={15}
-                alt="great britain flag"
-              />
-            </label>
-            <input
-              type="radio"
-              id="slovenian"
-              name="language"
-              value="slovenian"
-              required
-            />
-            <label htmlFor="language">
-              <Image
-                src="/flags/si.svg"
-                width={20}
-                height={15}
-                alt="slovenian flag"
-              />
-            </label>
-            <BackButton onClick={onClosePopup}>back</BackButton>
-            <ActionButton type="submit">continue</ActionButton>
-          </Popup>
+          <SpecificationForm
+            onFlashcardEntry={handleFlashcardEntry}
+            onClosePopup={onClosePopup}
+          />
         )}
         {popup === "second" && (
-          <NewFlashcard onSubmit={(event) => handleNewFlashcard(event)}>
-            <label htmlFor="english">
-              <Image
-                src={"/flags/gb.svg"}
-                width={16}
-                height={12}
-                alt={"english flag"}
-              />{" "}
-            </label>
-            <InputField
-              id="english"
-              name="english"
-              type="text"
-              maxLength={50}
-              defaultValue={infoForNewFlashcard[0]}
-            ></InputField>
-            <label htmlFor="queryLanguage1">
-              <Image
-                src={"/flags/si.svg"}
-                width={16}
-                height={12}
-                alt={"slovenian flag"}
-              />{" "}
-            </label>
-            <InputField
-              id="queryLanguage1"
-              name="queryLanguage1"
-              type="text"
-              maxLength={50}
-              defaultValue={infoForNewFlashcard[1]}
-            ></InputField>
-            <Dropdown
-              defaultValue={infoForNewFlashcard[2]}
-              name="gender"
-              id="gender"
-            >
-              <option value="" name="none">
-                none
-              </option>
-              <option value="m" name="male">
-                m
-              </option>
-              <option value="f" name="female">
-                f
-              </option>
-              <option value="n" name="neuter">
-                n
-              </option>
-            </Dropdown>
-            <Label htmlFor="category">category:</Label>
-
-            <InputField
-              id="newCategory"
-              name="category"
-              type="text"
-              maxLength={50}
-              list="category"
-              required
-            />
-            <datalist name="category" id="category">
-              {uniqueCategories.map((uniqueCategory) => {
-                return (
-                  <option
-                    key={uniqueCategory}
-                    value={uniqueCategory}
-                    name={uniqueCategory}
-                  >
-                    {uniqueCategory}
-                  </option>
-                );
-              })}
-            </datalist>
-            <section>
-              <BackButton
-                type="button"
-                aria-label="go back"
-                onClick={(event) => onPopupClick(event, "false")}
-              >
-                back
-              </BackButton>
-              <ActionButton type="submit" aria-label="add flashcard">
-                add
-              </ActionButton>
-            </section>
-          </NewFlashcard>
+          <NewFlashcardFromDictionary
+            onNewFlashcard={handleNewFlashcard}
+            onPopupClick={onPopupClick}
+            infoForNewFlashcard={infoForNewFlashcard}
+            uniqueCategories={uniqueCategories}
+          />
         )}
       </Main>
       <Footer onReturnFromEditMode={onReturnFromEditMode} />
@@ -315,16 +172,6 @@ const Main = styled.main`
   margin-bottom: 11vh;
 `;
 
-const Popup = styled.form`
-  position: fixed;
-  height: 50vh;
-  width: 70vw;
-  bottom: 25vh;
-  left: 15vw;
-  background-color: var(--lightgrey);
-`;
-
-const NewFlashcard = styled(Popup)``;
 const ResultSection = styled.section`
   padding: 0.625rem;
   margin: 0.625rem 0.75rem;
@@ -340,12 +187,11 @@ const ResultSection = styled.section`
 
   span {
     &.headword_attributes {
-      //color: var(--darkmagenta);
       font-weight: bold;
     }
 
     &.full_collocation {
-      //color: var(--darkgrey);
+      //additional styles go here
     }
 
     &.rhetoric,
@@ -375,7 +221,6 @@ const ResultSection = styled.section`
     button {
       grid-column: 2;
       grid-row: 1 / span 2;
-      //margin: 0.5rem;
       border: none;
       background-color: transparent;
     }
@@ -389,7 +234,7 @@ const TranslationP = styled.p`
 const SourceP = styled.p`
   strong {
     &.headword {
-      //color: var(--darkmagenta);
+      //additional styles go here
     }
   }
 `;

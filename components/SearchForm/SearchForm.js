@@ -43,6 +43,5 @@ const SearchButton = styled(ActionButton)`
   width: 30%;
   align-items: center;
   justify-content: center;
-  text-align: center;
   display: flex;
 `;
