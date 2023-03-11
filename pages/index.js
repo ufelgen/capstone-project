@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import PopupMenuButton from "../components/PopupMenuButton/PopupMenuButton";
 import PopupMenu from "../components/PopupMenu/PopupMenu";
 import EditCategory from "../components/EditCategory/EditCategory";
+import Footer from "../components/Footer/Footer";
 import { rearrangeData } from "../helpers/rearrangeData";
 import styled from "styled-components";
 import fetchData from "../helpers/fetchData";
@@ -27,6 +28,7 @@ export default function Home({
   onToggleDropdown,
   selectedFlag,
   onSelectFlag,
+  onCreateNew,
 }) {
   const { data: session } = useSession();
 
@@ -35,21 +37,6 @@ export default function Home({
   }
 
   const wordsInCategories = rearrangeData(allWords);
-
-  async function pushNewWord(newWord) {
-    await fetch("/api/words", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newWord),
-    });
-    async function performFetch() {
-      const allWordsFromDatabase = await fetchData();
-      onHandleAllWords(allWordsFromDatabase);
-    }
-    performFetch();
-  }
 
   async function handleDeleteCategory(event, category) {
     event.preventDefault();
@@ -106,7 +93,7 @@ export default function Home({
       {session && (
         <StyledMain>
           <NewWordForm
-            onCreateNew={pushNewWord}
+            onCreateNew={onCreateNew}
             allWords={allWords}
             isDropdown={isDropdown}
             onToggleDropdown={onToggleDropdown}
@@ -154,6 +141,7 @@ export default function Home({
               </Fragment>
             )
           )}
+          <Footer onReturnFromEditMode={onReturnFromEditMode} />
         </StyledMain>
       )}
     </>

@@ -99,3 +99,28 @@ export const Select = styled.label`
 export const InvisibleRadioButton = styled.input`
   opacity: 0;
 `;
+
+export const PopupForm = styled(StyledForm)`
+  position: fixed;
+  height: auto;
+  width: 80vw;
+  bottom: 30vh;
+  margin-left: 10vw;
+
+  background-color: var(--lightgrey);
+  background-image: none;
+
+  label {
+    margin: 0 0.5rem;
+  }
+
+  h4 {
+    margin: 0.5rem 0;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+`;

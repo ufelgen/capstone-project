@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [isDropdown, setIsDropdown] = useState(false);
   const [isDropdownTwo, setIsDropdownTwo] = useState(false);
   const [selectedFlag, setSelectedFlag] = useState("");
+  const [dictionaryResult, setDictionaryResult] = useState({});
 
   function handleAddTranslation(event, id) {
     event.preventDefault();
@@ -72,6 +73,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setIsDropdown(false);
     setIsDropdownTwo(false);
     setSelectedFlag("");
+    setDictionaryResult({});
   }
 
   function selectFlag(value, querylanguage) {
@@ -92,6 +94,25 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   function toggleDropdownTwo() {
     setIsDropdownTwo(!isDropdownTwo);
+  }
+
+  function handleUpdateDictionaryResult(translation) {
+    setDictionaryResult(translation);
+  }
+
+  async function pushNewWord(newWord) {
+    await fetch("/api/words", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newWord),
+    });
+    async function performFetch() {
+      const allWordsFromDatabase = await fetchData();
+      handleAllWords(allWordsFromDatabase);
+    }
+    performFetch();
   }
 
   return (
@@ -122,6 +143,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         onToggleDropdownTwo={toggleDropdownTwo}
         selectedFlag={selectedFlag}
         onSelectFlag={selectFlag}
+        dictionaryResult={dictionaryResult}
+        onUpdateDictionaryResult={handleUpdateDictionaryResult}
+        onCreateNew={pushNewWord}
       />
     </SessionProvider>
   );
