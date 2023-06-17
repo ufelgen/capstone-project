@@ -31,12 +31,20 @@ export default function Footer({ path, onReturnFromEditMode }) {
         </button>
       )}
       {pathname === "/" && (
-        <button
-          aria-label="go to translation page"
-          onClick={() => handleReturn("/dictionary")}
-        >
-          <HiTranslate size="7.7vh" color="darkmagenta" />
-        </button>
+        <>
+          <button
+            aria-label="go to translation page"
+            onClick={() => handleReturn("/dictionary")}
+          >
+            <HiTranslate size="7.7vh" color="darkmagenta" />
+          </button>
+          <button
+            aria-label="go to translation page"
+            onClick={() => handleReturn("/improved-dictionary")}
+          >
+            <HiTranslate size="7.7vh" color="darkmagenta" />
+          </button>
+        </>
       )}
       {pathname === "/declension/[id]" && (
         <button>

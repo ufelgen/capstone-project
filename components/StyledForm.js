@@ -76,17 +76,18 @@ export const Language = styled.button`
 export const DropdownContent = styled.div`
   opacity: 0;
   z-index: -1;
-  position: absolute;
-  width: 77px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  display: grid;
-  grid-template-columns: 0.1fr 1fr;
+  display: none;
 
   &.show {
     opacity: 1;
     z-index: 1;
     background-color: white;
+    position: absolute;
+    width: 77px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
   }
 `;
 
