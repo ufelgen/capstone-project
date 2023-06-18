@@ -16,6 +16,7 @@ export default function ImprovedDictionary({
   isDropdown,
   isDropdownTwo,
   onUpdateDictionaryResult,
+  dictionaryResult,
 }) {
   async function handleImprovedSearch(event) {
     event.preventDefault();
