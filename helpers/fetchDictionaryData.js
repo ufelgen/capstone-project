@@ -14,7 +14,7 @@ export async function fetchDictionaryData(searchTerm) {
 
 export async function fetchAllDictionaryData(searchParams) {
   try {
-    const response = await fetch(`/api/improvedDictionary/${searchParams}`);
+    const response = await fetch(`/api/improved-dictionary/${searchParams}`);
     if (response.status === 200) {
       const data = await response.json();
       return data;
