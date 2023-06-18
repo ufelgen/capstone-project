@@ -30,6 +30,16 @@ export default function ImprovedSearchForm({
     language.partners.includes(selectedFlag[0])
   );
 
+  function handleFromClick() {
+    onToggleDropdown();
+
+    if (selectedFlag === "") {
+      return;
+    } else if (selectedFlag[1] !== "") {
+      onSelectFlag([selectedFlag[0], ""]);
+    }
+  }
+
   return (
     <>
       <StyledSearchForm onSubmit={(event) => onImprovedSearch(event)}>
@@ -37,7 +47,7 @@ export default function ImprovedSearchForm({
         <SearchField name="searchTerm2" id="searchTerm2" required />
 
         <DropdownWrapper>
-          <Language onClick={onToggleDropdown}>
+          <Language onClick={handleFromClick}>
             {`from `}
             {selectedFlag === "" || selectedFlag[0] === "" ? (
               " \u25BC"
