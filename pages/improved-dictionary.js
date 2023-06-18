@@ -21,16 +21,26 @@ export default function ImprovedDictionary({
   async function handleImprovedSearch(event) {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm2.value;
-    const languageFrom = selectedFlag[0];
-    const languageTo = selectedFlag[1];
-    const searchParams = `${searchTerm}-${languageFrom}-${languageTo}`;
+    const languageFrom =
+      event.target.elements.queryLanguage.value.split("-")[2];
+    const languageTo = event.target.elements.queryLanguage2.value.split("-")[2];
+    const searchParams = `${searchTerm}${languageFrom}${languageTo}`;
     const translation = await fetchAllDictionaryData(searchParams);
+    //const translation = await fetchAllDictionaryData(searchTerm);
     onUpdateDictionaryResult(translation);
+
+    console.log("dictionaryResult", dictionaryResult);
     event.target.reset();
 
-    console.log("huhu testi");
+    console.log("huhu testi", searchParams);
     //onReturnFromEditMode();
   }
+
+  const testi = "cowensl";
+  const searchTermTesti = testi.slice(0, testi.length - 4);
+  console.log("search term", searchTermTesti);
+  console.log("from", testi.slice(searchTermTesti.length, testi.length - 2));
+  console.log("to", testi.slice(searchTermTesti.length + 2, testi.length));
 
   return (
     <Main>

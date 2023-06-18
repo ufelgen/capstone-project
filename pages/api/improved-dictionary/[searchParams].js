@@ -1,10 +1,16 @@
 export default async function handler(req, res) {
   const { searchParams } = req.query;
-  const searchTerm = searchParams.split("-")[0];
-  let languageFrom = searchParams.split("-")[1];
-  let languageTo = searchParams.split("-")[2];
+  const searchTerm = searchParams.slice(0, searchParams.length - 4);
+  const languageFrom = searchParams.slice(
+    searchTerm.length,
+    searchParams.length - 2
+  );
+  const languageTo = searchParams.slice(
+    searchTerm.length + 2,
+    searchParams.length
+  );
 
-  function getCorrectCountryCodes() {
+  /*   function getCorrectCountryCodes() {
     if (languageFrom === "si") {
       languageFrom = "sl";
       console.log("1");
@@ -26,13 +32,13 @@ export default async function handler(req, res) {
     }
   }
 
-  getCorrectCountryCodes();
+  getCorrectCountryCodes(); */
 
   try {
     const response = await fetch(
-      // `https://api.pons.com/v1/dictionary?q=${searchTerm}&l=${languageFrom}${languageTo}&in=${languageFrom}`,
-
-      `https://api.pons.com/v1/dictionary?q=${searchTerm}&l=ensl`,
+      //`https://api.pons.com/v1/dictionary?q=${searchTerm}&l=${languageFrom}${languageTo}&in=${languageFrom}`,
+      `https://api.pons.com/v1/dictionary?q=${searchTerm}&l=${languageFrom}${languageTo}`,
+      //`https://api.pons.com/v1/dictionary?q=${searchParams}&l=ensl`,
 
       {
         method: "GET",
