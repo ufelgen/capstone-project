@@ -12,7 +12,7 @@ import {
   InvisibleRadioButton,
   Label,
 } from "../StyledForm";
-import { languages } from "../../lib/languages";
+import { languagesDictionary } from "../../lib/languages";
 import { Fragment } from "react";
 
 export default function ImprovedSearchForm({
@@ -28,9 +28,7 @@ export default function ImprovedSearchForm({
   console.log(isDropdown, isDropdownTwo);
   return (
     <>
-      <button onClick={onToggleDropdown}> click me</button>
-      {isDropdown && <h1>it works!</h1>}
-      <div onSubmit={(event) => onImprovedSearch(event)}>
+      <StyledSearchForm onSubmit={(event) => onImprovedSearch(event)}>
         <Label htmlFor="searchTerm"></Label>
         <SearchField name="searchTerm" id="searchTerm" />
 
@@ -49,7 +47,7 @@ export default function ImprovedSearchForm({
             )}
           </Language>
           <DropdownContent className={isDropdown && "show"}>
-            {languages.map((language) => {
+            {languagesDictionary.map((language) => {
               return (
                 <Fragment key={language.name}>
                   <InvisibleRadioButton
@@ -91,7 +89,7 @@ export default function ImprovedSearchForm({
             )}
           </Language>
           <DropdownContent className={isDropdownTwo && "show"}>
-            {languages.map((language) => {
+            {languagesDictionary.map((language) => {
               return (
                 <Fragment key={language.name}>
                   <InvisibleRadioButton
@@ -122,7 +120,7 @@ export default function ImprovedSearchForm({
         <SearchButton type="submit" aria-label="submit search">
           search
         </SearchButton>
-      </div>
+      </StyledSearchForm>
     </>
   );
 }
