@@ -26,21 +26,11 @@ export default function ImprovedDictionary({
     const languageTo = event.target.elements.queryLanguage2.value.split("-")[2];
     const searchParams = `${searchTerm}${languageFrom}${languageTo}`;
     const translation = await fetchAllDictionaryData(searchParams);
-    //const translation = await fetchAllDictionaryData(searchTerm);
     onUpdateDictionaryResult(translation);
 
-    console.log("dictionaryResult", dictionaryResult);
     event.target.reset();
-
-    console.log("huhu testi", searchParams);
-    //onReturnFromEditMode();
+    onSelectFlag("");
   }
-
-  const testi = "cowensl";
-  const searchTermTesti = testi.slice(0, testi.length - 4);
-  console.log("search term", searchTermTesti);
-  console.log("from", testi.slice(searchTermTesti.length, testi.length - 2));
-  console.log("to", testi.slice(searchTermTesti.length + 2, testi.length));
 
   return (
     <Main>
@@ -81,7 +71,7 @@ export default function ImprovedDictionary({
                                     translation.target.replace(/&#39;/g, "'")
                                   )}
                                 </TranslationP>
-                                <button
+                                {/*  <button
                                   onClick={(event) =>
                                     handleAddFlashcard(
                                       event,
@@ -94,7 +84,7 @@ export default function ImprovedDictionary({
                                     color="darkmagenta"
                                     size="4vh"
                                   />
-                                </button>
+                                </button> */}
                               </article>
                             );
                           })}
