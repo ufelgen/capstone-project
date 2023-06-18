@@ -3,7 +3,6 @@ import Image from "next/image";
 import {
   StyledForm,
   ActionButton,
-  Dropdown,
   InputField,
   DropdownWrapper,
   DropdownContent,
@@ -29,8 +28,8 @@ export default function ImprovedSearchForm({
   return (
     <>
       <StyledSearchForm onSubmit={(event) => onImprovedSearch(event)}>
-        <Label htmlFor="searchTerm"></Label>
-        <SearchField name="searchTerm" id="searchTerm" />
+        <Label htmlFor="searchTerm2"></Label>
+        <SearchField name="searchTerm2" id="searchTerm2" required />
 
         <DropdownWrapper>
           <Language onClick={onToggleDropdown}>

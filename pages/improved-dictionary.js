@@ -18,7 +18,7 @@ export default function ImprovedDictionary({
 }) {
   async function handleImprovedSearch(event) {
     event.preventDefault();
-    const searchTerm = event.target.elements.searchTerm.value;
+    const searchTerm = event.target.elements.searchTerm2.value;
     const languageFrom = selectedFlag[0];
     const languageTo = selectedFlag[1];
     const searchParams = `${searchTerm}-${languageFrom}-${languageTo}`;
@@ -29,6 +29,7 @@ export default function ImprovedDictionary({
     console.log("huhu testi");
     //onReturnFromEditMode();
   }
+
   return (
     <>
       <ImprovedSearchForm
