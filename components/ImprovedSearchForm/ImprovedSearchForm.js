@@ -25,6 +25,11 @@ export default function ImprovedSearchForm({
 }) {
   console.log(selectedFlag);
   console.log(isDropdown, isDropdownTwo);
+
+  const partnerLanguages = languagesDictionary.filter((language) =>
+    language.partners.includes(selectedFlag[0])
+  );
+
   return (
     <>
       <StyledSearchForm onSubmit={(event) => onImprovedSearch(event)}>
@@ -74,7 +79,10 @@ export default function ImprovedSearchForm({
           </DropdownContent>
         </DropdownWrapper>
         <DropdownWrapper>
-          <Language onClick={onToggleDropdownTwo}>
+          <Language
+            onClick={onToggleDropdownTwo}
+            disabled={selectedFlag === "" || selectedFlag[0] === ""}
+          >
             {`to `}
             {selectedFlag === "" || selectedFlag[1] === "" ? (
               " \u25BC"
@@ -88,31 +96,32 @@ export default function ImprovedSearchForm({
             )}
           </Language>
           <DropdownContent className={isDropdownTwo && "show"}>
-            {languagesDictionary.map((language) => {
-              return (
-                <Fragment key={language.name}>
-                  <InvisibleRadioButton
-                    type="radio"
-                    id={`${language.name}2`}
-                    name="queryLanguage2"
-                    value={language.value}
-                    data-testid="queryLanguage2"
-                    onChange={() =>
-                      onSelectFlag(language.value.split("-")[0], "to")
-                    }
-                    checked={language.value.split("-")[0] === selectedFlag[1]}
-                  />
-                  <Select htmlFor={`${language.name}2`}>
-                    <Image
-                      src={`/flags/${language.value.split("-")[0]}.svg`}
-                      width={20}
-                      height={15}
-                      alt={`${language.name} flag`}
+            {selectedFlag[0] !== "" &&
+              partnerLanguages.map((language) => {
+                return (
+                  <Fragment key={language.name}>
+                    <InvisibleRadioButton
+                      type="radio"
+                      id={`${language.name}2`}
+                      name="queryLanguage2"
+                      value={language.value}
+                      data-testid="queryLanguage2"
+                      onChange={() =>
+                        onSelectFlag(language.value.split("-")[0], "to")
+                      }
+                      checked={language.value.split("-")[0] === selectedFlag[1]}
                     />
-                  </Select>
-                </Fragment>
-              );
-            })}
+                    <Select htmlFor={`${language.name}2`}>
+                      <Image
+                        src={`/flags/${language.value.split("-")[0]}.svg`}
+                        width={20}
+                        height={15}
+                        alt={`${language.name} flag`}
+                      />
+                    </Select>
+                  </Fragment>
+                );
+              })}
           </DropdownContent>
         </DropdownWrapper>
 
