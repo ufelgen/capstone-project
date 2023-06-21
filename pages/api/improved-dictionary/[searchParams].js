@@ -163,6 +163,9 @@ export default async function handler(req, res) {
       (languageFrom === "zh" && languageTo === "es")
     ) {
       correctDirection = "eszh";
+    } else {
+      console.log("huiiiii");
+      return;
     }
   }
   // deen; enfr; enit; enpl; enpt; enru; ensl; enes; enzh; defr; frit; frpl; frsl; esfr; frzh; deit; depl; dept; deru; desl; dees; dezh; itpl; itsl; esit; plru; espl; espt; essl; eszh 30

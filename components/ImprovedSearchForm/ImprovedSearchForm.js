@@ -37,6 +37,8 @@ export default function ImprovedSearchForm({
       return;
     } else if (selectedFlag[1] !== "") {
       onSelectFlag([selectedFlag[0], ""]);
+    } else {
+      console.log("banana");
     }
   }
 
@@ -45,8 +47,9 @@ export default function ImprovedSearchForm({
       <StyledSearchForm onSubmit={(event) => onImprovedSearch(event)}>
         <Label htmlFor="searchTerm2"></Label>
         <SearchField name="searchTerm2" id="searchTerm2" required />
-
-        <DropdownWrapper>
+        <input />
+        <button>click me maybe</button>
+        {/* <DropdownWrapper>
           <Language onClick={handleFromClick}>
             {`from `}
             {selectedFlag === "" || selectedFlag[0] === "" ? (
@@ -74,6 +77,7 @@ export default function ImprovedSearchForm({
                       onSelectFlag(language.value.split("-")[0], "from")
                     }
                     checked={language.value.split("-")[0] === selectedFlag[0]}
+                    //required
                   />
                   <Select htmlFor={language.name}>
                     <Image
@@ -120,6 +124,7 @@ export default function ImprovedSearchForm({
                         onSelectFlag(language.value.split("-")[0], "to")
                       }
                       checked={language.value.split("-")[0] === selectedFlag[1]}
+                      //required
                     />
                     <Select htmlFor={`${language.name}2`}>
                       <Image
@@ -133,12 +138,12 @@ export default function ImprovedSearchForm({
                 );
               })}
           </DropdownContent>
-        </DropdownWrapper>
-
+        </DropdownWrapper> */}
         <SearchButton type="submit" aria-label="submit search">
           search
         </SearchButton>
       </StyledSearchForm>
+      <button>me tooooo pls click </button>
     </>
   );
 }

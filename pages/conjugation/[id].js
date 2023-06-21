@@ -122,6 +122,9 @@ export default function Conjugation({
         },
       };
       return updatedWord;
+    } else {
+      console.log("bliblablu");
+      return;
     }
   }
 

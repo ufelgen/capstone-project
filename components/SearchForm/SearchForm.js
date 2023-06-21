@@ -4,25 +4,28 @@ import { StyledForm, ActionButton, InputField, Label } from "../StyledForm";
 
 export default function SearchForm({ onSearch }) {
   return (
-    <StyledSearchForm onSubmit={(event) => onSearch(event)}>
-      <Label htmlFor="searchTerm"></Label>
-      <SearchField name="searchTerm" id="searchTerm" />
-      <SearchButton type="submit" aria-label="submit search">
-        <Image
-          src="/flags/gb.svg"
-          width={20}
-          height={15}
-          alt="great britain flag"
-        />
-        <Arrow>{"\u25C2" + "\u25B8"}</Arrow>
-        <Image
-          src="/flags/si.svg"
-          width={20}
-          height={15}
-          alt="slovenian flag"
-        />
-      </SearchButton>
-    </StyledSearchForm>
+    <>
+      <StyledSearchForm onSubmit={(event) => onSearch(event)}>
+        <Label htmlFor="searchTerm"></Label>
+        <SearchField name="searchTerm" id="searchTerm" />
+        <SearchButton type="submit" aria-label="submit search">
+          <Image
+            src="/flags/gb.svg"
+            width={20}
+            height={15}
+            alt="great britain flag"
+          />
+          <Arrow>{"\u25C2" + "\u25B8"}</Arrow>
+          <Image
+            src="/flags/si.svg"
+            width={20}
+            height={15}
+            alt="slovenian flag"
+          />
+        </SearchButton>
+        <button>click pls</button>
+      </StyledSearchForm>
+    </>
   );
 }
 

@@ -20,16 +20,23 @@ export default function ImprovedDictionary({
 }) {
   async function handleImprovedSearch(event) {
     event.preventDefault();
+
     const searchTerm = event.target.elements.searchTerm2.value;
     const languageFrom =
-      event.target.elements.queryLanguage.value.split("-")[2];
-    const languageTo = event.target.elements.queryLanguage2.value.split("-")[2];
-    const searchParams = `${searchTerm}${languageFrom}${languageTo}`;
-    const translation = await fetchAllDictionaryData(searchParams);
-    onUpdateDictionaryResult(translation);
+      event.target.elements.queryLanguage?.value.split("-")[2];
+    const languageTo =
+      event.target.elements.queryLanguage2?.value.split("-")[2];
+    if (languageFrom && languageTo && searchTerm) {
+      const searchParams = `${searchTerm}${languageFrom}${languageTo}`;
+      const translation = await fetchAllDictionaryData(searchParams);
+      onUpdateDictionaryResult(translation);
 
-    event.target.reset();
-    onSelectFlag("");
+      event.target.reset();
+      onSelectFlag("");
+    } else {
+      console.log("bananaaaaa");
+      return;
+    }
   }
 
   return (

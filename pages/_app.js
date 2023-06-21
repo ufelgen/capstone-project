@@ -113,6 +113,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     // new word form
     else if (!querylanguage) {
       setSelectedFlag(value);
+    } else {
+      console.log("apple!!");
+      return;
     }
   }
 

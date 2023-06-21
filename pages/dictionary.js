@@ -63,6 +63,9 @@ export default function Dictionary({
       setInfoForNewFlashcard([translationToAdd[0], fullTranslation, ""]);
     } else if (type === "phrase" && language === "slovenian") {
       setInfoForNewFlashcard([fullTranslation, translationToAdd[0], ""]);
+    } else {
+      console.log("blublabli");
+      return;
     }
 
     onPopupClick(event, "second");
