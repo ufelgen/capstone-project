@@ -5,7 +5,7 @@ import { fetchAllDictionaryData } from "../helpers/fetchDictionaryData";
 import { Fragment } from "react";
 import parse from "html-react-parser";
 import { nanoid } from "nanoid";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+//import { AiOutlinePlusCircle } from "react-icons/ai";
 
 export default function ImprovedDictionary({
   onReturnFromEditMode,
@@ -34,7 +34,6 @@ export default function ImprovedDictionary({
       event.target.reset();
       onSelectFlag("");
     } else {
-      console.log("bananaaaaa");
       return;
     }
   }

@@ -114,7 +114,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     else if (!querylanguage) {
       setSelectedFlag(value);
     } else {
-      console.log("apple!!");
       return;
     }
   }

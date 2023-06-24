@@ -23,9 +23,6 @@ export default function ImprovedSearchForm({
   isDropdownTwo,
   onSelectFlag,
 }) {
-  console.log(selectedFlag);
-  console.log(isDropdown, isDropdownTwo);
-
   const partnerLanguages = languagesDictionary.filter((language) =>
     language.partners.includes(selectedFlag[0])
   );
@@ -38,7 +35,7 @@ export default function ImprovedSearchForm({
     } else if (selectedFlag[1] !== "") {
       onSelectFlag([selectedFlag[0], ""]);
     } else {
-      console.log("banana");
+      return;
     }
   }
 

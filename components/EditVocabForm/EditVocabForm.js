@@ -121,7 +121,7 @@ export default function EditVocabForm({
           defaultValue={word.base.translation}
         ></InputField>
         <DropdownWrapper>
-          <Language onClick={onToggleDropdown}>
+          <Language type="button" onClick={onToggleDropdown}>
             <Image
               src={`/flags/${selectedFlag[0]}.svg`}
               width={20}
@@ -185,7 +185,7 @@ export default function EditVocabForm({
         {word.query2.translation && (
           <>
             <DropdownWrapper>
-              <Language onClick={onToggleDropdownTwo}>
+              <Language type="button" onClick={onToggleDropdownTwo}>
                 <Image
                   src={`/flags/${selectedFlag[1]}.svg`}
                   width={20}

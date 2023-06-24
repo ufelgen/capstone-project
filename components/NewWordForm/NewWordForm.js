@@ -73,7 +73,7 @@ export default function NewWordForm({
       ></InputEng>
 
       <DropdownWrapper>
-        <QueryLanguage onClick={onToggleDropdown}>
+        <QueryLanguage type="button" onClick={onToggleDropdown}>
           {selectedFlag === "" ? (
             `language` + "\u25BC"
           ) : (
