@@ -76,18 +76,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setDictionaryResult({});
   }
 
-  /* function selectFlag(value, querylanguage) {
-    setIsDropdown(false);
-    setIsDropdownTwo(false);
-    if (querylanguage === "one") {
-      setSelectedFlag([value, selectedFlag[1]]);
-    } else if (querylanguage === "two") {
-      setSelectedFlag([selectedFlag[0], value]);
-    } else if (!querylanguage) {
-      setSelectedFlag(value);
-    }
-  } */
-
   function selectFlag(value, querylanguage) {
     setIsDropdown(false);
     setIsDropdownTwo(false);
