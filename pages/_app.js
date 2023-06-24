@@ -79,12 +79,30 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   function selectFlag(value, querylanguage) {
     setIsDropdown(false);
     setIsDropdownTwo(false);
+
+    // edit vocab card
     if (querylanguage === "one") {
       setSelectedFlag([value, selectedFlag[1]]);
     } else if (querylanguage === "two") {
       setSelectedFlag([selectedFlag[0], value]);
-    } else if (!querylanguage) {
+    }
+
+    // dictionary
+    else if (querylanguage === "from") {
+      selectedFlag[1]
+        ? setSelectedFlag([value, selectedFlag[1]])
+        : setSelectedFlag([value, ""]);
+    } else if (querylanguage === "to") {
+      selectedFlag[0]
+        ? setSelectedFlag([selectedFlag[0], value])
+        : setSelectedFlag(["", value]);
+    }
+
+    // new word form
+    else if (!querylanguage) {
       setSelectedFlag(value);
+    } else {
+      return;
     }
   }
 

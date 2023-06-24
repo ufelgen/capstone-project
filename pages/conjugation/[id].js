@@ -122,6 +122,8 @@ export default function Conjugation({
         },
       };
       return updatedWord;
+    } else {
+      return;
     }
   }
 

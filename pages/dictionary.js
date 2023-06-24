@@ -3,7 +3,7 @@ import Footer from "../components/Footer/Footer";
 import SearchForm from "../components/SearchForm/SearchForm";
 import SpecificationForm from "../components/SpecificationForm/SpecificationForm";
 import NewFlashcardFromDictionary from "../components/NewFlashcardFromDict/NewFlashcardFromDict";
-import fetchDictionaryData from "../helpers/fetchDictionaryData";
+import { fetchDictionaryData } from "../helpers/fetchDictionaryData";
 import parse from "html-react-parser";
 import { Fragment } from "react";
 import { nanoid } from "nanoid";
@@ -63,6 +63,8 @@ export default function Dictionary({
       setInfoForNewFlashcard([translationToAdd[0], fullTranslation, ""]);
     } else if (type === "phrase" && language === "slovenian") {
       setInfoForNewFlashcard([fullTranslation, translationToAdd[0], ""]);
+    } else {
+      return;
     }
 
     onPopupClick(event, "second");
