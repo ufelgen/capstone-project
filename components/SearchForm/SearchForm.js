@@ -23,7 +23,6 @@ export default function SearchForm({ onSearch }) {
             alt="slovenian flag"
           />
         </SearchButton>
-        <button>click pls</button>
       </StyledSearchForm>
     </>
   );

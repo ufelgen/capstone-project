@@ -9,6 +9,7 @@ import {
   HiTranslate,
 } from "react-icons/hi";
 import CaseInfo from "../CaseInfo/CaseInfo";
+import Image from "next/image";
 
 export default function Footer({ path, onReturnFromEditMode }) {
   const { pathname } = useRouter();
@@ -33,10 +34,15 @@ export default function Footer({ path, onReturnFromEditMode }) {
       {pathname === "/" && (
         <>
           <button
-            aria-label="go to translation page"
+            aria-label="go to translation page slovenian"
             onClick={() => handleReturn("/dictionary")}
           >
-            <HiTranslate size="7.7vh" color="darkmagenta" />
+            <Image
+              src="/flags/si.svg"
+              width={40}
+              height={30}
+              alt="slovenian flag"
+            />
           </button>
           <button
             aria-label="go to translation page"
